@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/09 15:42:50 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:51:19 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_map_data
 }	t_map_data;
 
 //parse_map
-void	parse_map(t_map_data *map_data, int argc, char **argv);
+void	parse(t_element_data *element_data, t_map_data *map_data, int argc, char **argv);
 
 //error_handler
 void	error_handler(const char *error_type);
