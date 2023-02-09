@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 14:14:20 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/09 15:50:37 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/09 15:11:42 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/09 15:44:36 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
-int	main(int argc, char **argv)
+void	parse(t_element_data *element_data, t_map_data *map_data, int argc, char **argv)
 {
-	t_element_data	element_data;
-	t_map_data		map_data;
-
-	parse(&element_data, &map_data, argc, argv);
-	return (0);
+	if (argc != 2)
+		error_handler(WRONG_ARGUMENTS_COUNT);
 }
