@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   count_splited_line.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 15:24:48 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/09 20:45:03 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/09 20:15:51 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/09 20:16:06 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	error_handler(const char *error_type)
+int	count_splited_line(char **splited_line)
 {
-	if (error_type == SYSTEMCALL_ERROR)
-		perror(error_type);
-	else
-		write(STDOUT_FILENO, error_type, ft_strlen(error_type));
-	write(STDOUT_FILENO, "Error\n", 6);
-	exit(EXIT_FAILURE);
+	int	count;
+
+	count = 0;
+	while (splited_line != NULL && splited_line[count] != NULL)
+		count++;
+	return (count);
 }

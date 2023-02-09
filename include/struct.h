@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/09 16:43:46 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/09 20:58:51 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,12 @@ typedef struct s_coord
 	double	col;
 }	t_coord;
 
-typedef struct s_texture_path
+typedef struct s_texture_data
 {
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-}	t_texture_path;
-
-typedef struct s_element_data
-{
-	t_texture_path	texture_path;
+	char			*texture_path[4];
 	int				floor_rgb;
 	int				ceiling_rgb;
-}	t_element_data;
+}	t_texture_data;
 
 typedef enum e_map
 {
@@ -52,6 +44,7 @@ typedef enum e_map
 
 typedef struct s_map_data
 {
+	t_texture_data	texture_data;
 	t_coord			size;
 	t_coord			player_position;
 	t_direction		spawning_orientation;
