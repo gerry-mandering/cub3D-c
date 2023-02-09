@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:11:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/09 20:59:23 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:41:05 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	parse(t_map_data *map_data, char **argv)
 {
 	int	fd;
 
-	fd = open(argv[1], O_RDONLY);
+ 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		error_handler(SYSTEMCALL_ERROR);
 	parse_element(element_data, fd);

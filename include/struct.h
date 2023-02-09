@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/09 20:58:51 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/09 20:19:07 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,27 @@ typedef enum e_map
 	PLAYER
 }	t_map;
 
+typedef struct s_minimap
+{
+	void	*bg_img;
+	void	*wall;
+	void	*player;
+	int		x_offset;
+	int		y_offset;
+	int		x_scale;
+	int		y_scale;
+}	t_minimap;
+
+typedef struct s_textures
+{
+	void	*north_wall;
+	void	*south_wall;
+	void	*east_wall;
+	void	*west_wall;
+	int		floor_rgb;
+	int		ceiling_rgb;
+}	t_textures;
+
 typedef struct s_map_data
 {
 	t_texture_data	texture_data;
@@ -50,6 +71,8 @@ typedef struct s_map_data
 	t_direction		spawning_orientation;
 	char			**char_map;
 	t_map			**map;
+	t_minimap		minimap;
+	t_textures		textures;
 }	t_map_data;
 
 typedef struct s_mlx
