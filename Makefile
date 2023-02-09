@@ -7,6 +7,8 @@ LIB_DIR = lib/
 LIBFT_DIR = $(LIB_DIR)libft/
 GNL_DIR = $(LIB_DIR)get_next_line/
 MLX_DIR = $(LIB_DIR)minilibx_opengl/
+SRC_DIR = src/
+SRC_BONUS_DIR = src_bonus/
 
 LIBFT_NAME = libft.a
 MLX_NAME = libmlx.a
@@ -14,8 +16,10 @@ MLX_NAME = libmlx.a
 LIBFT = $(LIBFT_DIR)$(LIBFT_NAME)
 MLX = $(MLX_DIR)$(MLX_NAME)
 
-SRC_DIR = src/
-SRC = main.c
+SRC = main.c \
+	parse/parse_map.c \
+	error_handler/error_handler.c
+SRC_BONUS = 
 GNL_SRC = get_next_line.c \
 		get_next_line_utils.c
 SRCS = $(addprefix $(SRC_DIR), $(SRC)) $(addprefix $(GNL_DIR), $(GNL_SRC))
@@ -26,7 +30,7 @@ ifdef SANITIZE
 endif
 
 ifdef BONUS
-	make BONUS=1 all
+	SRCS = $(addprefix $(SRC_BONUS_DIR), $(SRC_BONUS)) $(addprefix $(GNL_DIR), $(GNL_SRC))
 endif
 
 all : $(NAME)
