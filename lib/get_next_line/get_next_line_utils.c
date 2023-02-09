@@ -6,25 +6,12 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 16:00:45 by jinholee          #+#    #+#             */
-/*   Updated: 2022/10/26 16:18:05 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:00:12 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdlib.h>
-
-int	init(int fd, char **line, t_gnl_info *info)
-{
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	else
-	{
-		*line = 0;
-		info->total = 0;
-		info->len = 0;
-		return (1);
-	}
-}
 
 void	*gnl_memcpy(char *dst, char *src, size_t n)
 {

@@ -16,7 +16,9 @@ MLX_NAME = libmlx.a
 LIBFT = $(LIBFT_DIR)$(LIBFT_NAME)
 MLX = $(MLX_DIR)$(MLX_NAME)
 
-SRC = main.c
+SRC = main.c \
+	parse/parse_map.c \
+	error_handler/error_handler.c
 SRC_BONUS = 
 GNL_SRC = get_next_line.c \
 		get_next_line_utils.c

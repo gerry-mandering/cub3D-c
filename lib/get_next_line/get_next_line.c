@@ -6,13 +6,26 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:41:28 by jinholee          #+#    #+#             */
-/*   Updated: 2022/10/26 16:16:03 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:00:10 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <unistd.h>
 #include <stdlib.h>
+
+static int	init(int fd, char **line, t_gnl_info *info)
+{
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	else
+	{
+		*line = 0;
+		info->total = 0;
+		info->len = 0;
+		return (1);
+	}
+}
 
 char	*get_next_line(int fd)
 {
