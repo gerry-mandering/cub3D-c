@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/09 15:51:19 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:18:08 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 # define CUB3D_H
 
 # include <unistd.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
 # include "../lib/get_next_line/get_next_line.h"
 # include "../lib/libft/libft.h"
 # include "../lib/minilibx_opengl/mlx.h"
 
+# define SYSTEMCALL_ERROR		NULL
 # define WRONG_ARGUMENTS_COUNT	"Wrong Arguments Count -"
 # define INVALID_EXTENSION		"Invalid Expension - "
 # define INVALID_ELEMENT_FORMAT	"Invalid Element Format - "
@@ -41,13 +45,6 @@ typedef struct s_coord
 	double	col;
 }	t_coord;
 
-typedef struct s_rgb
-{
-	int	red;
-	int	green;
-	int	blue;
-}	t_rgb;
-
 typedef struct s_texture_path
 {
 	char	*north;
@@ -59,8 +56,8 @@ typedef struct s_texture_path
 typedef struct s_element_data
 {
 	t_texture_path	texture_path;
-	t_rgb			floor_rgb;
-	t_rgb			ceiling_rgb;
+	int				floor_rgb;
+	int				ceiling_rgb;
 }	t_element_data;
 
 typedef enum e_map
@@ -81,7 +78,7 @@ typedef struct s_map_data
 }	t_map_data;
 
 //parse_map
-void	parse(t_element_data *element_data, t_map_data *map_data, int argc, char **argv);
+void	parse(t_element_data *element_data, t_map_data *map_data, char **argv);
 
 //error_handler
 void	error_handler(const char *error_type);
