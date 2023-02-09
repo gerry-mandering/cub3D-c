@@ -6,12 +6,15 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/09 16:44:55 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/09 20:21:34 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONST_H
 # define CONST_H
+
+# define W_SIZE 1920
+# define H_SIZE 1080
 
 # define SYSTEMCALL_ERROR		NULL
 # define WRONG_ARGUMENTS_COUNT	"Wrong Arguments Count -"
@@ -21,8 +24,13 @@
 # define INVALID_MAP_FORMAT		"Invalid Map Format - "
 # define UNCLOSED_MAP			"Unclosed Map - "
 
-# define W_SIZE 1280
-# define H_SIZE 800
+# define NORTH_WALL "images/north_wall.xpm"
+# define SOUTH_WALL "images/south_wall.xpm"
+# define EAST_WALL "images/east_wall.xpm"
+# define WEST_WALL "images/west_wall.xpm"
+# define MINIMAP_BG "images/minimap_background.xpm"
+# define MINIMAP_WALL "images/minimap_wall.xpm"
+# define MINIMAP_PLAYER "images/minimap_player.xpm"
 
 # define X_EVENT_KEY_PRESS 2 
 # define X_EVENT_KEY_RELEASE 3

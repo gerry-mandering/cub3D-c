@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/09 16:43:56 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/09 20:18:42 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ void	parse(t_element_data *element_data, t_map_data *map_data, char **argv);
 
 //error_handler
 void	error_handler(const char *error_type);
+
+//render
 
 #endif

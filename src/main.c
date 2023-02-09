@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:14:20 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/09 16:44:49 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/09 20:53:50 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,35 @@ int	key_press(int keycode, t_mlx *mlx)
 	return (0);
 }
 
+void	read_images(t_mlx *mlx, t_map_data *map_data)
+{
+	int	w;
+	int	h;
+
+	map_data->textures.north_wall = \
+		mlx_xpm_file_to_image(mlx->mlx_ptr, NORTH_WALL, &w, &h);
+	map_data->textures.south_wall = \
+		mlx_xpm_file_to_image(mlx->mlx_ptr, SOUTH_WALL, &w, &h);
+	map_data->textures.east_wall = \
+		mlx_xpm_file_to_image(mlx->mlx_ptr, EAST_WALL, &w, &h);
+	map_data->textures.west_wall = \
+		mlx_xpm_file_to_image(mlx->mlx_ptr, WEST_WALL, &w, &h);
+	map_data->minimap.bg_img = \
+		mlx_xpm_file_to_image(mlx->mlx_ptr, MINIMAP_BG, &w, &h);
+	map_data->minimap.wall = \
+		mlx_xpm_file_to_image(mlx->mlx_ptr, MINIMAP_WALL, &w, &h);
+	map_data->minimap.player = \
+		mlx_xpm_file_to_image(mlx->mlx_ptr, MINIMAP_PLAYER, &w, &h);
+	if (map_data->textures.north_wall == 0 || \
+		map_data->textures.south_wall == 0 || \
+		map_data->textures.east_wall == 0 || \
+		map_data->textures.west_wall == 0 || \
+		map_data->minimap.bg_img == 0 || \
+		map_data->minimap.wall == 0 || \
+		map_data->minimap.player == 0)
+		error_handler(0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_element_data	element_data;
@@ -34,10 +63,14 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		error_handler(WRONG_ARGUMENTS_COUNT);
-	parse(&element_data, &map_data, argv);
+	// parse(&element_data, &map_data, argv);
+	if (argv[1])
+		element_data.ceiling_rgb = 0;
 	mlx.mlx_ptr = mlx_init();
 	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, W_SIZE, H_SIZE, "cub3D");
-	mlx_get_data_addr(mlx.img_ptr, &mlx.bits_per_pixel, &mlx.size_line, &mlx.endian);
+	read_images(&mlx, &map_data);
+	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, \
+							map_data.textures.north_wall, 0, 0);
 	mlx_hook(mlx.win_ptr, X_EVENT_KEY_PRESS, 0, &key_press, &mlx);
 	mlx_loop(mlx.mlx_ptr);
 	return (0);

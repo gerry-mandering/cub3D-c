@@ -1,28 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   cub3d_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 15:11:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/09 18:41:05 by jinholee         ###   ########.fr       */
+/*   Created: 2023/02/09 19:59:15 by jinholee          #+#    #+#             */
+/*   Updated: 2023/02/09 20:17:36 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-// void	parse_element(t_element_data *element_data, int fd)
-// {
-	
-// }
-
-// void	parse(t_element_data *element_data, t_map_data *map_data, char **argv)
-// {
-// 	int	fd;
-
-// 	fd = open(argv[1], O_RDONLY);
-// 	if (fd == -1)
-// 		error_handler(SYSTEMCALL_ERROR);
-// 	parse_element(element_data, fd);
-// }

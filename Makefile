@@ -17,7 +17,7 @@ LIBFT = $(LIBFT_DIR)$(LIBFT_NAME)
 MLX = $(MLX_DIR)$(MLX_NAME)
 
 SRC = main.c \
-	parse/parse_map.c \
+	parse/parse.c \
 	error_handler/error_handler.c
 SRC_BONUS = 
 GNL_SRC = get_next_line.c \
@@ -61,4 +61,7 @@ bonus :
 
 re : fclean all
 
-.PHONY: all clean fclean re bonus
+sanitize :
+	make SANITIZE=1 re
+
+.PHONY: all clean fclean re bonus sanitize
