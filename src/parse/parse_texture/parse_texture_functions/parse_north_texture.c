@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_north_texture.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 15:11:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/10 15:05:29 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/10 13:41:01 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/10 14:45:38 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../../../include/cub3d.h"
 
-void	parse(t_map_data *map_data, char **argv)
+void	parse_north_texture(t_texture *texture, int *bitflag, char *value)
 {
-	int	fd;
-
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		error_handler(SYSTEMCALL_ERROR);
-	parse_texture(&map_data->texture, fd);
-	parse_map(map_data, fd);
+	if (*bitflag & NORTH_TEXTURE)
+		error_handler(DUPLICATED_TEXTURE);
+	texture->wall[NORTH] = value;
+	*bitflag |= NORTH_TEXTURE;
 }

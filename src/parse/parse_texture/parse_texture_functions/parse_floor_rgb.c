@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_floor_rgb.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 15:11:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/10 15:05:29 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/10 13:57:14 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/10 14:45:20 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../../../include/cub3d.h"
 
-void	parse(t_map_data *map_data, char **argv)
+void	parse_floor_rgb(t_texture *texture, int *bitflag, char *value)
 {
-	int	fd;
-
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		error_handler(SYSTEMCALL_ERROR);
-	parse_texture(&map_data->texture, fd);
-	parse_map(map_data, fd);
+	if (*bitflag & FLOOR_RGB)
+		error_handler(DUPLICATED_TEXTURE);
+	texture->floor_rgb = get_rgb(value);
+	*bitflag |= FLOOR_RGB;
 }

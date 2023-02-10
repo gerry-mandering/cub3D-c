@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:14:20 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/09 20:53:50 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/10 13:04:53 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,12 @@ void	read_images(t_mlx *mlx, t_map_data *map_data)
 
 int	main(int argc, char **argv)
 {
-	t_element_data	element_data;
 	t_map_data		map_data;
 	t_mlx			mlx;
 
 	if (argc != 2)
 		error_handler(WRONG_ARGUMENTS_COUNT);
-	// parse(&element_data, &map_data, argv);
-	if (argv[1])
-		element_data.ceiling_rgb = 0;
+	parse(&map_data, argv);
 	mlx.mlx_ptr = mlx_init();
 	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, W_SIZE, H_SIZE, "cub3D");
 	read_images(&mlx, &map_data);

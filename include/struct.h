@@ -6,12 +6,14 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/09 20:19:07 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/10 15:27:18 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+# include "../lib/libft/libft.h"
 
 typedef enum e_direction
 {
@@ -26,6 +28,24 @@ typedef struct s_coord
 	double	row;
 	double	col;
 }	t_coord;
+
+enum e_rgb
+{
+	BLUE = 0,
+	GREEN = 8,
+	RED = 16
+};
+
+enum e_texture_bitmask
+{
+	NORTH_TEXTURE = 1,
+	SOUTH_TEXTURE = 2,
+	WEST_TEXTURE = 4,
+	EAST_TEXTURE = 8,
+	FLOOR_RGB = 16,
+	CEILING_RGB = 32,
+	PARSED_EVERY_TEXTURE = 63
+};
 
 typedef struct s_texture_data
 {
@@ -53,15 +73,15 @@ typedef struct s_minimap
 	int		y_scale;
 }	t_minimap;
 
-typedef struct s_textures
+typedef struct s_texture
 {
-	void	*north_wall;
-	void	*south_wall;
-	void	*east_wall;
-	void	*west_wall;
+	char	*wall[4];
 	int		floor_rgb;
 	int		ceiling_rgb;
-}	t_textures;
+}	t_texture;
+
+typedef void	(*t_parse_texture_fp)(t_texture *texture, \
+										int *bitflag, char *value);
 
 typedef struct s_map_data
 {
@@ -69,10 +89,10 @@ typedef struct s_map_data
 	t_coord			size;
 	t_coord			player_position;
 	t_direction		spawning_orientation;
-	char			**char_map;
+	t_list			char_map;
 	t_map			**map;
 	t_minimap		minimap;
-	t_textures		textures;
+	t_texture		texture;
 }	t_map_data;
 
 typedef struct s_mlx
