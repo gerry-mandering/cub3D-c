@@ -26,7 +26,8 @@ SRCS = $(addprefix $(SRC_DIR), $(SRC)) $(addprefix $(GNL_DIR), $(GNL_SRC))
 OBJS = $(SRCS:.c=.o)
 
 ifdef SANITIZE
-	CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+	$(CFLAGS) += -fsanitize=address -g3
+	$(LDFLAGS) += -fsanitize=address -g3
 endif
 
 ifdef BONUS
