@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/10 15:33:53 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:52:45 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@
 # define MINIMAP_BG				"images/minimap_background.xpm"
 # define MINIMAP_WALL			"images/minimap_wall.xpm"
 # define MINIMAP_PLAYER			"images/minimap_player.xpm"
+
+# define WALL_COLOR 0xffffff
+# define PLAYER_COLOR 0xff0000
+# define EMPTY_SPACE_COLOR 0
 
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3
