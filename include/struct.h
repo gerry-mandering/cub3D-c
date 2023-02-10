@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/10 15:27:18 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/10 15:03:40 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,16 @@ typedef struct s_minimap
 	void	*bg_img;
 	void	*wall;
 	void	*player;
+	void	*minimap_img;
 	int		x_offset;
 	int		y_offset;
 	int		x_scale;
 	int		y_scale;
+	int		w_size;
+	int		h_size;
+	int		size_line;
+	int		bits_per_pixel;
+	int		endidan;
 }	t_minimap;
 
 typedef struct s_texture
