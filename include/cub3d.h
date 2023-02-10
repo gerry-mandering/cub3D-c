@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/10 14:58:42 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:05:35 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	error_handler(const char *error_type);
 
 //utils
 int		count_strings(char **strings);
+void	free_strings(char **strings);
 int		ft_strcmp(const char *s1, const char *s2);
 
 //render

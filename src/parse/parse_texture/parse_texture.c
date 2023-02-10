@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:41:00 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/10 15:06:50 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:03:45 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,16 @@ void	parse_texture(t_texture *texture, int fd)
 		if (line == NULL)
 			error_handler(LACKING_TEXTURE_INFO);
 		if (ft_strcmp(line, "\n") == 0)
+		{
+			free(line);
 			continue ;
+		}
 		splited_line = ft_split(line, WHITE_SPACE);
+		free(line);
 		if (count_strings(splited_line) != 2)
 			error_handler(INVALID_TEXTURE_FORMAT);
 		fp_index = get_fp_index(splited_line[IDENTIFIER]);
 		parse_texture_fp[fp_index](texture, &bitflag, splited_line[VALUE]);
+		free_strings(splited_line);
 	}
 }
