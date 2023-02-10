@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/10 18:39:14 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/10 18:01:04 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,30 @@ typedef enum e_map
 	PLAYER
 }	t_map;
 
+typedef struct s_image
+{
+	void	*img;
+	char	*img_ptr;
+	int		size_line;
+	int		bits_per_pixel;
+	int		endidan;
+	int		width;
+	int		height;
+}	t_image;
+
 typedef struct s_minimap
 {
-	void	*bg_img;
+	t_image	background_img;
+	t_image	minimap_img;
+	void	*empty_space;
 	void	*wall;
 	void	*player;
-	void	*minimap_img;
 	int		x_offset;
 	int		y_offset;
 	int		x_scale;
 	int		y_scale;
 	int		w_size;
 	int		h_size;
-	int		size_line;
-	int		bits_per_pixel;
-	int		endidan;
 }	t_minimap;
 
 typedef struct s_texture
@@ -96,10 +105,13 @@ typedef struct s_mlx
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	void	*img_ptr;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
+	t_image	*mlx_img;
 }	t_mlx;
+
+typedef struct s_params
+{
+	t_mlx		*mlx;
+	t_map_data	*map_data;
+}	t_params;
 
 #endif
