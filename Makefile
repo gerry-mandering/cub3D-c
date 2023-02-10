@@ -17,8 +17,8 @@ LIBFT = $(LIBFT_DIR)$(LIBFT_NAME)
 MLX = $(MLX_DIR)$(MLX_NAME)
 
 SRC = main.c \
-	parse/parse.c \
 	error_handler/error_handler.c
+	# parse/parse.c
 SRC_BONUS = 
 GNL_SRC = get_next_line.c \
 		get_next_line_utils.c
