@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/10 17:05:35 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/13 00:47:09 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ int		get_rgb(char *value);
 //parse_map
 void	parse_map(t_map_data *map_data, int fd);
 
+//parse_map_utils
+char	*skip_newlines(int fd);
+void	cut_last_spaces(char *line, int length);
+
 //error_handler
 void	error_handler(const char *error_type);
 
@@ -53,6 +57,7 @@ void	error_handler(const char *error_type);
 int		count_strings(char **strings);
 void	free_strings(char **strings);
 int		ft_strcmp(const char *s1, const char *s2);
+int		ft_isspace(char character);
 
 //render
 

@@ -6,43 +6,11 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:57:29 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/10 18:49:46 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/13 00:47:18 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
-
-static char	*skip_newlines(int fd)
-{
-	char	*line;
-
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			error_handler(HAVE_NO_MAP_INPUT);
-		if (ft_strcmp(line, "\n") != 0)
-			break ;
-	}
-	return (line);
-}
-
-static int	ft_isspace(char character)
-{
-	if (ft_strchr(WHITE_SPACE, character) != NULL)
-		return (1);
-	else
-		return (0);
-}
-
-static void	cut_last_spaces(char *line, int length)
-{
-	int	i;
-
-	i = length - 1;
-	while (ft_isspace(line[i]))
-		line[i--] = '\0';
-}
 
 static void	allocate_map(t_map **map, t_coord size)
 {
