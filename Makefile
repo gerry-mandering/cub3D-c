@@ -17,6 +17,11 @@ LIBFT = $(LIBFT_DIR)$(LIBFT_NAME)
 MLX = $(MLX_DIR)$(MLX_NAME)
 
 SRC = main.c \
+	render/bresenham.c \
+	render/render_minimap.c \
+	render/cub3d_init.c \
+	hooks/mouse.c \
+	hooks/key.c \
 	error_handler/error_handler.c
 	# parse/parse.c
 SRC_BONUS = 
@@ -26,8 +31,8 @@ SRCS = $(addprefix $(SRC_DIR), $(SRC)) $(addprefix $(GNL_DIR), $(GNL_SRC))
 OBJS = $(SRCS:.c=.o)
 
 ifdef SANITIZE
-	$(CFLAGS) += -fsanitize=address -g3
-	$(LDFLAGS) += -fsanitize=address -g3
+	CFLAGS += -fsanitize=address -g3
+	LDFLAGS += -fsanitize=address -g3
 endif
 
 ifdef BONUS
@@ -37,10 +42,10 @@ endif
 all : $(NAME)
 
 $(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR) all
+	@$(MAKE) -C $(LIBFT_DIR) all -j6
 
 $(MLX):
-	@$(MAKE) -C $(MLX_DIR) all
+	@$(MAKE) -C $(MLX_DIR) all -j6
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I $(LIB_DIR) -c $< -o $@
