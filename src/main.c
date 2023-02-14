@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:14:20 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 20:42:35 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/14 21:21:37 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 
 	if (!argv || argc != 2)
 		error_handler(WRONG_ARGUMENTS_COUNT);
-	parse(&map_data, argv);
+	parse(&vars, argv);
 	printf("parse_finished\n");
 	init_params(&vars);
 	mlx_hook(vars.win_ptr, X_EVENT_KEY_PRESS, 0, &key_press, &vars);

@@ -6,25 +6,25 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:43:26 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 10:43:44 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/14 21:08:40 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-static void	set_spawning_direction(char character, t_map_data *map_data)
+static void	set_spawning_direction(char character, t_vars *vars)
 {
 	if (character == 'N')
-		map_data->spawning_direction = NORTH;
+		vars->spawning_direction = NORTH;
 	else if (character == 'S')
-		map_data->spawning_direction = SOUTH;
+		vars->spawning_direction = SOUTH;
 	else if (character == 'E')
-		map_data->spawning_direction = EAST;
+		vars->spawning_direction = EAST;
 	else if (character == 'W')
-		map_data->spawning_direction = WEST;
+		vars->spawning_direction = WEST;
 }
 
-static int	get_label(char character, t_map_data *map_data)
+static int	get_label(char character, t_vars *vars)
 {
 	if (character == ' ')
 		return (NONE);
@@ -35,7 +35,7 @@ static int	get_label(char character, t_map_data *map_data)
 	else if (character == 'N' || character == 'S' || \
 				character == 'E' || character == 'W')
 	{
-		set_spawning_direction(character, map_data);
+		set_spawning_direction(character, vars);
 		return (PLAYER);
 	}
 	else
@@ -45,20 +45,20 @@ static int	get_label(char character, t_map_data *map_data)
 	}
 }
 
-void	labeling_map(t_map_data *map_data, t_list *list_map)
+void	labeling_map(t_vars *vars, t_list *list_map)
 {
 	int		width;
 	int		height;
 	char	*line;
 
 	height = 0;
-	while (height < map_data->size.height)
+	while (height < vars->map_height)
 	{
 		width = 0;
 		line = list_map->content;
 		while (line[width] != '\0')
 		{
-			(map_data->map)[height][width] = get_label(line[width], map_data);
+			vars->map_elem[height][width] = get_label(line[width], vars);
 			width++;
 		}
 		height++;

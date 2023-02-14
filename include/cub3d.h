@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 20:43:50 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/14 21:21:45 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include "../lib/minilibx_opengl/mlx.h"
 
 //parse
-void	parse(t_map_data *map_data, char **argv);
+void	parse(t_vars *vars, char **argv);
 
 //parse_texture
 void	parse_texture(t_texture *texture, int fd);
@@ -44,18 +44,18 @@ void	parse_ceiling_rgb(t_texture *texture, int *bitflag, char *value);
 int		get_rgb(char *value);
 
 //parse_map
-void	parse_map(t_map_data *map_data, int fd);
+void	parse_map(t_vars *vars, int fd);
 void	make_list_map(t_list **list_map, int fd);
-void	measure_map_size(t_coord *size, t_list *list_map);
-void	allocate_map(t_map_data *map_data);
-void	labeling_map(t_map_data *map_data, t_list *list_map);
-void	set_player_position(t_map_data *map_data);
+void	measure_map_size(int *map_width, int *map_height, t_list *list_map);
+void	allocate_map(t_vars *vars);
+void	labeling_map(t_vars *vars, t_list *list_map);
+void	set_player_position(t_vars *vars);
 
 //validate_map
-void	validate_map(t_map_data *map_data);
+void	validate_map(t_vars *vars);
 
 //validate_map_utils
-t_map	**copy_map(t_map_data *map_data);
+t_map	**copy_map(t_vars *vars);
 
 //error_handler
 void	error_handler(const char *error_type);

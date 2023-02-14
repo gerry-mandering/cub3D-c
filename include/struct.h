@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/14 20:48:34 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/14 20:57:38 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct s_ivec
 
 typedef struct s_dvec
 {
-	double x;
-	double y;
+	double	x;
+	double	y;
 }	t_dvec;
 
 enum e_rgb
@@ -108,7 +108,7 @@ typedef struct s_vars
 	t_direction	spawning_direction;
 	t_minimap	minimap;
 	t_texture	texture;
-	t_ivec	mouse;
+	t_ivec		mouse;
 }	t_vars;
 
 #endif

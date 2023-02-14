@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:11:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 11:11:19 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/14 20:59:23 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ static void	check_extension_format(char *scene_description_file)
 		error_handler(INVALID_EXTENSION);
 }
 
-void	parse(t_map_data *map_data, char **argv)
+void	parse(t_vars *vars, char **argv)
 {
 	int	fd;
 
-	ft_memset(map_data, 0, sizeof(t_map_data));
+	ft_memset(vars, 0, sizeof(t_vars));
 	check_extension_format(argv[1]);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		error_handler(SYSTEMCALL_ERROR);
-	parse_texture(&map_data->texture, fd);
-	parse_map(map_data, fd);
-	validate_map(map_data);
+	parse_texture(&vars->texture, fd);
+	parse_map(vars, fd);
+	validate_map(vars);
 }
