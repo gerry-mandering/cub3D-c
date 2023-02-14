@@ -47,21 +47,21 @@ static int	get_label(char character, t_map_data *map_data)
 
 void	labeling_map(t_map_data *map_data, t_list *list_map)
 {
-	int		row;
-	int		col;
+	int		width;
+	int		height;
 	char	*line;
 
-	col = 0;
-	while (col < map_data->size.col)
+	height = 0;
+	while (height < map_data->size.height)
 	{
-		row = 0;
+		width = 0;
 		line = list_map->content;
-		while (line[row] != '\0')
+		while (line[width] != '\0')
 		{
-			(map_data->map)[col][row] = get_label(line[row], map_data);
-			row++;
+			(map_data->map)[height][width] = get_label(line[width], map_data);
+			width++;
 		}
-		col++;
+		height++;
 		list_map = list_map->next;
 	}
 }

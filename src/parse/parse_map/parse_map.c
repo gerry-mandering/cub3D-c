@@ -14,28 +14,28 @@
 
 static void	print_map(t_map_data *map_data)
 {
-	int	row;
-	int	col;
+	int	width;
+	int	height;
 
 	printf("<%s>\n", __func__);
-	col = 0;
-	while (col < map_data->size.col)
+	height = 0;
+	while (height < map_data->size.height)
 	{
-		row = 0;
-		while (row < map_data->size.row)
+		width = 0;
+		while (width < map_data->size.width)
 		{
-			if (map_data->map[col][row] == NONE)
+			if (map_data->map[height][width] == NONE)
 				printf(" ");
-			else if (map_data->map[col][row] == EMPTY_SPACE)
+			else if (map_data->map[height][width] == EMPTY_SPACE)
 				printf("0");
-			else if (map_data->map[col][row] == WALL)
+			else if (map_data->map[height][width] == WALL)
 				printf("1");
-			else if (map_data->map[col][row] == PLAYER)
+			else if (map_data->map[height][width] == PLAYER)
 				printf("P");
-			row++;
+			width++;
 		}
 		printf("\n");
-		col++;
+		height++;
 	}
 }
 

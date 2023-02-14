@@ -17,16 +17,16 @@ void	allocate_map(t_map_data *map_data)
 	t_map	**map;
 	int		i;
 
-	map = (t_map **)ft_calloc((int)map_data->size.col, sizeof(int *));
+	map = (t_map **)ft_calloc((int)map_data->size.height, sizeof(int *));
 	if (map == NULL)
 		error_handler(SYSTEMCALL_ERROR);
 	i = 0;
-	while (i < map_data->size.col)
+	while (i < map_data->size.height)
 	{
-		map[i] = (t_map *)ft_calloc((int)map_data->size.row, sizeof(int));
+		map[i] = (t_map *)ft_calloc((int)map_data->size.width, sizeof(int));
 		if (map[i] == NULL)
 			error_handler(SYSTEMCALL_ERROR);
-		ft_memset(map[i], -1, sizeof(int) * map_data->size.row);
+		ft_memset(map[i], -1, sizeof(int) * map_data->size.width);
 		i++;
 	}
 	map_data->map = map;

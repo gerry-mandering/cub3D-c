@@ -14,20 +14,20 @@
 
 static bool	is_player_exist(t_map_data *map_data)
 {
-	int		col;
-	int		row;
+	int		height;
+	int		width;
 
-	col = 0;
-	while (col < map_data->size.col)
+	height = 0;
+	while (height < map_data->size.height)
 	{
-		row = 0;
-		while (row < map_data->size.row)
+		width = 0;
+		while (width < map_data->size.width)
 		{
-			if (map_data->map[col][row] == PLAYER)
+			if (map_data->map[height][width] == PLAYER)
 				return (true);
-			row++;
+			width++;
 		}
-		col++;
+		height++;
 	}
 	return (false);
 }
@@ -35,45 +35,45 @@ static bool	is_player_exist(t_map_data *map_data)
 static bool	is_player_duplicated(t_map_data *map_data)
 {
 	bool	player_flag;
-	int		col;
-	int		row;
+	int		height;
+	int		width;
 
 	player_flag = false;
-	col = 0;
-	while (col < map_data->size.col)
+	height = 0;
+	while (height < map_data->size.height)
 	{
-		row = 0;
-		while (row < map_data->size.row)
+		width = 0;
+		while (width < map_data->size.width)
 		{
-			if (map_data->map[col][row] == PLAYER)
+			if (map_data->map[height][width] == PLAYER)
 			{
 				if (player_flag == false)
 					player_flag = true;
 				else
 					return (true);
 			}
-			row++;
+			width++;
 		}
-		col++;
+		height++;
 	}
 	return (false);
 }
 
-static void	flood_fill(t_map **map, int col, int row, t_coord size)
+static void	flood_fill(t_map **map, int height, int width, t_coord size)
 {
-	if (col < 0 || row < 0)
+	if (height < 0 || width < 0)
 		return ;
-	else if (col == size.col || row == size.row)
+	else if (height == size.height || width == size.width)
 		return ;
-	else if (map[col][row] == WALL || map[col][row] == VISITED)
+	else if (map[height][width] == WALL || map[height][width] == VISITED)
 		return ;
-	else if (map[col][row] == NONE)
+	else if (map[height][width] == NONE)
 		error_handler(UNCLOSED_MAP);
-	map[col][row] = VISITED;
-	flood_fill(map, col - 1, row, size);
-	flood_fill(map, col + 1, row, size);
-	flood_fill(map, col, row - 1, size);
-	flood_fill(map, col, row + 1, size);
+	map[height][width] = VISITED;
+	flood_fill(map, height - 1, width, size);
+	flood_fill(map, height + 1, width, size);
+	flood_fill(map, height, width - 1, size);
+	flood_fill(map, height, width + 1, size);
 }
 
 static void	check_map_is_closed(t_map_data *map_data)
@@ -85,7 +85,7 @@ static void	check_map_is_closed(t_map_data *map_data)
 	copied_map = copy_map(map_data);
 	player_position = map_data->player_position;
 	size = map_data->size;
-	flood_fill(copied_map, player_position.col, player_position.row, size);
+	flood_fill(copied_map, player_position.height, player_position.width, size);
 }
 
 void	validate_map(t_map_data *map_data)

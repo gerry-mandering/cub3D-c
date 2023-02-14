@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:57:48 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 13:14:35 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/14 18:56:32 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ static t_map	**allocate_copied_map(t_coord size)
 	t_map	**map;
 	int		i;
 
-	map = (t_map **)ft_calloc((int)size.col, sizeof(int *));
+	map = (t_map **)ft_calloc((int)size.height, sizeof(int *));
 	if (map == NULL)
 		error_handler(SYSTEMCALL_ERROR);
 	i = 0;
-	while (i < size.col)
+	while (i < size.height)
 	{
-		map[i] = (t_map *)ft_calloc((int)size.row, sizeof(int));
+		map[i] = (t_map *)ft_calloc((int)size.width, sizeof(int));
 		if (map[i] == NULL)
 			error_handler(SYSTEMCALL_ERROR);
-		ft_memset(map[i], -1, sizeof(int) * size.row);
+		ft_memset(map[i], -1, sizeof(int) * size.width);
 		i++;
 	}
 	return (map);
@@ -35,20 +35,20 @@ static t_map	**allocate_copied_map(t_coord size)
 t_map	**copy_map(t_map_data *map_data)
 {
 	t_map	**copied_map;
-	int		col;
-	int		row;
+	int		height;
+	int		width;
 
 	copied_map = allocate_copied_map(map_data->size);
-	col = 0;
-	while (col < map_data->size.col)
+	height = 0;
+	while (height < map_data->size.height)
 	{
-		row = 0;
-		while (row < map_data->size.row)
+		width = 0;
+		while (width < map_data->size.width)
 		{
-			copied_map[col][row] = map_data->map[col][row];
-			row++;
+			copied_map[height][width] = map_data->map[height][width];
+			width++;
 		}
-		col++;
+		height++;
 	}
 	return (copied_map);
 }
