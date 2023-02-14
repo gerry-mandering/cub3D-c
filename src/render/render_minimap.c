@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:43:34 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/14 20:39:39 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/14 21:42:45 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	ft_pixel_put(t_image *img, int x, int y, unsigned int color)
 
 void	place_player(t_vars *vars)
 {
-	const int	x_offset = vars->player.x;
-	const int	y_offset = vars->player.y;
+	const int	x_offset = vars->player.x * TILE_SIZE;
+	const int	y_offset = vars->player.y * TILE_SIZE;
 	int			x;
 	int			y;
 
