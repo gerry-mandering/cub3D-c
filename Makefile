@@ -17,8 +17,28 @@ LIBFT = $(LIBFT_DIR)$(LIBFT_NAME)
 MLX = $(MLX_DIR)$(MLX_NAME)
 
 SRC = main.c \
-	error_handler/error_handler.c
-	# parse/parse.c
+	error_handler/error_handler.c \
+	parse/parse.c \
+	parse/parse_texture/parse_texture.c \
+	parse/parse_texture/parse_texture_functions/parse_north_texture.c \
+	parse/parse_texture/parse_texture_functions/parse_south_texture.c \
+	parse/parse_texture/parse_texture_functions/parse_east_texture.c \
+	parse/parse_texture/parse_texture_functions/parse_west_texture.c \
+	parse/parse_texture/parse_texture_functions/parse_floor_rgb.c \
+	parse/parse_texture/parse_texture_functions/parse_ceiling_rgb.c \
+	parse/parse_texture/parse_texture_utils/get_rgb.c \
+	parse/parse_map/parse_map.c \
+	parse/parse_map/allocate_map.c \
+	parse/parse_map/labeling_map.c \
+	parse/parse_map/make_list_map.c \
+	parse/parse_map/measure_map_size.c \
+	parse/parse_map/set_player_position.c \
+	parse/validate_map/validate_map.c \
+	parse/validate_map/validate_map_utils/copy_map.c \
+	utils/count_strings.c \
+	utils/free_strings.c \
+	utils/ft_strcmp.c \
+	utils/ft_isspace.c
 SRC_BONUS = 
 GNL_SRC = get_next_line.c \
 		get_next_line_utils.c
@@ -26,8 +46,8 @@ SRCS = $(addprefix $(SRC_DIR), $(SRC)) $(addprefix $(GNL_DIR), $(GNL_SRC))
 OBJS = $(SRCS:.c=.o)
 
 ifdef SANITIZE
-	$(CFLAGS) += -fsanitize=address -g3
-	$(LDFLAGS) += -fsanitize=address -g3
+	CFLAGS += -fsanitize=address -g3
+	LDFLAGS += -fsanitize=address -g3
 endif
 
 ifdef BONUS
@@ -37,7 +57,7 @@ endif
 all : $(NAME)
 
 $(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR) all
+	@$(MAKE) -C $(LIBFT_DIR) bonus
 
 $(MLX):
 	@$(MAKE) -C $(MLX_DIR) all

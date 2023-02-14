@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:14:20 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/10 18:15:40 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:17:36 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,8 @@ int	main(int argc, char **argv)
 
 	if (!argv || argc != 2)
 		error_handler(WRONG_ARGUMENTS_COUNT);
-	//parse(&map_data, argv);
+	parse(&map_data, argv);
+	printf("parse_finished\n");
 	params.mlx = &mlx;
 	params.map_data = &map_data;
 	mlx.mlx_ptr = mlx_init();

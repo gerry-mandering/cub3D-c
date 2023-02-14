@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/10 18:01:04 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/13 21:14:37 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ typedef enum e_direction
 {
 	NORTH,
 	SOUTH,
-	WEST,
-	EAST
+	EAST,
+	WEST
 }	t_direction;
 
 typedef struct s_coord
@@ -52,7 +52,8 @@ typedef enum e_map
 	NONE = -1,
 	EMPTY_SPACE,
 	WALL,
-	PLAYER
+	PLAYER,
+	VISITED
 }	t_map;
 
 typedef struct s_image
@@ -95,8 +96,8 @@ typedef struct s_map_data
 {
 	t_coord			size;
 	t_coord			player_position;
-	t_direction		spawning_orientation;
-	t_map			**map;
+	t_direction		spawning_direction;
+	int				**map;
 	t_minimap		minimap;
 	t_texture		texture;
 }	t_map_data;

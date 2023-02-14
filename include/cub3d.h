@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/10 17:05:35 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/14 13:11:54 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,17 @@ int		get_rgb(char *value);
 
 //parse_map
 void	parse_map(t_map_data *map_data, int fd);
+void	make_list_map(t_list **list_map, int fd);
+void	measure_map_size(t_coord *size, t_list *list_map);
+void	allocate_map(t_map_data *map_data);
+void	labeling_map(t_map_data *map_data, t_list *list_map);
+void	set_player_position(t_map_data *map_data);
+
+//validate_map
+void	validate_map(t_map_data *map_data);
+
+//validate_map_utils
+t_map	**copy_map(t_map_data *map_data);
 
 //error_handler
 void	error_handler(const char *error_type);
@@ -53,7 +64,6 @@ void	error_handler(const char *error_type);
 int		count_strings(char **strings);
 void	free_strings(char **strings);
 int		ft_strcmp(const char *s1, const char *s2);
-
-//render
+int		ft_isspace(char character);
 
 #endif

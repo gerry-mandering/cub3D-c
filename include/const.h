@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/10 17:52:45 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:17:22 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define LACKING_TEXTURE_INFO	"Laking Texture Info -"
 # define HAVE_NO_MAP_INPUT		"Have No Map Input -"
 # define INVALID_MAP_FORMAT		"Invalid Map Format - "
+# define HAVE_NO_PLAYER			"Have No Player - "
+# define DUPLICATED_PLAYER		"Duplicated Player - "
 # define UNCLOSED_MAP			"Unclosed Map - "
 
 # define NORTH_WALL				"images/north_wall.xpm"
