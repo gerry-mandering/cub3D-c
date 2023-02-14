@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/14 11:53:01 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/14 19:56:38 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define W_SIZE					1920
 # define H_SIZE					1080
 # define TILE_SIZE				24
-# define MOVING_SPEED			5
+# define MOVING_SPEED			0.1
 # define MOUSE_SPEED			0.08
 
 # define SYSTEMCALL_ERROR		NULL
@@ -41,9 +41,12 @@
 # define MINIMAP_WALL			"images/minimap_wall.xpm"
 # define MINIMAP_PLAYER			"images/minimap_player.xpm"
 
-# define WALL_COLOR 0xffffff
-# define PLAYER_COLOR 0xff0000
-# define EMPTY_SPACE_COLOR 0
+# define WALL_COLOR 			0xffffff
+# define PLAYER_COLOR 			0xff0000
+# define EMPTY_SPACE_COLOR 		0
+
+# define MINIMAP_XOFFSET 		0
+# define MINIMAP_YOFFSET 		0
 
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3

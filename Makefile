@@ -20,7 +20,7 @@ SRC = main.c \
 	render/bresenham.c \
 	render/render_minimap.c \
 	render/cub3d_init.c \
-	rener/raycast.c \
+	render/raycast.c \
 	hooks/mouse.c \
 	hooks/key.c \
 	error_handler/error_handler.c \
