@@ -19,8 +19,8 @@ typedef enum e_direction
 {
 	NORTH,
 	SOUTH,
-	WEST,
-	EAST
+	EAST,
+	WEST
 }	t_direction;
 
 typedef struct s_coord
@@ -53,7 +53,8 @@ typedef enum e_map
 	NONE = -1,
 	EMPTY_SPACE,
 	WALL,
-	PLAYER
+	PLAYER,
+	VISITED
 }	t_map;
 
 typedef struct s_image
@@ -96,8 +97,8 @@ typedef struct s_map_data
 {
 	t_coord			size;
 	t_coord			player_position;
-	t_direction		spawning_orientation;
-	t_map			**map;
+	t_direction		spawning_direction;
+	int				**map;
 	t_minimap		minimap;
 	t_texture		texture;
 }	t_map_data;

@@ -29,6 +29,8 @@
 # define LACKING_TEXTURE_INFO	"Laking Texture Info -"
 # define HAVE_NO_MAP_INPUT		"Have No Map Input -"
 # define INVALID_MAP_FORMAT		"Invalid Map Format - "
+# define HAVE_NO_PLAYER			"Have No Player - "
+# define DUPLICATED_PLAYER		"Duplicated Player - "
 # define UNCLOSED_MAP			"Unclosed Map - "
 
 # define NORTH_WALL				"images/north_wall.xpm"

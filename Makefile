@@ -23,8 +23,28 @@ SRC = main.c \
 	rener/raycast.c \
 	hooks/mouse.c \
 	hooks/key.c \
-	error_handler/error_handler.c
-	# parse/parse.c
+	error_handler/error_handler.c \
+	parse/parse.c \
+	parse/parse_texture/parse_texture.c \
+	parse/parse_texture/parse_texture_functions/parse_north_texture.c \
+	parse/parse_texture/parse_texture_functions/parse_south_texture.c \
+	parse/parse_texture/parse_texture_functions/parse_east_texture.c \
+	parse/parse_texture/parse_texture_functions/parse_west_texture.c \
+	parse/parse_texture/parse_texture_functions/parse_floor_rgb.c \
+	parse/parse_texture/parse_texture_functions/parse_ceiling_rgb.c \
+	parse/parse_texture/parse_texture_utils/get_rgb.c \
+	parse/parse_map/parse_map.c \
+	parse/parse_map/allocate_map.c \
+	parse/parse_map/labeling_map.c \
+	parse/parse_map/make_list_map.c \
+	parse/parse_map/measure_map_size.c \
+	parse/parse_map/set_player_position.c \
+	parse/validate_map/validate_map.c \
+	parse/validate_map/validate_map_utils/copy_map.c \
+	utils/count_strings.c \
+	utils/free_strings.c \
+	utils/ft_strcmp.c \
+	utils/ft_isspace.c
 SRC_BONUS = 
 GNL_SRC = get_next_line.c \
 		get_next_line_utils.c
@@ -43,7 +63,7 @@ endif
 all : $(NAME)
 
 $(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR) all -j6
+	@$(MAKE) -C $(LIBFT_DIR) bonus -j6
 
 $(MLX):
 	@$(MAKE) -C $(MLX_DIR) all -j6

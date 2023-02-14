@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cut_last_spaces.c                                  :+:      :+:    :+:   */
+/*   measure_map_size.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 00:46:50 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/13 00:47:03 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/14 11:14:55 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/14 11:17:54 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
-void	cut_last_spaces(char *line, int length)
+void	measure_map_size(t_coord *size, t_list *list_map)
 {
-	int	i;
+	char	*line;
+	int		length;
 
-	i = length - 1;
-	while (ft_isspace(line[i]))
-		line[i--] = '\0';
+	while (list_map != NULL)
+	{
+		line = list_map->content;
+		length = ft_strlen(line);
+		if (length > size->row)
+			size->row = length;
+		size->col++;
+		list_map = list_map->next;
+	}
 }

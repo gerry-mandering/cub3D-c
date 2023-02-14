@@ -20,7 +20,8 @@ int	main(int argc, char **argv)
 
 	if (!argv || argc != 2)
 		error_handler(WRONG_ARGUMENTS_COUNT);
-	//parse(&map_data, argv);
+	parse(&map_data, argv);
+	printf("parse_finished\n");
 	params.mlx = &mlx;
 	params.map_data = &map_data;
 	init_params(&params);
