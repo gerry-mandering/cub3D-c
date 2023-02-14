@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/13 22:11:01 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/14 13:18:18 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int		wall_collision(void);
 int		mouse(t_params *params);
 
 //render
+void	raycast(t_params *params);
+
 void	plot_low(t_image *img, t_coord from, t_coord to);
 void	plot_high(t_image *img, t_coord from, t_coord to);
 void	draw_line(t_image *img, t_coord from, t_coord to);

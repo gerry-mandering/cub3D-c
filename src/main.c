@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:14:20 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/13 22:09:46 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/14 13:16:05 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int argc, char **argv)
 	params.mlx = &mlx;
 	params.map_data = &map_data;
 	init_params(&params);
+	raycast(&params);
 	mlx_hook(mlx.win_ptr, X_EVENT_KEY_PRESS, 0, &key_press, &params);
 	mlx_loop_hook(mlx.mlx_ptr, &mouse, &params);
 	mlx_loop(mlx.mlx_ptr);
