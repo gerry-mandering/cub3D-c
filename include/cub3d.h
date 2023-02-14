@@ -45,10 +45,17 @@ int		get_rgb(char *value);
 
 //parse_map
 void	parse_map(t_map_data *map_data, int fd);
+void	make_list_map(t_list **list_map, int fd);
+void	measure_map_size(t_coord *size, t_list *list_map);
+void	allocate_map(t_map_data *map_data);
+void	labeling_map(t_map_data *map_data, t_list *list_map);
+void	set_player_position(t_map_data *map_data);
 
-//parse_map_utils
-char	*skip_newlines(int fd);
-void	cut_last_spaces(char *line, int length);
+//validate_map
+void	validate_map(t_map_data *map_data);
+
+//validate_map_utils
+t_map	**copy_map(t_map_data *map_data);
 
 //error_handler
 void	error_handler(const char *error_type);
