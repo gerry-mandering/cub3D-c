@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/14 20:41:49 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/14 20:48:34 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,26 +96,6 @@ typedef struct s_texture
 typedef void	(*t_parse_texture_fp)(t_texture *texture, \
 										int *bitflag, char *value);
 
-typedef struct s_map_data
-{
-	int			w_size;
-	int			h_size;
-	int			**map_elem;
-	double		viewing_angle;
-	t_dvec		player;
-	t_direction	spawning_direction;
-	t_minimap	minimap;
-	t_texture	texture;
-}	t_map_data;
-
-typedef struct s_mlx
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_ivec	mouse;
-	t_image	*mlx_img;
-}	t_mlx;
-
 typedef struct s_vars
 {
 	void		*mlx_ptr;
@@ -130,11 +110,5 @@ typedef struct s_vars
 	t_texture	texture;
 	t_ivec	mouse;
 }	t_vars;
-
-typedef struct s_params
-{
-	t_mlx		*mlx;
-	t_map_data	*map_data;
-}	t_params;
 
 #endif
