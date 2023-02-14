@@ -21,9 +21,9 @@ void	measure_map_size(t_coord *size, t_list *list_map)
 	{
 		line = list_map->content;
 		length = ft_strlen(line);
-		if (length > size->row)
-			size->row = length;
-		size->col++;
+		if (length > size->width)
+			size->width = length;
+		size->height++;
 		list_map = list_map->next;
 	}
 }

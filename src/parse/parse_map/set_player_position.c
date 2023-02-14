@@ -14,22 +14,22 @@
 
 void	set_player_position(t_map_data *map_data)
 {
-	int		col;
-	int		row;
+	int		height;
+	int		width;
 
-	col = 0;
-	while (col < map_data->size.col)
+	height = 0;
+	while (height < map_data->size.height)
 	{
-		row = 0;
-		while (row < map_data->size.row)
+		width = 0;
+		while (width < map_data->size.width)
 		{
-			if (map_data->map[col][row] == PLAYER)
+			if (map_data->map[height][width] == PLAYER)
 			{
-				map_data->player_position.col = col;
-				map_data->player_position.row = row;
+				map_data->player_position.height = height;
+				map_data->player_position.width = width;
 			}
-			row++;
+			width++;
 		}
-		col++;
+		height++;
 	}
 }

@@ -23,10 +23,22 @@ typedef enum e_direction
 	WEST
 }	t_direction;
 
+typedef struct s_ivec
+{
+	int	x;
+	int	y;
+}	t_ivec;
+
+typedef struct s_dvec
+{
+	double	x;
+	double	y;	
+}	t_dvec;
+
 typedef struct s_coord
 {
-	double	row;
-	double	col;
+	double	width;
+	double	height;
 	double	direction;
 }	t_coord;
 
