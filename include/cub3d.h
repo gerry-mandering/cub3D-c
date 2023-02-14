@@ -6,11 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/02/14 13:11:54 by minseok2         ###   ########.fr       */
-=======
-/*   Updated: 2023/02/13 00:47:09 by minseok2         ###   ########.fr       */
->>>>>>> 0284733da34c59dab1bc897be857e79849823a90
+/*   Updated: 2023/02/14 13:23:26 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +56,6 @@ void	validate_map(t_map_data *map_data);
 
 //validate_map_utils
 t_map	**copy_map(t_map_data *map_data);
-
-//parse_map_utils
-char	*skip_newlines(int fd);
-void	cut_last_spaces(char *line, int length);
 
 //error_handler
 void	error_handler(const char *error_type);
