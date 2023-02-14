@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 21:38:29 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/14 21:40:40 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,17 @@ int		ft_strcmp(const char *s1, const char *s2);
 int		ft_isspace(char character);
 
 //hooks
-int		key_press(int keycode, t_params *params);
-void	update_player_position(int keycode, t_map_data *map_data);
+int		key_press(int keycode, t_vars *vars);
+void	update_player_position(int keycode, t_vars *vars);
 int		wall_collision(void);
-int		mouse(t_params *params);
+int		mouse(t_vars *vars);
 
 //render
 void	raycast(t_vars *vars);
 
-void	plot_low(t_image *img, t_coord from, t_coord to);
-void	plot_high(t_image *img, t_coord from, t_coord to);
-void	draw_line(t_image *img, t_coord from, t_coord to);
+void	plot_low(t_image *img, t_dvec from, t_dvec to);
+void	plot_high(t_image *img, t_dvec from, t_dvec to);
+void	draw_line(t_image *img, t_dvec from, t_dvec to);
 
 void	ft_pixel_put(t_image *img, int x, int y, unsigned int color);
 void	place_player(t_vars *vars);
