@@ -17,6 +17,11 @@ LIBFT = $(LIBFT_DIR)$(LIBFT_NAME)
 MLX = $(MLX_DIR)$(MLX_NAME)
 
 SRC = main.c \
+	render/bresenham.c \
+	render/render_minimap.c \
+	render/cub3d_init.c \
+	hooks/mouse.c \
+	hooks/key.c \
 	error_handler/error_handler.c \
 	parse/parse.c \
 	parse/parse_texture/parse_texture.c \
@@ -57,10 +62,10 @@ endif
 all : $(NAME)
 
 $(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR) bonus
+	@$(MAKE) -C $(LIBFT_DIR) bonus -j6
 
 $(MLX):
-	@$(MAKE) -C $(MLX_DIR) all
+	@$(MAKE) -C $(MLX_DIR) all -j6
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I $(LIB_DIR) -c $< -o $@

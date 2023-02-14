@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/13 21:14:37 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/13 21:05:49 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_coord
 {
 	double	row;
 	double	col;
+	double	direction;
 }	t_coord;
 
 enum e_rgb
@@ -102,11 +103,18 @@ typedef struct s_map_data
 	t_texture		texture;
 }	t_map_data;
 
+typedef	struct s_mouse
+{
+	int	x_pos;
+	int	y_pos;
+}	t_mouse;
+
 typedef struct s_mlx
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_image	*mlx_img;
+	t_mouse	mouse;
 }	t_mlx;
 
 typedef struct s_params
