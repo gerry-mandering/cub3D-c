@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:58:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/15 17:46:48 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:50:52 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	wall_collision(t_vars *vars, t_dvec delta)
 
 	next_pos.x = vars->player.x + delta.x;
 	next_pos.y = vars->player.y + delta.y;
-	if ()
+	if (vars->map_elem[(int)next_pos.y][(int)next_pos.x] == WALL)
+		return (1);
 	return (0);
 }
 

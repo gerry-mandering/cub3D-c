@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/15 17:21:01 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:07:30 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,8 @@ void	raycast(t_vars *vars)
 	inter.x = (ray_start.x + dx * dist);
 	inter.y = (ray_start.y + dy * dist);
 	printf("start x:%f, y:%f hit x:%f, y:%f\n", ray_start.x, ray_start.y, inter.x, inter.y);
-	for (int i=0; i<4; i++)
-	{
-		for (int j=0; j<4; j++)
-		{
-			ft_pixel_put(&vars->minimap.img, inter.x * TILE_SIZE + i, inter.y * TILE_SIZE + j, 0xff);
-		}
-	}
+	t_ivec	offset;
+	offset.x = inter.x * TILE_SIZE;
+	offset.y = inter.y * TILE_SIZE;
+	draw_rect(&vars->minimap.img, offset, 4, 0xff);
 }

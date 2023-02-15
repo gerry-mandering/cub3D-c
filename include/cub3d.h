@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 21:40:40 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/15 18:50:27 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		ft_isspace(char character);
 //hooks
 int		key_press(int keycode, t_vars *vars);
 void	update_player_position(int keycode, t_vars *vars);
-int		wall_collision(void);
+int		wall_collision(t_vars *vars, t_dvec delta);
 int		mouse(t_vars *vars);
 
 //render
@@ -82,6 +82,7 @@ void	draw_line(t_image *img, t_dvec from, t_dvec to);
 void	ft_pixel_put(t_image *img, int x, int y, unsigned int color);
 void	place_player(t_vars *vars);
 void	place_wall(t_vars *vars);
+void	draw_rect(t_image *image, t_ivec offset, int size, unsigned int color);
 void	render_minimap(t_vars *vars);
 
 void	init_params(t_vars *vars);
