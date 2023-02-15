@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:54:58 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/10 14:45:52 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/14 21:51:23 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void	parse_west_texture(t_texture *texture, int *bitflag, char *value)
 {
 	if (*bitflag & WEST_TEXTURE)
 		error_handler(DUPLICATED_TEXTURE);
-	texture->wall[WEST] = value;
+	texture->wall[WEST] = ft_strdup(value);
 	*bitflag |= WEST_TEXTURE;
 }
