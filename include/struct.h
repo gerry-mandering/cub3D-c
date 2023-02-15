@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/15 20:02:07 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:13:36 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_minimap
 typedef struct s_texture
 {
 	char	*wall[4];
+	void	*wall_img_ptr[4];
 	int		floor_rgb;
 	int		ceiling_rgb;
 }	t_texture;
@@ -107,6 +108,7 @@ typedef struct s_vars
 	t_image		view;
 	t_dvec		player;
 	t_direction	spawning_direction;
+	t_image		view;
 	t_minimap	minimap;
 	t_texture	texture;
 	t_ivec		mouse;
