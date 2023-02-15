@@ -17,8 +17,11 @@
 # define W_SIZE					1920
 # define H_SIZE					1080
 # define TILE_SIZE				24
+# define PLAYER_SIZE			10
 # define MOVING_SPEED			0.1
 # define MOUSE_SPEED			0.08
+# define FOV_ANGLE				M_PI_4
+# define NUMBER_OF_RAYS			210
 
 # define SYSTEMCALL_ERROR		NULL
 # define WRONG_ARGUMENTS_COUNT	"Wrong Arguments Count -"
