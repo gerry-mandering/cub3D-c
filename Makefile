@@ -21,6 +21,7 @@ SRC = main.c \
 	render/render_minimap.c \
 	render/cub3d_init.c \
 	render/raycast.c \
+	render/view/init_view.c \
 	hooks/mouse.c \
 	hooks/key.c \
 	error_handler/error_handler.c \

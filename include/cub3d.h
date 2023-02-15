@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 21:40:40 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:16:59 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,8 @@ void	init_params(t_vars *vars);
 void	read_images(t_vars *vars);
 t_image	create_image(t_vars *vars, int img_w, int img_h);
 void	create_minimap(t_vars *vars);
+
+//init_view
+void	init_view(t_vars *vars);
 
 #endif

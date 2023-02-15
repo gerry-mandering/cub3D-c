@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:43:34 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/15 16:01:25 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:09:54 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	place_wall(t_vars *vars)
 		}
 		h++;
 	}
-
 }
 
 void	render_minimap(t_vars *vars)

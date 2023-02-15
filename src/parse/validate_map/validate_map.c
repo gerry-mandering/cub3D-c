@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:08:34 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 21:19:35 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:02:54 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,19 @@ static void	flood_fill(t_map **map, int y, int x, t_ivec map_size)
 	flood_fill(map, y, x + 1, map_size);
 }
 
+static void	free_copied_map(t_map **copied_map, t_ivec map_size)
+{
+	int	i;
+
+	i = 0;
+	while (i < map_size.y)
+	{
+		free(copied_map[i]);
+		i++;
+	}
+	free(copied_map);
+}
+
 static void	check_map_is_closed(t_vars *vars)
 {
 	t_map	**copied_map;
@@ -85,6 +98,7 @@ static void	check_map_is_closed(t_vars *vars)
 	map_size.y = vars->map_height;
 	map_size.x = vars->map_width;
 	flood_fill(copied_map, vars->player.y, vars->player.x, map_size);
+	free_copied_map(copied_map, map_size);
 }
 
 void	validate_map(t_vars *vars)
