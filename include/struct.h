@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/13 21:05:49 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/14 20:57:38 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,17 @@ typedef enum e_direction
 	WEST
 }	t_direction;
 
-typedef struct s_coord
+typedef struct s_ivec
 {
-	double	row;
-	double	col;
-	double	direction;
-}	t_coord;
+	int	x;
+	int	y;
+}	t_ivec;
+
+typedef struct s_dvec
+{
+	double	x;
+	double	y;
+}	t_dvec;
 
 enum e_rgb
 {
@@ -71,12 +76,10 @@ typedef struct s_image
 typedef struct s_minimap
 {
 	t_image	background_img;
-	t_image	minimap_img;
+	t_image	img;
 	void	*empty_space;
 	void	*wall;
 	void	*player;
-	int		x_offset;
-	int		y_offset;
 	int		x_scale;
 	int		y_scale;
 	int		w_size;
@@ -93,34 +96,19 @@ typedef struct s_texture
 typedef void	(*t_parse_texture_fp)(t_texture *texture, \
 										int *bitflag, char *value);
 
-typedef struct s_map_data
+typedef struct s_vars
 {
-	t_coord			size;
-	t_coord			player_position;
-	t_direction		spawning_direction;
-	int				**map;
-	t_minimap		minimap;
-	t_texture		texture;
-}	t_map_data;
-
-typedef	struct s_mouse
-{
-	int	x_pos;
-	int	y_pos;
-}	t_mouse;
-
-typedef struct s_mlx
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_image	*mlx_img;
-	t_mouse	mouse;
-}	t_mlx;
-
-typedef struct s_params
-{
-	t_mlx		*mlx;
-	t_map_data	*map_data;
-}	t_params;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	int			**map_elem;
+	int			map_width;
+	int			map_height;
+	double		viewing_angle;
+	t_dvec		player;
+	t_direction	spawning_direction;
+	t_minimap	minimap;
+	t_texture	texture;
+	t_ivec		mouse;
+}	t_vars;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:41:00 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/13 15:08:22 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/14 21:59:55 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,34 @@ static int	get_fp_index(char *identifier)
 	return (-1);
 }
 
+static void	check_line_is_null(char *line)
+{
+	if (line == NULL)
+		error_handler(LACKING_TEXTURE_INFO);
+}
+
+static int	is_newline(char *line)
+{
+	if (ft_strcmp(line, "\n") == 0)
+	{
+		free(line);
+		return (1);
+	}
+	else
+		return (0);
+}
+
+static void	check_splited_line(char **splited_line)
+{
+	if (count_strings(splited_line) != 2)
+		error_handler(INVALID_TEXTURE_FORMAT);
+}
+
 void	parse_texture(t_texture *texture, int fd)
 {
 	const t_parse_texture_fp	parse_texture_fp[6] = {
-		parse_north_texture, parse_south_texture, \
-		parse_west_texture, parse_east_texture, \
-		parse_floor_rgb, parse_ceiling_rgb
+		parse_north_texture, parse_south_texture, parse_west_texture, \
+		parse_east_texture, parse_floor_rgb, parse_ceiling_rgb
 	};
 	char						*line;
 	char						**splited_line;
@@ -47,17 +69,12 @@ void	parse_texture(t_texture *texture, int fd)
 	while (bitflag != PARSED_EVERY_TEXTURE)
 	{
 		line = get_next_line(fd);
-		if (line == NULL)
-			error_handler(LACKING_TEXTURE_INFO);
-		if (ft_strcmp(line, "\n") == 0)
-		{
-			free(line);
+		check_line_is_null(line);
+		if (is_newline(line))
 			continue ;
-		}
 		splited_line = ft_split(line, WHITE_SPACE);
 		free(line);
-		if (count_strings(splited_line) != 2)
-			error_handler(INVALID_TEXTURE_FORMAT);
+		check_splited_line(splited_line);
 		fp_index = get_fp_index(splited_line[IDENTIFIER]);
 		parse_texture_fp[fp_index](texture, &bitflag, splited_line[VALUE]);
 		free_strings(splited_line);

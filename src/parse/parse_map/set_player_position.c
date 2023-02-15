@@ -6,30 +6,30 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:18:32 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 11:18:40 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/14 21:10:23 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-void	set_player_position(t_map_data *map_data)
+void	set_player_position(t_vars *vars)
 {
-	int		col;
-	int		row;
+	int		height;
+	int		width;
 
-	col = 0;
-	while (col < map_data->size.col)
+	height = 0;
+	while (height < vars->map_height)
 	{
-		row = 0;
-		while (row < map_data->size.row)
+		width = 0;
+		while (width < vars->map_width)
 		{
-			if (map_data->map[col][row] == PLAYER)
+			if (vars->map_elem[height][width] == PLAYER)
 			{
-				map_data->player_position.col = col;
-				map_data->player_position.row = row;
+				vars->player.y = height;
+				vars->player.x = width;
 			}
-			row++;
+			width++;
 		}
-		col++;
+		height++;
 	}
 }

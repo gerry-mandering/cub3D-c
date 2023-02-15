@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/13 22:11:01 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/14 21:40:40 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include "../lib/minilibx_opengl/mlx.h"
 
 //parse
-void	parse(t_map_data *map_data, char **argv);
+void	parse(t_vars *vars, char **argv);
 
 //parse_texture
 void	parse_texture(t_texture *texture, int fd);
@@ -44,18 +44,18 @@ void	parse_ceiling_rgb(t_texture *texture, int *bitflag, char *value);
 int		get_rgb(char *value);
 
 //parse_map
-void	parse_map(t_map_data *map_data, int fd);
+void	parse_map(t_vars *vars, int fd);
 void	make_list_map(t_list **list_map, int fd);
-void	measure_map_size(t_coord *size, t_list *list_map);
-void	allocate_map(t_map_data *map_data);
-void	labeling_map(t_map_data *map_data, t_list *list_map);
-void	set_player_position(t_map_data *map_data);
+void	measure_map_size(int *map_width, int *map_height, t_list *list_map);
+void	allocate_map(t_vars *vars);
+void	labeling_map(t_vars *vars, t_list *list_map);
+void	set_player_position(t_vars *vars);
 
 //validate_map
-void	validate_map(t_map_data *map_data);
+void	validate_map(t_vars *vars);
 
 //validate_map_utils
-t_map	**copy_map(t_map_data *map_data);
+t_map	**copy_map(t_vars *vars);
 
 //error_handler
 void	error_handler(const char *error_type);
@@ -67,26 +67,26 @@ int		ft_strcmp(const char *s1, const char *s2);
 int		ft_isspace(char character);
 
 //hooks
-int		key_press(int keycode, t_params *params);
-void	update_player_position(int keycode, t_map_data *map_data);
+int		key_press(int keycode, t_vars *vars);
+void	update_player_position(int keycode, t_vars *vars);
 int		wall_collision(void);
-int		mouse(t_params *params);
+int		mouse(t_vars *vars);
 
 //render
-void	plot_low(t_image *img, t_coord from, t_coord to);
-void	plot_high(t_image *img, t_coord from, t_coord to);
-void	draw_line(t_image *img, t_coord from, t_coord to);
+void	raycast(t_vars *vars);
+
+void	plot_low(t_image *img, t_dvec from, t_dvec to);
+void	plot_high(t_image *img, t_dvec from, t_dvec to);
+void	draw_line(t_image *img, t_dvec from, t_dvec to);
 
 void	ft_pixel_put(t_image *img, int x, int y, unsigned int color);
-void	place_player(t_image *img, int w, int h);
-void	place_wall(t_image	*img, int w, int h);
-void	show_direction(t_map_data *map_data);
-void	render_minimap(t_mlx *mlx, t_map_data *map_data);
+void	place_player(t_vars *vars);
+void	place_wall(t_vars *vars);
+void	render_minimap(t_vars *vars);
 
-void	init_params(t_params *params);
-void	tmp_make_map(t_map_data *map_data);
-void	read_images(t_mlx *mlx, t_map_data *map_data);
-void	create_image(t_mlx *mlx, t_image *img, int img_w, int img_h);
-void	create_minimap(t_mlx *mlx, t_map_data *map_data);
+void	init_params(t_vars *vars);
+void	read_images(t_vars *vars);
+t_image	create_image(t_vars *vars, int img_w, int img_h);
+void	create_minimap(t_vars *vars);
 
 #endif

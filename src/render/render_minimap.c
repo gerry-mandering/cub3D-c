@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:43:34 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/13 21:46:20 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:01:25 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,59 +24,70 @@ void	ft_pixel_put(t_image *img, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
-void	place_player(t_image *img, int w, int h)
+void	place_player(t_vars *vars)
 {
-	int		i;
-	int		j;
-	
-	i = 0;
-	while (i < 10)
+	const int	x_offset = vars->player.x * TILE_SIZE;
+	const int	y_offset = vars->player.y * TILE_SIZE;
+	int			x;
+	int			y;
+
+	x = 0;
+	while (x < 10)
 	{
-		j = 0;
-		while (j < 10)
+		y = 0;
+		while (y < 10)
 		{
-			ft_pixel_put(img, w + j, h + i, PLAYER_COLOR);
-			j++;
+			ft_pixel_put(&vars->minimap.img, x_offset + x, y_offset + y, PLAYER_COLOR);
+			y++;
 		}
-		i++;
+		x++;
 	}
 }
 
-void	place_wall(t_image	*img, int w, int h)
+void	draw_rect(t_image *image, int w, int h, unsigned int color)
 {
-	int		i;
-	int		j;
-	
+	const int	w_offset = w * TILE_SIZE;
+	const int	h_offset = h * TILE_SIZE;
+	int			i;
+	int			j;
+
 	i = 0;
 	while (i < TILE_SIZE)
 	{
 		j = 0;
 		while (j < TILE_SIZE)
 		{
-			ft_pixel_put(img, w + j, h + i, WALL_COLOR);
+			ft_pixel_put(image, w_offset + i, h_offset + j, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	show_direction(t_map_data *map_data)
+void	place_wall(t_vars *vars)
 {
-	t_coord	from;
-	t_coord	to;
+	int	w;
+	int	h;
 
-	from.row = map_data->player_position.row + 5;
-	from.col = map_data->player_position.col + 5;
-	to = from;
-	to.col += 20 * cos(map_data->player_position.direction);
-	to.row += 20 * sin(map_data->player_position.direction);
-	draw_line(&map_data->minimap.minimap_img, from, to);
+	h = 0;
+	while (h < vars->map_height)
+	{
+		w = 0;
+		while (w < vars->map_width)
+		{
+			if (vars->map_elem[h][w] == WALL)
+				draw_rect(&vars->minimap.background_img, w, h, WALL_COLOR);
+			w++;
+		}
+		h++;
+	}
+
 }
 
-void	render_minimap(t_mlx *mlx, t_map_data *map_data)
+void	render_minimap(t_vars *vars)
 {
-	ft_memcpy(map_data->minimap.minimap_img.img_ptr, map_data->minimap.background_img.img_ptr, map_data->minimap.w_size * map_data->minimap.h_size * sizeof(int));
-	place_player(&map_data->minimap.minimap_img, map_data->player_position.col, map_data->player_position.row);
-	show_direction(map_data);
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, map_data->minimap.minimap_img.img, 0, 0);
+	ft_memcpy(vars->minimap.img.img_ptr, vars->minimap.background_img.img_ptr, sizeof(int) * vars->minimap.w_size * vars->minimap.h_size);
+	place_player(vars);
+	raycast(vars);
+	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->minimap.img.img, MINIMAP_XOFFSET, MINIMAP_YOFFSET);
 }

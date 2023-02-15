@@ -6,21 +6,21 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:47:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/13 21:47:53 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/14 21:30:35 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	plot_low(t_image *img, t_coord from, t_coord to)
+void	plot_low(t_image *img, t_dvec from, t_dvec to)
 {
 	int	dx;
 	int	dy;
 	int	yi;
 	int	p;
 
-	dx = (int)(to.col - from.col);
-	dy = (int)(to.row - from.row);
+	dx = (int)(to.x - from.x);
+	dy = (int)(to.y - from.y);
 	yi = 1;
 	if (dy < 0)
 	{
@@ -28,12 +28,12 @@ void	plot_low(t_image *img, t_coord from, t_coord to)
 		dy = -dy;
 	}
 	p = 2 * dy - dx;
-	while (from.col < to.col)
+	while (from.y < to.y)
 	{
-		ft_pixel_put(img, from.col++, from.row, 0xff00);
+		ft_pixel_put(img, from.x++, from.y, 0xff00);
 		if (p > 0)
 		{
-			from.row += yi;
+			from.y += yi;
 			p += 2 * (dy - dx);
 		}
 		else
@@ -41,15 +41,15 @@ void	plot_low(t_image *img, t_coord from, t_coord to)
 	}
 }
 
-void	plot_high(t_image *img, t_coord from, t_coord to)
+void	plot_high(t_image *img, t_dvec from, t_dvec to)
 {
 	int	dx;
 	int	dy;
 	int	xi;
 	int	p;
 
-	dx = (int)(to.col - from.col);
-	dy = (int)(to.row - from.row);
+	dx = (int)(to.y - from.y);
+	dy = (int)(to.x - from.x);
 	xi = 1;
 	if (dx < 0)
 	{
@@ -57,12 +57,12 @@ void	plot_high(t_image *img, t_coord from, t_coord to)
 		dx = -dx;
 	}
 	p = 2 * dx - dy;
-	while (from.row < to.row)
+	while (from.x < to.x)
 	{
-		ft_pixel_put(img, from.col, from.row++, 0xff00);
+		ft_pixel_put(img, from.y, from.x++, 0xff00);
 		if (p > 0)
 		{
-			from.col += xi;
+			from.y += xi;
 			p += 2 * (dx - dy);
 		}
 		else
@@ -70,27 +70,27 @@ void	plot_high(t_image *img, t_coord from, t_coord to)
 	}
 }
 
-void	draw_line(t_image *img, t_coord from, t_coord to)
+void	draw_line(t_image *img, t_dvec from, t_dvec to)
 {
 	int	dx;
 	int	dy;
 
-	dx = (int)(to.col - from.col);
-	dy = (int)(to.row - from.row);
+	dx = (int)(to.x - from.x);
+	dy = (int)(to.y - from.y);
 	if (dx < 0)
 		dx = -dx;
 	if (dy < 0)
 		dy = -dy;
 	if (dy < dx)
 	{
-		if (from.col > to.col)
+		if (from.x > to.x)
 			plot_low(img, to, from);
 		else
 			plot_low(img, from, to);
 	}
 	else
 	{
-		if (from.row > to.row)
+		if (from.y > to.y)
 			plot_high(img, to, from);
 		else
 			plot_high(img, from, to);
