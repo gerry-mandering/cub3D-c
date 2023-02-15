@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/15 21:13:36 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/15 22:04:42 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ typedef struct s_vars
 	int			map_height;
 	double		viewing_angle;
 	t_image		view;
+	t_image		backgroud;
 	t_dvec		player;
 	t_direction	spawning_direction;
-	t_image		view;
 	t_minimap	minimap;
 	t_texture	texture;
 	t_ivec		mouse;

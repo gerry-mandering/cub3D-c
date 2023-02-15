@@ -6,11 +6,22 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/15 21:11:50 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/15 22:03:18 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void	draw_vertical_line(t_image *img, t_ivec offset, int length, unsigned int color)
+{
+	for (int i=offset.y-length; i<offset.y+length; i++)
+	{
+		for (int j=offset.x; j<offset.x+5; j++)
+		{
+			ft_pixel_put(img, j, i, color);
+		}
+	}
+}
 
 void	raycast(t_vars *vars, double ray_dir)
 {
@@ -70,7 +81,7 @@ void	raycast(t_vars *vars, double ray_dir)
 		{
 			if (vars->map_elem[map_check.y][map_check.x] == WALL)
 			{
-				//printf("block: %d, %d dist:%f\n", map_check.x, map_check.y, dist);
+				printf("block: %d, %d dist:%f\n", map_check.x, map_check.y, dist);
 				hit = 1;
 			}
 		}
@@ -84,23 +95,24 @@ void	raycast(t_vars *vars, double ray_dir)
 	offset.y = inter.y * TILE_SIZE;
 	draw_rect(&vars->minimap.img, offset, 2, 0xff);
 	int face = get_collision_direction(map_check, inter);
-	offset.x = W_SIZE * (ray_dir + FOV_ANGLE / 2) / FOV_ANGLE;
+	offset.x = W_SIZE * (ray_dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
 	offset.y = H_SIZE / 2;
+	printf("offset x:%d, %d\n", offset.x, offset.y);
 	if (face ==  NORTH)
 	{
-		draw_rect(&vars->view, offset, 5, 0xff0000);
+		draw_vertical_line(&vars->view, offset, 10*dist, 0xff0000);
 	}
 	else if (face == SOUTH)
 	{
-		draw_rect(&vars->view, offset, 5, 0xff00);
+		draw_vertical_line(&vars->view, offset, 10*dist, 0xff00);
 	}
 	else if (face == EAST)
 	{
-		draw_rect(&vars->view, offset, 5, 0xff);
+		draw_vertical_line(&vars->view, offset, 10*dist, 0xff);
 	}
 	else if (face == WEST)
 	{
-		draw_rect(&vars->view, offset, 5, 0xffffff);
+		draw_vertical_line(&vars->view, offset, 10*dist, 0xffffff);
 	}
 	else
 		printf("wrong face\n");

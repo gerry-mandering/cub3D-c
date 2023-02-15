@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_view.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:26:09 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/15 20:43:00 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/15 22:09:47 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ static void	init_wall_img_ptr(void *mlx_ptr, t_texture *texture)
 void	init_view(t_vars *vars)
 {
 	create_view(&vars->view, vars);
-	init_background_color(&vars->view, vars);
+	init_background_color(&vars->backgroud, vars);
 	init_wall_img_ptr(vars->mlx_ptr, &vars->texture);
 }
