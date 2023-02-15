@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:57:44 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/14 21:29:47 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:28:06 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int	mouse(t_vars *vars)
 		vars->viewing_angle -= MOUSE_SPEED;
 	else if (vars->mouse.x <= 0 || (vars->mouse.x > cur_x && cur_x > 0))
 		vars->viewing_angle += MOUSE_SPEED;
+	if (vars->viewing_angle < 0)
+		vars->viewing_angle += 2 * M_PI;
+	else if (vars->viewing_angle > 2 * M_PI)
+		vars->viewing_angle -= 2 * M_PI;
 	vars->mouse.x = cur_x;
 	vars->mouse.y = cur_y;
 	render_minimap(vars);
