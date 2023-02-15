@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/15 18:50:27 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:20:01 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int		wall_collision(t_vars *vars, t_dvec delta);
 int		mouse(t_vars *vars);
 
 //render
-void	raycast(t_vars *vars);
+void	raycast(t_vars *vars, double ray_dir);
+void	FOV(t_vars *vars);
 
 void	plot_low(t_image *img, t_dvec from, t_dvec to);
 void	plot_high(t_image *img, t_dvec from, t_dvec to);
