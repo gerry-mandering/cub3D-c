@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:57:44 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/15 16:28:06 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:09:22 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int	mouse(t_vars *vars)
 	vars->mouse.x = cur_x;
 	vars->mouse.y = cur_y;
 	render_minimap(vars);
+	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->view.img_ptr, 0, 0);
 	return (0);
 }

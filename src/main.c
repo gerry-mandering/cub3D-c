@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:14:20 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/15 17:51:11 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:11:08 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 t_direction	get_collision_direction(t_ivec wall_location, t_dvec collision_point)
 {
-	if (collision_point.x == wall_location.x)
+	if ((int)collision_point.x == wall_location.x)
 		return (WEST);
-	else if (collision_point.y == wall_location.y)
+	else if ((int)collision_point.y == wall_location.y)
 		return (NORTH);
-	else if (collision_point.x == wall_location.x + 1)
+	else if ((int)collision_point.x == wall_location.x + 1)
 		return (EAST);
-	else if (collision_point.y == wall_location.y + 1)
+	else if ((int)collision_point.y == wall_location.y + 1)
 		return (SOUTH);
 	else
 	{

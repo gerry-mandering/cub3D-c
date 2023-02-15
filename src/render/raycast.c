@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/15 19:38:11 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:11:50 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,27 @@ void	raycast(t_vars *vars, double ray_dir)
 	offset.x = inter.x * TILE_SIZE;
 	offset.y = inter.y * TILE_SIZE;
 	draw_rect(&vars->minimap.img, offset, 2, 0xff);
+	int face = get_collision_direction(map_check, inter);
+	offset.x = W_SIZE * (ray_dir + FOV_ANGLE / 2) / FOV_ANGLE;
+	offset.y = H_SIZE / 2;
+	if (face ==  NORTH)
+	{
+		draw_rect(&vars->view, offset, 5, 0xff0000);
+	}
+	else if (face == SOUTH)
+	{
+		draw_rect(&vars->view, offset, 5, 0xff00);
+	}
+	else if (face == EAST)
+	{
+		draw_rect(&vars->view, offset, 5, 0xff);
+	}
+	else if (face == WEST)
+	{
+		draw_rect(&vars->view, offset, 5, 0xffffff);
+	}
+	else
+		printf("wrong face\n");
 }
 
 void	FOV(t_vars *vars)

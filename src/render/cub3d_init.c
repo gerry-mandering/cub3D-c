@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:59:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/14 20:01:47 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/15 20:39:45 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	init_params(t_vars *vars)
 {
 	vars->mlx_ptr = mlx_init();
 	vars->win_ptr = mlx_new_window(vars->mlx_ptr, W_SIZE, H_SIZE, "cub3D");
+	vars->view.img = mlx_new_image(vars->mlx_ptr, W_SIZE, H_SIZE);
+	vars->view.img_ptr = mlx_get_data_addr(vars->view.img, &vars->view.bits_per_pixel, &vars->view.size_line, &vars->view.endidan);
 	vars->viewing_angle = M_PI + M_PI_2;
 	read_images(vars);
 	create_minimap(vars);
