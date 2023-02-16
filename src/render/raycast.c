@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/16 17:25:06 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:23:41 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,48 @@ void	render_view(t_vars *vars, t_ray ray)
 		ray.perp_wall_dist = ((double)ray.map_check.y - vars->player.y + (1 - ray.step.y) / 2) / ray.delta.y;
 	else if (face == WEST || face == EAST)
 		ray.perp_wall_dist = ((double)ray.map_check.x - vars->player.x + (1 - ray.step.x) / 2) / ray.delta.x;
-	//From here is just a temporary code for debugging; 
-	int 	color = 0;
-	t_ivec	offset;
-	offset.x = W_SIZE * (ray.dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
-	offset.y = H_SIZE / 2;
-	if (face ==  NORTH)
-		color = 0xff0000;
-	else if (face == SOUTH)
-		color = 0xff00;
-	else if (face == EAST)
-		color = 0xff;
-	else if (face == WEST)
-		color = 0xffffff;
-	else
-		printf("wrong face\n");
-	draw_vertical_line(&vars->view, offset, 200/ray.perp_wall_dist, color);
+	
+	int	line_height = (int)(H_SIZE / ray.perp_wall_dist);
+	int	draw_start = -line_height / 2 + H_SIZE / 2;
+	if (draw_start < 0)
+		draw_start = 0;
+	int draw_end = line_height / 2 + H_SIZE / 2;
+	if (draw_end >= H_SIZE)
+		draw_end = H_SIZE - 1;
+	
+	double wall_x;
+	int	texture_x;
+	if (face == NORTH || face == SOUTH)
+	{
+		wall_x = ray.intersection.x - floor(ray.intersection.x);
+		texture_x = (int)(wall_x * (double)2000);
+		if (face == SOUTH)
+			texture_x = 2000 - texture_x - 1;
+	}
+	else if (face == EAST || face == WEST)
+	{
+		wall_x = ray.intersection.y - floor(ray.intersection.y);
+		texture_x = (int)(wall_x * (double)2000);
+		if (face == EAST)
+			texture_x = 2000 - texture_x - 1;
+	}
+	t_image img = vars->texture.wall_image[face];
+	double	step = 1.0 * 2000 / line_height;
+	double	textPos = 0;
+	int x = W_SIZE * (ray.dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
+	for (int y=draw_start; y<draw_end; y++)
+	{
+		int texture_y = (int)textPos & (2000 - 1);
+		textPos += step;
+		int offset = (texture_y * img.size_line) + texture_x * (img.bits_per_pixel / 8);
+		unsigned int color = img.img_ptr[offset];
+		if (face == NORTH || face == SOUTH)
+			color = (color >> 1) & 8355711;
+		for (int i=x; i<x+4; i++)
+		{
+			ft_pixel_put(&vars->view, i, y, color);
+		}
+	}
 }
 
 void	raycast(t_vars *vars, double ray_dir)
@@ -114,10 +140,10 @@ void	raycast(t_vars *vars, double ray_dir)
 	ray.intersection.x = ray.start.x + ray.delta.x * ray.dist;
 	ray.intersection.y = ray.start.y + ray.delta.y * ray.dist;
 	//add ray to minimap
-	t_ivec	offset;
-	offset.x = ray.intersection.x * TILE_SIZE;
-	offset.y = ray.intersection.y * TILE_SIZE;
-	draw_rect(&vars->minimap.img, offset, 2, 0xff);
+	// t_ivec	offset;
+	// offset.x = ray.intersection.x * TILE_SIZE;
+	// offset.y = ray.intersection.y * TILE_SIZE;
+	// draw_rect(&vars->minimap.img, offset, 2, 0xff);
 	render_view(vars, ray);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/16 17:02:29 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:41:23 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_minimap
 typedef struct s_texture
 {
 	char	*wall[4];
-	void	*wall_img_ptr[4];
+	t_image	wall_image[4];
 	int		floor_rgb;
 	int		ceiling_rgb;
 }	t_texture;

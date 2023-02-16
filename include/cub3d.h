@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/15 21:17:53 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:00:19 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ void	create_minimap(t_vars *vars);
 t_direction	get_collision_direction(t_ivec wall_location, t_dvec collision_point);
 //init_view
 void	init_view(t_vars *vars);
+void	init_wall_image(t_vars *vars);
 
 #endif

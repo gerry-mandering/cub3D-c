@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:59:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/16 17:15:18 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:05:24 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_params(t_vars *vars)
 	vars->view = create_image(vars, W_SIZE, H_SIZE);
 	vars->backgroud = create_image(vars, W_SIZE, H_SIZE);
 	//read_images(vars);
+	init_wall_image(vars);
 	create_minimap(vars);
 	mlx_mouse_hide();
 	mlx_mouse_move(vars->win_ptr, W_SIZE / 2, H_SIZE / 2);
