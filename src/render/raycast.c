@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/16 21:00:27 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 21:26:47 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,7 @@ void	render_view(t_vars *vars, t_ray ray)
 		unsigned int color = img.img_ptr[offset];
 		if (face == NORTH || face == SOUTH)
 			color = (color >> 1) & 8355711;
-		for (int i=x; i<x+4; i++)
-		{
-			ft_pixel_put(&vars->view, i, y, color);
-		}
+		ft_pixel_put(&vars->view, x, y, color);
 	}
 }
 
