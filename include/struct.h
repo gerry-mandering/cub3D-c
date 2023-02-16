@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/16 16:08:40 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:02:29 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_ray
 	t_ivec	step;
 	t_ivec	map_check;
 	t_ivec	offset;
+	double	dir;
 	double	dist;
 	double	perp_wall_dist;
 }	t_ray;
