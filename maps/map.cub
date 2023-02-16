@@ -1,7 +1,7 @@
-NO ./images/white.xpm
-SO ./images/black.xpm
-WE ./images/green.xpm
-EA ./images/blue.xpm
+NO ./images/north.xpm
+SO ./images/south.xpm
+WE ./images/west.xpm
+EA ./images/east.xpm
 
 F 220,100,0
 C 225,30,0
