@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/15 22:03:18 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:20:51 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	draw_vertical_line(t_image *img, t_ivec offset, int length, unsigned int co
 {
 	for (int i=offset.y-length; i<offset.y+length; i++)
 	{
-		for (int j=offset.x; j<offset.x+5; j++)
+		for (int j=offset.x; j<offset.x+1; j++)
 		{
 			ft_pixel_put(img, j, i, color);
 		}
@@ -100,19 +100,19 @@ void	raycast(t_vars *vars, double ray_dir)
 	printf("offset x:%d, %d\n", offset.x, offset.y);
 	if (face ==  NORTH)
 	{
-		draw_vertical_line(&vars->view, offset, 10*dist, 0xff0000);
+		draw_vertical_line(&vars->view, offset, 100 - 10*dist, 0xff0000);
 	}
 	else if (face == SOUTH)
 	{
-		draw_vertical_line(&vars->view, offset, 10*dist, 0xff00);
+		draw_vertical_line(&vars->view, offset, 100 - 10*dist, 0xff00);
 	}
 	else if (face == EAST)
 	{
-		draw_vertical_line(&vars->view, offset, 10*dist, 0xff);
+		draw_vertical_line(&vars->view, offset, 100 - 10*dist, 0xff);
 	}
 	else if (face == WEST)
 	{
-		draw_vertical_line(&vars->view, offset, 10*dist, 0xffffff);
+		draw_vertical_line(&vars->view, offset, 100 - 10*dist, 0xffffff);
 	}
 	else
 		printf("wrong face\n");
