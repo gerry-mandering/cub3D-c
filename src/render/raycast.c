@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/16 20:23:41 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 21:00:27 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	draw_vertical_line(t_image *img, t_ivec offset, \
 {
 	for (int i=offset.y-length; i<offset.y+length; i++)
 	{
-		for (int j=offset.x; j<offset.x+1; j++)
+		for (int j=offset.x; j<offset.x+3; j++)
 		{
 			ft_pixel_put(img, j, i, color);
 		}
@@ -140,11 +140,29 @@ void	raycast(t_vars *vars, double ray_dir)
 	ray.intersection.x = ray.start.x + ray.delta.x * ray.dist;
 	ray.intersection.y = ray.start.y + ray.delta.y * ray.dist;
 	//add ray to minimap
-	// t_ivec	offset;
-	// offset.x = ray.intersection.x * TILE_SIZE;
-	// offset.y = ray.intersection.y * TILE_SIZE;
-	// draw_rect(&vars->minimap.img, offset, 2, 0xff);
-	render_view(vars, ray);
+	t_ivec	offset;
+	offset.x = ray.intersection.x * TILE_SIZE;
+	offset.y = ray.intersection.y * TILE_SIZE;
+	draw_rect(&vars->minimap.img, offset, 2, 0xff);
+	//render_view(vars, ray);
+	int	face = get_collision_direction(ray.map_check, ray.intersection);
+	ray.perp_wall_dist = 0;
+	if (face == NORTH || face == SOUTH)
+		ray.perp_wall_dist = ((double)ray.map_check.y - vars->player.y + (1 - ray.step.y) / 2) / ray.delta.y;
+	else if (face == WEST || face == EAST)
+		ray.perp_wall_dist = ((double)ray.map_check.x - vars->player.x + (1 - ray.step.x) / 2) / ray.delta.x;
+	offset.x = W_SIZE * (ray.dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
+	offset.y = H_SIZE / 2;
+	int color;
+	if (face == NORTH)
+		color = 0xff0000;
+	else if (face == EAST)
+		color = 0xff00;
+	else if (face == WEST)
+		color = 0xff;
+	else
+		color = 0xffffff;
+	draw_vertical_line(&vars->view, offset, 200/ray.perp_wall_dist, color);
 }
 
 void	FOV(t_vars *vars)

@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/16 20:04:58 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 21:00:30 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define MOVING_SPEED			0.1
 # define MOUSE_SPEED			0.06
 # define FOV_ANGLE				M_PI_4
-# define NUMBER_OF_RAYS			500
+# define NUMBER_OF_RAYS			700
 
 # define SYSTEMCALL_ERROR		NULL
 # define WRONG_ARGUMENTS_COUNT	"Wrong Arguments Count -"
