@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:14:20 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/16 15:10:07 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:59:43 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 	parse(&vars, argv);
 	printf("parse_finished\n");
 	init_params(&vars);
-	init_view(&vars);
+	//init_view(&vars);
 	mlx_hook(vars.win_ptr, X_EVENT_KEY_PRESS, 0, &key_press, &vars);
 	mlx_loop_hook(vars.mlx_ptr, &mouse, &vars);
 	mlx_loop(vars.mlx_ptr);
