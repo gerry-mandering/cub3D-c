@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:59:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/15 22:08:04 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:27:35 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ void	init_params(t_vars *vars)
 	mlx_mouse_get_pos(vars->win_ptr, &vars->mouse.x, &vars->mouse.y);
 	vars->texture.ceiling_rgb = 0x00ccff;
 	vars->texture.floor_rgb = 0x7ec850;
+	// for (int i=0; i<H_SIZE/2; i++)
+	// {
+	// 	for (int j=0; j<W_SIZE; j++)
+	// 		ft_pixel_put(&vars->backgroud, j, i, vars->texture.ceiling_rgb);
+	// }
+	// for (int i=H_SIZE/2; i<H_SIZE; i++)
+	// {
+	// 	for (int j=0; j<W_SIZE; j++)
+	// 		ft_pixel_put(&vars->backgroud, j, i, vars->texture.floor_rgb);
+	// }
 }
 
 void	read_images(t_vars *vars)

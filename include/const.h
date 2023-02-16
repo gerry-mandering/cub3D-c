@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/16 14:22:47 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:07:38 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # define TILE_SIZE				24
 # define PLAYER_SIZE			10
 # define MOVING_SPEED			0.1
-# define MOUSE_SPEED			0.02
+# define MOUSE_SPEED			0.06
 # define FOV_ANGLE				M_PI_4
-# define NUMBER_OF_RAYS			1920
+# define NUMBER_OF_RAYS			500
 
 # define SYSTEMCALL_ERROR		NULL
 # define WRONG_ARGUMENTS_COUNT	"Wrong Arguments Count -"

@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/16 14:20:51 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:09:37 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	raycast(t_vars *vars, double ray_dir)
 	}
 	int		hit = 0;
 	double	dist = 0;
+	int		side = 0;
 	//double	max_dist = 100;
 	while (!hit)
 	{
@@ -70,12 +71,14 @@ void	raycast(t_vars *vars, double ray_dir)
 			map_check.x += step.x;
 			dist = ray_length.x;
 			ray_length.x += unit_step_size.x;
+			side = 0;
 		}
 		else
 		{
 			map_check.y += step.y;
 			dist = ray_length.y;
 			ray_length.y += unit_step_size.y;
+			side = 1;
 		}
 		if (map_check.x >= 0 && map_check.x < vars->map_width && map_check.y >= 0 && map_check.y < vars->map_height)
 		{
@@ -97,25 +100,24 @@ void	raycast(t_vars *vars, double ray_dir)
 	int face = get_collision_direction(map_check, inter);
 	offset.x = W_SIZE * (ray_dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
 	offset.y = H_SIZE / 2;
-	printf("offset x:%d, %d\n", offset.x, offset.y);
+	double	perp_wall_dist = dist;
+	if (face == WEST || face == EAST)
+		perp_wall_dist = (map_check.x - vars->player.x + (1 - step.x) / 2) / dx;
+	else if (face == NORTH || face == SOUTH)
+		perp_wall_dist = (map_check.y - vars->player.y + (1 - step.y) / 2) / dy;
+	printf("perp:%f, dist:%f\n", perp_wall_dist, dist);
+	unsigned int	color = 0;
 	if (face ==  NORTH)
-	{
-		draw_vertical_line(&vars->view, offset, 100 - 10*dist, 0xff0000);
-	}
+		color = 0xff0000;
 	else if (face == SOUTH)
-	{
-		draw_vertical_line(&vars->view, offset, 100 - 10*dist, 0xff00);
-	}
+		color = 0xff00;
 	else if (face == EAST)
-	{
-		draw_vertical_line(&vars->view, offset, 100 - 10*dist, 0xff);
-	}
+		color = 0xff;
 	else if (face == WEST)
-	{
-		draw_vertical_line(&vars->view, offset, 100 - 10*dist, 0xffffff);
-	}
+		color = 0xffffff;
 	else
 		printf("wrong face\n");
+	draw_vertical_line(&vars->view, offset, 300/perp_wall_dist, color);
 }
 
 void	FOV(t_vars *vars)
