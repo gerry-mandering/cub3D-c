@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:41:00 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/15 20:53:40 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/16 11:42:12 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	check_splited_line(char **splited_line)
 		error_handler(INVALID_TEXTURE_FORMAT);
 }
 
-void	parse_texture(t_texture *texture, int fd)
+void	parse_texture(t_vars *vars, int fd)
 {
 	const t_parse_texture_fp	parse_texture_fp[6] = {
 		parse_north_texture, parse_south_texture, parse_west_texture, \
@@ -76,7 +76,7 @@ void	parse_texture(t_texture *texture, int fd)
 		free(line);
 		check_splited_line(splited_line);
 		fp_index = get_fp_index(splited_line[IDENTIFIER]);
-		parse_texture_fp[fp_index](texture, &bitflag, splited_line[VALUE]);
+		parse_texture_fp[fp_index](vars, &bitflag, splited_line[VALUE]);
 		free_strings(splited_line);
 	}
 }

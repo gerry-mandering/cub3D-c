@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:26:09 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/15 20:43:00 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/16 11:39:08 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,29 +43,8 @@ static void	init_background_color(t_image *view, t_vars *vars)
 	}
 }
 
-static void	init_wall_img_ptr(void *mlx_ptr, t_texture *texture)
-{
-	int	width;
-	int	height;
-
-	texture->wall_img_ptr[NORTH] = \
-		mlx_xpm_file_to_image(mlx_ptr, texture->wall[NORTH], &width, &height);
-	texture->wall_img_ptr[SOUTH] = \
-		mlx_xpm_file_to_image(mlx_ptr, texture->wall[SOUTH], &width, &height);
-	texture->wall_img_ptr[EAST] = \
-		mlx_xpm_file_to_image(mlx_ptr, texture->wall[EAST], &width, &height);
-	texture->wall_img_ptr[WEST] = \
-		mlx_xpm_file_to_image(mlx_ptr, texture->wall[WEST], &width, &height);
-	if (texture->wall_img_ptr[NORTH] == NULL || \
-		texture->wall_img_ptr[SOUTH] == NULL || \
-		texture->wall_img_ptr[EAST] == NULL || \
-		texture->wall_img_ptr[WEST] == NULL)
-		error_handler(INVALID_IMAGE_PATH);
-}
-
 void	init_view(t_vars *vars)
 {
 	create_view(&vars->view, vars);
 	init_background_color(&vars->view, vars);
-	init_wall_img_ptr(vars->mlx_ptr, &vars->texture);
 }
