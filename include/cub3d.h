@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/15 19:16:59 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/16 11:45:25 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@
 void	parse(t_vars *vars, char **argv);
 
 //parse_texture
-void	parse_texture(t_texture *texture, int fd);
+void	parse_texture(t_vars *vars, int fd);
 
 //parse_texture_functions
-void	parse_north_texture(t_texture *texture, int *bitflag, char *value);
-void	parse_south_texture(t_texture *texture, int *bitflag, char *value);
-void	parse_west_texture(t_texture *texture, int *bitflag, char *value);
-void	parse_east_texture(t_texture *texture, int *bitflag, char *value);
-void	parse_floor_rgb(t_texture *texture, int *bitflag, char *value);
-void	parse_ceiling_rgb(t_texture *texture, int *bitflag, char *value);
+void	parse_north_texture(t_vars *vars, int *bitflag, char *value);
+void	parse_south_texture(t_vars *vars, int *bitflag, char *value);
+void	parse_west_texture(t_vars *vars, int *bitflag, char *value);
+void	parse_east_texture(t_vars *vars, int *bitflag, char *value);
+void	parse_floor_rgb(t_vars *vars, int *bitflag, char *value);
+void	parse_ceiling_rgb(t_vars *vars, int *bitflag, char *value);
 
 //parse_texture_utils
 int		get_rgb(char *value);
