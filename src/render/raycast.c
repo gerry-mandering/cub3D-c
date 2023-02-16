@@ -6,13 +6,14 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/16 14:20:51 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:25:06 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	draw_vertical_line(t_image *img, t_ivec offset, int length, unsigned int color)
+void	draw_vertical_line(t_image *img, t_ivec offset, \
+							int length, unsigned int color)
 {
 	for (int i=offset.y-length; i<offset.y+length; i++)
 	{
@@ -23,99 +24,101 @@ void	draw_vertical_line(t_image *img, t_ivec offset, int length, unsigned int co
 	}
 }
 
+t_ray	init_ray(t_vars *vars, double ray_dir)
+{
+	t_ray	ray;
+
+	ray.dir = ray_dir;
+	ray.start.x = vars->player.x;
+	ray.start.y = vars->player.y;
+	ray.map_check.x = (int)ray.start.x;
+	ray.map_check.y = (int)ray.start.y;
+	ray.delta.x = cos(ray_dir);
+	ray.delta.y = sin(ray_dir);
+	ray.step.x = (ray.delta.x >= 0) - (ray.delta.x < 0);
+	ray.step.y = (ray.delta.y >= 0) - (ray.delta.y < 0);
+	ray.unit_step.x = sqrt(1 + \
+				(ray.delta.y / ray.delta.x) * (ray.delta.y / ray.delta.x));
+	ray.unit_step.y = sqrt(1 + \
+				(ray.delta.x / ray.delta.y) * (ray.delta.x / ray.delta.y));
+	ray.length.x = (ray.map_check.x + 1 - ray.start.x) * ray.unit_step.x;
+	ray.length.y = (ray.map_check.y + 1 - ray.start.y) * ray.unit_step.y;
+	if (ray.delta.x < 0)
+		ray.length.x = (ray.start.x - ray.map_check.x) * ray.unit_step.x;
+	if (ray.delta.y < 0)
+		ray.length.y = (ray.start.y - ray.map_check.y) * ray.unit_step.y;
+	return (ray);
+}
+
+int	check_wall_hit(t_vars *vars, t_ray ray)
+{
+	if (ray.map_check.x >= 0 && ray.map_check.x < vars->map_width \
+		&& ray.map_check.y >= 0 && ray.map_check.y < vars->map_height)
+	{
+		if (vars->map_elem[ray.map_check.y][ray.map_check.x] == WALL)
+			return (1);
+	}
+	return (0);
+}
+
+void	render_view(t_vars *vars, t_ray ray)
+{
+	const int	face = get_collision_direction(ray.map_check, ray.intersection);
+
+	ray.perp_wall_dist = 0;
+	if (face == NORTH || face == SOUTH)
+		ray.perp_wall_dist = ((double)ray.map_check.y - vars->player.y + (1 - ray.step.y) / 2) / ray.delta.y;
+	else if (face == WEST || face == EAST)
+		ray.perp_wall_dist = ((double)ray.map_check.x - vars->player.x + (1 - ray.step.x) / 2) / ray.delta.x;
+	//From here is just a temporary code for debugging; 
+	int 	color = 0;
+	t_ivec	offset;
+	offset.x = W_SIZE * (ray.dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
+	offset.y = H_SIZE / 2;
+	if (face ==  NORTH)
+		color = 0xff0000;
+	else if (face == SOUTH)
+		color = 0xff00;
+	else if (face == EAST)
+		color = 0xff;
+	else if (face == WEST)
+		color = 0xffffff;
+	else
+		printf("wrong face\n");
+	draw_vertical_line(&vars->view, offset, 200/ray.perp_wall_dist, color);
+}
+
 void	raycast(t_vars *vars, double ray_dir)
 {
-	t_dvec	ray_start;
-	t_dvec	ray_length;
-	t_dvec	unit_step_size;
-	t_ivec	step;
-	t_ivec	map_check;
-	double	dx = cos(ray_dir);
-	double	dy = sin(ray_dir);
+	t_ray	ray;
+	int		hit;
 
-	ray_start.x = vars->player.x;
-	ray_start.y = vars->player.y;
-	map_check.x = (int)ray_start.x;
-	map_check.y = (int)ray_start.y;
-	unit_step_size.x = sqrt(1 + (dy / dx) * (dy / dx));
-	unit_step_size.y = sqrt(1 + (dx / dy) * (dx / dy));
-	//printf("ray_dir: %f, dx: %f, dy: %f\n",ray_dir, dx, dy);
-	if (dx < 0)
-	{
-		step.x = -1;
-		ray_length.x = (ray_start.x - map_check.x) * unit_step_size.x;
-	}
-	else
-	{
-		step.x = 1;
-		ray_length.x = (map_check.x + 1 - ray_start.x) * unit_step_size.x;
-	}
-	if (dy < 0)
-	{
-		step.y = -1;
-		ray_length.y = (ray_start.y - map_check.y) * unit_step_size.y;
-	}
-	else
-	{
-		step.y = 1;
-		ray_length.y = (map_check.y + 1 - ray_start.y) * unit_step_size.y;
-	}
-	int		hit = 0;
-	double	dist = 0;
-	//double	max_dist = 100;
+	ray = init_ray(vars, ray_dir);
+	hit = 0;
 	while (!hit)
 	{
-		if (ray_length.x < ray_length.y)
+		if (ray.length.x < ray.length.y)
 		{
-			map_check.x += step.x;
-			dist = ray_length.x;
-			ray_length.x += unit_step_size.x;
+			ray.map_check.x += ray.step.x;
+			ray.dist = ray.length.x;
+			ray.length.x += ray.unit_step.x;
 		}
 		else
 		{
-			map_check.y += step.y;
-			dist = ray_length.y;
-			ray_length.y += unit_step_size.y;
+			ray.map_check.y += ray.step.y;
+			ray.dist = ray.length.y;
+			ray.length.y += ray.unit_step.y;
 		}
-		if (map_check.x >= 0 && map_check.x < vars->map_width && map_check.y >= 0 && map_check.y < vars->map_height)
-		{
-			if (vars->map_elem[map_check.y][map_check.x] == WALL)
-			{
-				printf("block: %d, %d dist:%f\n", map_check.x, map_check.y, dist);
-				hit = 1;
-			}
-		}
+		hit = check_wall_hit(vars, ray);
 	}
-	t_dvec	inter;
-	inter.x = (ray_start.x + dx * dist);
-	inter.y = (ray_start.y + dy * dist);
-	//printf("start x:%f, y:%f hit x:%f, y:%f\n", ray_start.x, ray_start.y, inter.x, inter.y);
+	ray.intersection.x = ray.start.x + ray.delta.x * ray.dist;
+	ray.intersection.y = ray.start.y + ray.delta.y * ray.dist;
+	//add ray to minimap
 	t_ivec	offset;
-	offset.x = inter.x * TILE_SIZE;
-	offset.y = inter.y * TILE_SIZE;
+	offset.x = ray.intersection.x * TILE_SIZE;
+	offset.y = ray.intersection.y * TILE_SIZE;
 	draw_rect(&vars->minimap.img, offset, 2, 0xff);
-	int face = get_collision_direction(map_check, inter);
-	offset.x = W_SIZE * (ray_dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
-	offset.y = H_SIZE / 2;
-	printf("offset x:%d, %d\n", offset.x, offset.y);
-	if (face ==  NORTH)
-	{
-		draw_vertical_line(&vars->view, offset, 100 - 10*dist, 0xff0000);
-	}
-	else if (face == SOUTH)
-	{
-		draw_vertical_line(&vars->view, offset, 100 - 10*dist, 0xff00);
-	}
-	else if (face == EAST)
-	{
-		draw_vertical_line(&vars->view, offset, 100 - 10*dist, 0xff);
-	}
-	else if (face == WEST)
-	{
-		draw_vertical_line(&vars->view, offset, 100 - 10*dist, 0xffffff);
-	}
-	else
-		printf("wrong face\n");
+	render_view(vars, ray);
 }
 
 void	FOV(t_vars *vars)

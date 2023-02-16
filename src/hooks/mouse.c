@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:57:44 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/15 22:09:26 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:14:35 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	mouse(t_vars *vars)
 
 	mlx_mouse_get_pos(vars->win_ptr, &cur_x, &cur_y);
 	if (vars->mouse.x >= W_SIZE || (vars->mouse.x < cur_x && cur_x < W_SIZE))
-		vars->viewing_angle -= MOUSE_SPEED;
-	else if (vars->mouse.x <= 0 || (vars->mouse.x > cur_x && cur_x > 0))
 		vars->viewing_angle += MOUSE_SPEED;
+	else if (vars->mouse.x <= 0 || (vars->mouse.x > cur_x && cur_x > 0))
+		vars->viewing_angle -= MOUSE_SPEED;
 	if (vars->viewing_angle < 0)
 		vars->viewing_angle += 2 * M_PI;
 	else if (vars->viewing_angle > 2 * M_PI)
