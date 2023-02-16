@@ -6,11 +6,11 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:40:23 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 21:06:37 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:41:57 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
+#include "../../../../include/cub3d.h"
 
 void	allocate_map(t_vars *vars)
 {

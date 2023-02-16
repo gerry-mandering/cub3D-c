@@ -6,12 +6,11 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:27:24 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/15 21:04:41 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:42:12 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
-#include <stdlib.h>
+#include "../../../../include/cub3d.h"
 
 static char	*skip_newlines(int fd)
 {

@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:41:00 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/15 20:53:40 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:36:13 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	is_newline(char *line)
 		return (0);
 }
 
-static void	check_splited_line(char **splited_line)
+static void	count_splited_line(char **splited_line)
 {
 	if (count_strings(splited_line) != 2)
 		error_handler(INVALID_TEXTURE_FORMAT);
@@ -63,7 +63,6 @@ void	parse_texture(t_texture *texture, int fd)
 	char						*line;
 	char						**splited_line;
 	int							bitflag;
-	int							fp_index;
 
 	ft_memset(&bitflag, 0, sizeof(int));
 	while (bitflag != PARSED_EVERY_TEXTURE)
@@ -74,9 +73,9 @@ void	parse_texture(t_texture *texture, int fd)
 			continue ;
 		splited_line = ft_split(line, WHITE_SPACE);
 		free(line);
-		check_splited_line(splited_line);
-		fp_index = get_fp_index(splited_line[IDENTIFIER]);
-		parse_texture_fp[fp_index](texture, &bitflag, splited_line[VALUE]);
+		count_splited_line(splited_line);
+		parse_texture_fp[get_fp_index(splited_line[IDENTIFIER])](texture, \
+											&bitflag, splited_line[VALUE]);
 		free_strings(splited_line);
 	}
 }

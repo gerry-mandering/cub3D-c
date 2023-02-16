@@ -34,13 +34,14 @@ SRC = main.c \
 	parse/parse_texture/parse_texture_functions/parse_ceiling_rgb.c \
 	parse/parse_texture/parse_texture_utils/get_rgb.c \
 	parse/parse_map/parse_map.c \
-	parse/parse_map/allocate_map.c \
-	parse/parse_map/labeling_map.c \
-	parse/parse_map/make_list_map.c \
-	parse/parse_map/measure_map_size.c \
-	parse/parse_map/set_player_position.c \
+	parse/parse_map/parse_map_utils/allocate_map.c \
+	parse/parse_map/parse_map_utils/labeling_map.c \
+	parse/parse_map/parse_map_utils/make_list_map.c \
+	parse/parse_map/parse_map_utils/measure_map_size.c \
+	parse/parse_map/parse_map_utils/set_player_position.c \
 	parse/validate_map/validate_map.c \
 	parse/validate_map/validate_map_utils/copy_map.c \
+	parse/validate_map/validate_map_utils/free_copied_map.c \
 	utils/count_strings.c \
 	utils/free_strings.c \
 	utils/ft_strcmp.c \

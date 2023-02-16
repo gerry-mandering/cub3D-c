@@ -6,11 +6,11 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:18:32 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 21:10:23 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:42:22 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
+#include "../../../../include/cub3d.h"
 
 void	set_player_position(t_vars *vars)
 {

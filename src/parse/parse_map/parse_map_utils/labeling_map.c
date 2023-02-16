@@ -6,11 +6,11 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:43:26 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 21:08:40 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:42:02 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
+#include "../../../../include/cub3d.h"
 
 static void	set_spawning_direction(char character, t_vars *vars)
 {
