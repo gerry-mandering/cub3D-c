@@ -12,17 +12,6 @@
 
 #include "../../../include/cub3d.h"
 
-static void	create_view(t_image *view, t_vars *vars)
-{
-	view->img = mlx_new_image(vars->mlx_ptr, W_SIZE, H_SIZE);
-	view->img_ptr = mlx_get_data_addr(view->img, &view->bits_per_pixel, \
-										&view->size_line, &view->endidan);
-	view->width = W_SIZE;
-	view->height = H_SIZE;
-	if (!view->img_ptr)
-		error_handler(SYSTEMCALL_ERROR);
-}
-
 static void	init_background_color(t_image *view, t_vars *vars)
 {
 	t_ivec	index;
@@ -65,7 +54,7 @@ static void	init_wall_img_ptr(void *mlx_ptr, t_texture *texture)
 
 void	init_view(t_vars *vars)
 {
-	create_view(&vars->view, vars);
+	vars->view = create_image(vars, W_SIZE, H_SIZE);
 	init_background_color(&vars->backgroud, vars);
 	init_wall_img_ptr(vars->mlx_ptr, &vars->texture);
 }
