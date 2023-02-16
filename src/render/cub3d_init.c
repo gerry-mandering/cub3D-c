@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:59:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/14 20:01:47 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/15 22:08:04 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@ void	init_params(t_vars *vars)
 	vars->mlx_ptr = mlx_init();
 	vars->win_ptr = mlx_new_window(vars->mlx_ptr, W_SIZE, H_SIZE, "cub3D");
 	vars->viewing_angle = M_PI + M_PI_2;
-	read_images(vars);
+	vars->view = create_image(vars, W_SIZE, H_SIZE);
+	vars->backgroud = create_image(vars, W_SIZE, H_SIZE);
+	//read_images(vars);
 	create_minimap(vars);
 	mlx_mouse_show();
 	mlx_mouse_move(vars->win_ptr, W_SIZE / 2, H_SIZE / 2);
 	mlx_mouse_get_pos(vars->win_ptr, &vars->mouse.x, &vars->mouse.y);
+	vars->texture.ceiling_rgb = 0x00ccff;
+	vars->texture.floor_rgb = 0x7ec850;
 }
 
 void	read_images(t_vars *vars)

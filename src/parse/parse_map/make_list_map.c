@@ -6,11 +6,12 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:27:24 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 11:14:26 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:04:41 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
+#include <stdlib.h>
 
 static char	*skip_newlines(int fd)
 {
@@ -23,6 +24,7 @@ static char	*skip_newlines(int fd)
 			error_handler(HAVE_NO_MAP_INPUT);
 		if (ft_strcmp(line, "\n") != 0)
 			break ;
+		free(line);
 	}
 	return (line);
 }

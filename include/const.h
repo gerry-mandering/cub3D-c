@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/14 21:43:24 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:22:47 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@
 # define W_SIZE					1920
 # define H_SIZE					1080
 # define TILE_SIZE				24
+# define PLAYER_SIZE			10
 # define MOVING_SPEED			0.1
-# define MOUSE_SPEED			0.08
+# define MOUSE_SPEED			0.02
+# define FOV_ANGLE				M_PI_4
+# define NUMBER_OF_RAYS			1920
 
 # define SYSTEMCALL_ERROR		NULL
 # define WRONG_ARGUMENTS_COUNT	"Wrong Arguments Count -"
@@ -32,6 +35,7 @@
 # define HAVE_NO_PLAYER			"Have No Player - "
 # define DUPLICATED_PLAYER		"Duplicated Player - "
 # define UNCLOSED_MAP			"Unclosed Map - "
+# define INVALID_IMAGE_PATH		"Invalid Image Path - "
 
 # define NORTH_WALL				"images/north_wall.xpm"
 # define SOUTH_WALL				"images/south_wall.xpm"

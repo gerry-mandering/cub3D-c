@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:57:29 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 21:03:33 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/15 20:53:07 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	parse_map(t_vars *vars, int fd)
 	labeling_map(vars, list_map);
 	set_player_position(vars);
 	print_map(vars);
+	ft_lstclear(&list_map, free);
 }
