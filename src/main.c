@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:14:20 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/16 20:27:02 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:59:41 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,18 @@ void	init_wall_image(t_vars *vars)
 
 t_direction	get_collision_direction(t_ivec wall_location, t_dvec collision_point)
 {
-	if ((double)wall_location.x == collision_point.x)
+	if (fabs((double)wall_location.x - collision_point.x) < 0.000001)
 		return (WEST);
-	else if ((double)(wall_location.x + 1) == collision_point.x)
+	else if (fabs((double)wall_location.x + 1 - collision_point.x) < 0.000001)
 		return (EAST);
-	else if ((double)wall_location.y == collision_point.y)
+	else if (fabs((double)wall_location.y - collision_point.y) < 0.000001)
 		return (NORTH);
-	else if ((double)(wall_location.y + 1) == collision_point.y)
+	else if (fabs((double)wall_location.y + 1 - collision_point.y) < 0.000001)
 		return (SOUTH);
 	else
 	{
-		printf("ERROR - testcode");
+		printf("wall x:%d, y:%d, hit x:%.20f, y:%.20f\n", wall_location.x, wall_location.y, collision_point.x, collision_point.y);
+		//printf("ERROR - testcode");
 		return (-1);
 	}
 }
