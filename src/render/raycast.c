@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/16 21:24:53 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/17 14:48:06 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	render_view(t_vars *vars, t_ray ray)
 	{
 		wall_x = ray.intersection.x - floor(ray.intersection.x);
 		texture_x = (int)(wall_x * (double)2000);
-		if (face == SOUTH)
+		if (face == NORTH)
 			texture_x = 2000 - texture_x - 1;
 	}
 	else if (face == EAST || face == WEST)
@@ -104,13 +104,14 @@ void	render_view(t_vars *vars, t_ray ray)
 		int texture_y = (int)textPos & (2000 - 1);
 		textPos += step;
 		int offset = (texture_y * img.size_line) + texture_x * (img.bits_per_pixel / 8);
-		unsigned int color = img.img_ptr[offset];
+		char*	dst = img.img_ptr + offset;
+		unsigned int color = *(unsigned int *)dst;
 		if (face == NORTH || face == SOUTH)
 			color = (color >> 1) & 8355711;
-		for (int i=x; i<x+4; i++)
-		{
-			ft_pixel_put(&vars->view, i, y, color);
-		}
+		ft_pixel_put(&vars->view, x, y, color);
+		ft_pixel_put(&vars->view, x+1, y, color);
+		ft_pixel_put(&vars->view, x+2, y, color);
+		ft_pixel_put(&vars->view, x+3, y, color);
 	}
 }
 
@@ -145,24 +146,24 @@ void	raycast(t_vars *vars, double ray_dir)
 	offset.y = ray.intersection.y * TILE_SIZE;
 	draw_rect(&vars->minimap.img, offset, 2, 0xff);
 	render_view(vars, ray);
-//	int	face = get_collision_direction(ray.map_check, ray.intersection);
-//	ray.perp_wall_dist = 0;
-//	if (face == NORTH || face == SOUTH)
-//		ray.perp_wall_dist = ((double)ray.map_check.y - vars->player.y + (1 - ray.step.y) / 2) / ray.delta.y;
-//	else if (face == WEST || face == EAST)
-//		ray.perp_wall_dist = ((double)ray.map_check.x - vars->player.x + (1 - ray.step.x) / 2) / ray.delta.x;
-//	offset.x = W_SIZE * (ray.dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
-//	offset.y = H_SIZE / 2;
-//	int color;
-//	if (face == NORTH)
-//		color = 0xff0000;
-//	else if (face == EAST)
-//		color = 0xff00;
-//	else if (face == WEST)
-//		color = 0xff;
-//	else
-//		color = 0xffffff;
-//	draw_vertical_line(&vars->view, offset, 200/ray.perp_wall_dist, color);
+	// int	face = get_collision_direction(ray.map_check, ray.intersection);
+	// ray.perp_wall_dist = 0;
+	// if (face == NORTH || face == SOUTH)
+	// 	ray.perp_wall_dist = ((double)ray.map_check.y - vars->player.y + (1 - ray.step.y) / 2) / ray.delta.y;
+	// else if (face == WEST || face == EAST)
+	// 	ray.perp_wall_dist = ((double)ray.map_check.x - vars->player.x + (1 - ray.step.x) / 2) / ray.delta.x;
+	// offset.x = W_SIZE * (ray.dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
+	// offset.y = H_SIZE / 2;
+	// int color;
+	// if (face == NORTH)
+	// 	color = 0xff0000;
+	// else if (face == EAST)
+	// 	color = 0xff00;
+	// else if (face == WEST)
+	// 	color = 0xff;
+	// else
+	// 	color = 0xffffff;
+	// draw_vertical_line(&vars->view, offset, 200/ray.perp_wall_dist, color);
 }
 
 void	FOV(t_vars *vars)
