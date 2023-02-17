@@ -32,6 +32,7 @@ SRC = main.c \
 	parse/parse_texture/parse_texture_functions/parse_west.c \
 	parse/parse_texture/parse_texture_functions/parse_floor.c \
 	parse/parse_texture/parse_texture_functions/parse_ceiling.c \
+	parse/parse_texture/parse_texture_functions/parse_door.c \
 	parse/parse_texture/parse_texture_utils/get_rgb.c \
 	parse/parse_map/parse_map.c \
 	parse/parse_map/parse_map_utils/allocate_map.c \

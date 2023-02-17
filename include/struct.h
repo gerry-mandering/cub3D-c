@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 19:13:08 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:38:19 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ enum e_texture_bitmask
 	EAST_BITMASK = 8,
 	FLOOR_BITMASK = 16,
 	CEILING_BITMASK = 32,
-	PARSED_EVERY_TEXTURE = 63
+	DOOR_BITMASK = 64,
+	PARSED_EVERY_TEXTURE = 127
 };
 
 typedef enum e_map
@@ -59,8 +60,20 @@ typedef enum e_map
 	EMPTY_SPACE,
 	WALL,
 	PLAYER,
+	DOOR,
 	VISITED
 }	t_map;
+
+typedef enum e_door_state
+{
+	OPEN,
+	CLOSE
+}	t_door_state;
+
+typedef struct s_door
+{
+	t_door_state	state;
+}	t_door;
 
 typedef struct s_image
 {
@@ -89,7 +102,9 @@ typedef struct s_minimap
 typedef struct s_texture
 {
 	char	*wall_path[4];
+	char	*door_path;
 	t_image	wall[4];
+	t_image	door;
 	int		floor_rgb;
 	int		ceiling_rgb;
 }	t_texture;

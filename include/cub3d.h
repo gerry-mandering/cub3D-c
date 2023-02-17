@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/17 20:09:29 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:40:07 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void		parse_west(t_vars *vars, int *bitflag, char *value);
 void		parse_east(t_vars *vars, int *bitflag, char *value);
 void		parse_floor(t_vars *vars, int *bitflag, char *value);
 void		parse_ceiling(t_vars *vars, int *bitflag, char *value);
+void		parse_door(t_vars *vars, int *bitflag, char *value);
 
 //parse_texture_utils
 int			get_rgb(char *value);
