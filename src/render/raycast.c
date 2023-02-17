@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 19:44:40 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:06:19 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,14 @@ int	get_texture_xpos(t_ray ray)
 	if (ray.collision_direction == NORTH || ray.collision_direction == SOUTH)
 	{
 		wall_x = ray.intersection.x - floor(ray.intersection.x);
-		texture_x = (int)(wall_x * (double)2000);
+		texture_x = (int)(wall_x * 2000);
 		if (ray.collision_direction == NORTH)
 			texture_x = 2000 - texture_x - 1;
 	}
 	else if (ray.collision_direction == EAST || ray.collision_direction == WEST)
 	{
 		wall_x = ray.intersection.y - floor(ray.intersection.y);
-		texture_x = (int)(wall_x * (double)2000);
+		texture_x = (int)(wall_x * 2000);
 		if (ray.collision_direction == EAST)
 			texture_x = 2000 - texture_x - 1;
 	}
@@ -150,15 +150,13 @@ void	draw_texture_in_view(t_vars *vars, t_ray ray, t_ivec screen, t_ivec texture
 	textPos = 0;
 	while (screen.y < draw_end)
 	{
-		texture.y = (int)textPos & (2000 - 1);
+		texture.y = (int)textPos;
 		textPos += step;
 		color = get_color_value(&vars->texture.wall[ray.collision_direction], texture);
 		if (ray.collision_direction == NORTH || ray.collision_direction == SOUTH)
 			color = (color >> 1) & 0x7f7f7f;
 		ft_pixel_put(&vars->view, screen.x, screen.y, color);
 		ft_pixel_put(&vars->view, screen.x + 1, screen.y, color);
-		ft_pixel_put(&vars->view, screen.x + 2, screen.y, color);
-		ft_pixel_put(&vars->view, screen.x + 3, screen.y, color);
 		screen.y++;
 	}
 }
@@ -175,6 +173,8 @@ void	render_view(t_vars *vars, t_ray ray)
 	texture.y = 0;
 	screen.x = W_SIZE * (ray.dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
 	screen.y = -(int)(H_SIZE / ray.perp_wall_dist) / 2  + H_SIZE / 2;
+	if (screen.y < 0)
+		screen.y = 0;
 	draw_texture_in_view(vars, ray, screen, texture);
 }
 
