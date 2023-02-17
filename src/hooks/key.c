@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:58:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 21:32:00 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:59:58 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	update_viewing_angle(int keycode, t_vars *vars)
 int	key_press(int keycode, t_vars *vars)
 {
 	if (keycode == KEY_ESC)
-		exit(0);
+		cub3d_exit(vars);
 	else if (keycode == KEY_W || keycode == KEY_A \
 		|| keycode == KEY_S || keycode == KEY_D)
 		update_player_position(keycode, vars);

@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/17 20:37:57 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:59:46 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,5 @@ t_direction	get_collision_direction(t_ivec wall_location, \
 													t_dvec collision_point);
 
 int	render(t_vars *vars);
+int	cub3d_exit(t_vars *vars);
 #endif
