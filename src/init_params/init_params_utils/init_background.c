@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_player_position.c                              :+:      :+:    :+:   */
+/*   init_background.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 11:18:32 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/16 20:42:22 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/17 20:12:01 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/17 20:12:08 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
-void	set_player_position(t_vars *vars)
+void	init_background(t_vars *vars, int ceiling_rgb, int floor_rgb)
 {
-	int		height;
-	int		width;
+	int	height;
+	int	width;
 
+	vars->background = create_image(vars, W_SIZE, H_SIZE);
 	height = 0;
-	while (height < vars->map_height)
+	while (height < H_SIZE)
 	{
 		width = 0;
-		while (width < vars->map_width)
+		while (width < W_SIZE)
 		{
-			if (vars->map_elem[height][width] == PLAYER)
-			{
-				vars->player.y = height;
-				vars->player.x = width;
-			}
+			if (height < H_SIZE / 2)
+				ft_pixel_put(&vars->background, width, height, ceiling_rgb);
+			else
+				ft_pixel_put(&vars->background, width, height, floor_rgb);
 			width++;
 		}
 		height++;
 	}
-	vars->player.x += 0.0001;
-	vars->player.y += 0.0001;
 }

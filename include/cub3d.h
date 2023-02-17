@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/16 20:45:39 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:37:57 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@
 void		parse(t_vars *vars, char **argv);
 
 //parse_texture
-void		parse_texture(t_texture *texture, int fd);
+void		parse_texture(t_vars *vars, int fd);
 
 //parse_texture_functions
-void		parse_north_texture(t_texture *texture, int *bitflag, char *value);
-void		parse_south_texture(t_texture *texture, int *bitflag, char *value);
-void		parse_west_texture(t_texture *texture, int *bitflag, char *value);
-void		parse_east_texture(t_texture *texture, int *bitflag, char *value);
-void		parse_floor_rgb(t_texture *texture, int *bitflag, char *value);
-void		parse_ceiling_rgb(t_texture *texture, int *bitflag, char *value);
+void		parse_north(t_vars *vars, int *bitflag, char *value);
+void		parse_south(t_vars *vars, int *bitflag, char *value);
+void		parse_west(t_vars *vars, int *bitflag, char *value);
+void		parse_east(t_vars *vars, int *bitflag, char *value);
+void		parse_floor(t_vars *vars, int *bitflag, char *value);
+void		parse_ceiling(t_vars *vars, int *bitflag, char *value);
 
 //parse_texture_utils
 int			get_rgb(char *value);
@@ -58,14 +58,17 @@ void		validate_map(t_vars *vars);
 t_map		**copy_map(t_vars *vars);
 void		free_copied_map(t_map **copied_map, t_ivec map_size);
 
-//error_handler
-void		error_handler(const char *error_type);
+//init_params
+void		init_params(t_vars *vars);
 
-//utils
-int			count_strings(char **strings);
-void		free_strings(char **strings);
-int			ft_strcmp(const char *s1, const char *s2);
-int			ft_isspace(char character);
+//init_params_utils
+t_image		create_image(t_vars *vars, int img_w, int img_h);
+void		init_mlx_params(t_vars *vars);
+void		init_viewing_angle(t_vars *vars);
+void		init_view(t_vars *vars);
+void		init_wall(t_image *wall, char **wall_path, void *mlx_ptr);
+void		init_background(t_vars *vars, int ceiling_rgb, int floor_rgb);
+void		init_minimap(t_vars *vars);
 
 //hooks
 int			key_press(int keycode, t_vars *vars);
@@ -88,14 +91,17 @@ void		draw_rect(t_image *image, \
 								t_ivec offset, int size, unsigned int color);
 void		render_minimap(t_vars *vars);
 
-void		init_params(t_vars *vars);
-void		read_images(t_vars *vars);
-t_image		create_image(t_vars *vars, int img_w, int img_h);
-void		create_minimap(t_vars *vars);
+//utils
+int			count_strings(char **strings);
+void		free_strings(char **strings);
+int			ft_strcmp(const char *s1, const char *s2);
+int			ft_isspace(char character);
+
+//error_handler
+void		error_handler(const char *error_type);
 
 t_direction	get_collision_direction(t_ivec wall_location, \
 													t_dvec collision_point);
 
-void		init_wall_image(t_vars *vars);
-
+int	render(t_vars *vars);
 #endif

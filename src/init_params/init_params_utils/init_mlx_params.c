@@ -1,37 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_player_position.c                              :+:      :+:    :+:   */
+/*   init_mlx_params.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 11:18:32 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/16 20:42:22 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/17 20:10:13 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/17 20:10:25 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
-void	set_player_position(t_vars *vars)
+void	init_mlx_params(t_vars *vars)
 {
-	int		height;
-	int		width;
-
-	height = 0;
-	while (height < vars->map_height)
-	{
-		width = 0;
-		while (width < vars->map_width)
-		{
-			if (vars->map_elem[height][width] == PLAYER)
-			{
-				vars->player.y = height;
-				vars->player.x = width;
-			}
-			width++;
-		}
-		height++;
-	}
-	vars->player.x += 0.0001;
-	vars->player.y += 0.0001;
+	vars->mlx_ptr = mlx_init();
+	vars->win_ptr = mlx_new_window(vars->mlx_ptr, W_SIZE, H_SIZE, "cub3D");
+	mlx_mouse_hide();
+	mlx_mouse_move(vars->win_ptr, W_SIZE / 2, H_SIZE / 2);
+	mlx_mouse_get_pos(vars->win_ptr, &vars->mouse.x, &vars->mouse.y);
 }

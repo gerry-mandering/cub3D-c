@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/16 19:41:23 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/17 19:13:08 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ enum e_rgb
 
 enum e_texture_bitmask
 {
-	NORTH_TEXTURE = 1,
-	SOUTH_TEXTURE = 2,
-	WEST_TEXTURE = 4,
-	EAST_TEXTURE = 8,
-	FLOOR_RGB = 16,
-	CEILING_RGB = 32,
+	NORTH_BITMASK = 1,
+	SOUTH_BITMASK = 2,
+	WEST_BITMASK = 4,
+	EAST_BITMASK = 8,
+	FLOOR_BITMASK = 16,
+	CEILING_BITMASK = 32,
 	PARSED_EVERY_TEXTURE = 63
 };
 
@@ -88,8 +88,8 @@ typedef struct s_minimap
 
 typedef struct s_texture
 {
-	char	*wall[4];
-	t_image	wall_image[4];
+	char	*wall_path[4];
+	t_image	wall[4];
 	int		floor_rgb;
 	int		ceiling_rgb;
 }	t_texture;
@@ -107,10 +107,8 @@ typedef struct s_ray
 	double	dir;
 	double	dist;
 	double	perp_wall_dist;
+	int		collision_direction;
 }	t_ray;
-
-typedef void	(*t_parse_texture_fp)(t_texture *texture, \
-										int *bitflag, char *value);
 
 typedef struct s_vars
 {
@@ -121,12 +119,14 @@ typedef struct s_vars
 	int			map_height;
 	double		viewing_angle;
 	t_image		view;
-	t_image		backgroud;
+	t_image		background;
 	t_dvec		player;
 	t_direction	spawning_direction;
 	t_minimap	minimap;
 	t_texture	texture;
 	t_ivec		mouse;
 }	t_vars;
+
+typedef void	(*t_parse_texture_fp)(t_vars *vars, int *bitflag, char *value);
 
 #endif

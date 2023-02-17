@@ -19,19 +19,19 @@ MLX = $(MLX_DIR)$(MLX_NAME)
 SRC = main.c \
 	render/bresenham.c \
 	render/render_minimap.c \
-	render/cub3d_init.c \
 	render/raycast.c \
+	render/get_collision_direction.c \
 	hooks/mouse.c \
 	hooks/key.c \
 	error_handler/error_handler.c \
 	parse/parse.c \
 	parse/parse_texture/parse_texture.c \
-	parse/parse_texture/parse_texture_functions/parse_north_texture.c \
-	parse/parse_texture/parse_texture_functions/parse_south_texture.c \
-	parse/parse_texture/parse_texture_functions/parse_east_texture.c \
-	parse/parse_texture/parse_texture_functions/parse_west_texture.c \
-	parse/parse_texture/parse_texture_functions/parse_floor_rgb.c \
-	parse/parse_texture/parse_texture_functions/parse_ceiling_rgb.c \
+	parse/parse_texture/parse_texture_functions/parse_north.c \
+	parse/parse_texture/parse_texture_functions/parse_south.c \
+	parse/parse_texture/parse_texture_functions/parse_east.c \
+	parse/parse_texture/parse_texture_functions/parse_west.c \
+	parse/parse_texture/parse_texture_functions/parse_floor.c \
+	parse/parse_texture/parse_texture_functions/parse_ceiling.c \
 	parse/parse_texture/parse_texture_utils/get_rgb.c \
 	parse/parse_map/parse_map.c \
 	parse/parse_map/parse_map_utils/allocate_map.c \
@@ -42,6 +42,14 @@ SRC = main.c \
 	parse/validate_map/validate_map.c \
 	parse/validate_map/validate_map_utils/copy_map.c \
 	parse/validate_map/validate_map_utils/free_copied_map.c \
+	init_params/init_params.c \
+	init_params/init_params_utils/create_image.c \
+	init_params/init_params_utils/init_background.c \
+	init_params/init_params_utils/init_minimap.c \
+	init_params/init_params_utils/init_mlx_params.c \
+	init_params/init_params_utils/init_view.c \
+	init_params/init_params_utils/init_viewing_angle.c \
+	init_params/init_params_utils/init_wall.c \
 	utils/count_strings.c \
 	utils/free_strings.c \
 	utils/ft_strcmp.c \
