@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/14 20:57:38 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:41:23 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,25 @@ typedef struct s_minimap
 typedef struct s_texture
 {
 	char	*wall[4];
+	t_image	wall_image[4];
 	int		floor_rgb;
 	int		ceiling_rgb;
 }	t_texture;
+
+typedef struct s_ray
+{
+	t_dvec	start;
+	t_dvec	length;
+	t_dvec	delta;
+	t_dvec	unit_step;
+	t_dvec	intersection;
+	t_ivec	step;
+	t_ivec	map_check;
+	t_ivec	offset;
+	double	dir;
+	double	dist;
+	double	perp_wall_dist;
+}	t_ray;
 
 typedef void	(*t_parse_texture_fp)(t_texture *texture, \
 										int *bitflag, char *value);
@@ -104,6 +120,8 @@ typedef struct s_vars
 	int			map_width;
 	int			map_height;
 	double		viewing_angle;
+	t_image		view;
+	t_image		backgroud;
 	t_dvec		player;
 	t_direction	spawning_direction;
 	t_minimap	minimap;

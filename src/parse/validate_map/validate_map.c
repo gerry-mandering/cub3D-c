@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:08:34 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 21:19:35 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:38:43 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static void	check_map_is_closed(t_vars *vars)
 	map_size.y = vars->map_height;
 	map_size.x = vars->map_width;
 	flood_fill(copied_map, vars->player.y, vars->player.x, map_size);
+	free_copied_map(copied_map, map_size);
 }
 
 void	validate_map(t_vars *vars)
@@ -94,5 +95,4 @@ void	validate_map(t_vars *vars)
 	if (is_player_duplicated(vars))
 		error_handler(DUPLICATED_PLAYER);
 	check_map_is_closed(vars);
-	printf("validate_map success\n");
 }
