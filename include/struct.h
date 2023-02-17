@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 20:38:19 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:40:26 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ enum e_texture_bitmask
 	EAST_BITMASK = 8,
 	FLOOR_BITMASK = 16,
 	CEILING_BITMASK = 32,
-	DOOR_BITMASK = 64,
-	PARSED_EVERY_TEXTURE = 127
+	PARSED_EVERY_TEXTURE = 63
 };
 
 typedef enum e_map
