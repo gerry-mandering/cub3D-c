@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/16 20:45:39 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/17 19:56:34 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@
 void		parse(t_vars *vars, char **argv);
 
 //parse_texture
-void		parse_texture(t_texture *texture, int fd);
+void		parse_texture(t_vars *vars, int fd);
 
 //parse_texture_functions
-void		parse_north_texture(t_texture *texture, int *bitflag, char *value);
-void		parse_south_texture(t_texture *texture, int *bitflag, char *value);
-void		parse_west_texture(t_texture *texture, int *bitflag, char *value);
-void		parse_east_texture(t_texture *texture, int *bitflag, char *value);
-void		parse_floor_rgb(t_texture *texture, int *bitflag, char *value);
-void		parse_ceiling_rgb(t_texture *texture, int *bitflag, char *value);
+void		parse_north(t_vars *vars, int *bitflag, char *value);
+void		parse_south(t_vars *vars, int *bitflag, char *value);
+void		parse_west(t_vars *vars, int *bitflag, char *value);
+void		parse_east(t_vars *vars, int *bitflag, char *value);
+void		parse_floor(t_vars *vars, int *bitflag, char *value);
+void		parse_ceiling(t_vars *vars, int *bitflag, char *value);
 
 //parse_texture_utils
 int			get_rgb(char *value);
@@ -88,14 +88,10 @@ void		draw_rect(t_image *image, \
 								t_ivec offset, int size, unsigned int color);
 void		render_minimap(t_vars *vars);
 
+//init_params
 void		init_params(t_vars *vars);
-void		read_images(t_vars *vars);
-t_image		create_image(t_vars *vars, int img_w, int img_h);
-void		create_minimap(t_vars *vars);
 
 t_direction	get_collision_direction(t_ivec wall_location, \
 													t_dvec collision_point);
-
-void		init_wall_image(t_vars *vars);
 
 #endif

@@ -26,12 +26,12 @@ SRC = main.c \
 	error_handler/error_handler.c \
 	parse/parse.c \
 	parse/parse_texture/parse_texture.c \
-	parse/parse_texture/parse_texture_functions/parse_north_texture.c \
-	parse/parse_texture/parse_texture_functions/parse_south_texture.c \
-	parse/parse_texture/parse_texture_functions/parse_east_texture.c \
-	parse/parse_texture/parse_texture_functions/parse_west_texture.c \
-	parse/parse_texture/parse_texture_functions/parse_floor_rgb.c \
-	parse/parse_texture/parse_texture_functions/parse_ceiling_rgb.c \
+	parse/parse_texture/parse_texture_functions/parse_north.c \
+	parse/parse_texture/parse_texture_functions/parse_south.c \
+	parse/parse_texture/parse_texture_functions/parse_east.c \
+	parse/parse_texture/parse_texture_functions/parse_west.c \
+	parse/parse_texture/parse_texture_functions/parse_floor.c \
+	parse/parse_texture/parse_texture_functions/parse_ceiling.c \
 	parse/parse_texture/parse_texture_utils/get_rgb.c \
 	parse/parse_map/parse_map.c \
 	parse/parse_map/parse_map_utils/allocate_map.c \

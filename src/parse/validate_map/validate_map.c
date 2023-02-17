@@ -6,13 +6,13 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:08:34 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/16 20:38:43 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/17 19:06:26 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-static bool	is_player_exist(t_vars *vars)
+static void	check_player_is_exist(t_vars *vars)
 {
 	int		height;
 	int		width;
@@ -24,15 +24,15 @@ static bool	is_player_exist(t_vars *vars)
 		while (width < vars->map_width)
 		{
 			if (vars->map_elem[height][width] == PLAYER)
-				return (true);
+				return ;
 			width++;
 		}
 		height++;
 	}
-	return (false);
+	error_handler(HAVE_NO_PLAYER);
 }
 
-static bool	is_player_duplicated(t_vars *vars)
+static void	check_player_is_duplicated(t_vars *vars)
 {
 	bool	player_flag;
 	int		height;
@@ -50,13 +50,12 @@ static bool	is_player_duplicated(t_vars *vars)
 				if (player_flag == false)
 					player_flag = true;
 				else
-					return (true);
+					error_handler(DUPLICATED_PLAYER);
 			}
 			width++;
 		}
 		height++;
 	}
-	return (false);
 }
 
 static void	flood_fill(t_map **map, int y, int x, t_ivec map_size)
@@ -90,9 +89,7 @@ static void	check_map_is_closed(t_vars *vars)
 
 void	validate_map(t_vars *vars)
 {
-	if (!is_player_exist(vars))
-		error_handler(HAVE_NO_PLAYER);
-	if (is_player_duplicated(vars))
-		error_handler(DUPLICATED_PLAYER);
+	check_player_is_exist(vars);
+	check_player_is_duplicated(vars);
 	check_map_is_closed(vars);
 }

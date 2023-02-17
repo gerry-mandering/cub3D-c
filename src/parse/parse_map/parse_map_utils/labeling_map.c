@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:43:26 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/16 20:42:02 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/17 19:02:44 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,16 @@ static void	set_spawning_direction(char character, t_vars *vars)
 		vars->spawning_direction = WEST;
 }
 
-static int	get_label(char character, t_vars *vars)
+static int	is_direction(char character)
+{
+	if (character == 'N' || character == 'S' || \
+			character == 'W' || character == 'E')
+		return (1);
+	else
+		return (0);
+}
+
+static int	get_label(char character)
 {
 	if (character == ' ')
 		return (NONE);
@@ -34,10 +43,7 @@ static int	get_label(char character, t_vars *vars)
 		return (WALL);
 	else if (character == 'N' || character == 'S' || \
 				character == 'E' || character == 'W')
-	{
-		set_spawning_direction(character, vars);
 		return (PLAYER);
-	}
 	else
 	{
 		error_handler(INVALID_MAP_FORMAT);
@@ -58,7 +64,9 @@ void	labeling_map(t_vars *vars, t_list *list_map)
 		line = list_map->content;
 		while (line[width] != '\0')
 		{
-			vars->map_elem[height][width] = get_label(line[width], vars);
+			vars->map_elem[height][width] = get_label(line[width]);
+			if (is_direction(line[width]))
+				set_spawning_direction(line[width], vars);
 			width++;
 		}
 		height++;

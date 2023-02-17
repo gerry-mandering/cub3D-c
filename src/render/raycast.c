@@ -6,11 +6,12 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 14:48:06 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/17 19:54:56 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+#include <stdio.h>
 
 void	draw_vertical_line(t_image *img, t_ivec offset, \
 							int length, unsigned int color)
@@ -70,7 +71,6 @@ void	render_view(t_vars *vars, t_ray ray)
 		ray.perp_wall_dist = ((double)ray.map_check.y - vars->player.y + (1 - ray.step.y) / 2) / ray.delta.y;
 	else if (face == WEST || face == EAST)
 		ray.perp_wall_dist = ((double)ray.map_check.x - vars->player.x + (1 - ray.step.x) / 2) / ray.delta.x;
-	
 	int	line_height = (int)(H_SIZE / ray.perp_wall_dist);
 	int	draw_start = -line_height / 2 + H_SIZE / 2;
 	if (draw_start < 0)
@@ -95,7 +95,7 @@ void	render_view(t_vars *vars, t_ray ray)
 		if (face == EAST)
 			texture_x = 2000 - texture_x - 1;
 	}
-	t_image img = vars->texture.wall_image[face];
+	t_image img = vars->texture.wall[face];
 	double	step = 1.0 * 2000 / line_height;
 	double	textPos = 0;
 	int x = W_SIZE * (ray.dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
@@ -110,8 +110,6 @@ void	render_view(t_vars *vars, t_ray ray)
 			color = (color >> 1) & 8355711;
 		ft_pixel_put(&vars->view, x, y, color);
 		ft_pixel_put(&vars->view, x+1, y, color);
-		ft_pixel_put(&vars->view, x+2, y, color);
-		ft_pixel_put(&vars->view, x+3, y, color);
 	}
 }
 
