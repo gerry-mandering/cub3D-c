@@ -32,4 +32,6 @@ void	set_player_position(t_vars *vars)
 		}
 		height++;
 	}
+	vars->player.x += 0.0001;
+	vars->player.y += 0.0001;
 }

@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:57:44 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 19:55:06 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/17 15:55:00 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	mouse(t_vars *vars)
 	vars->mouse.y = cur_y;
 	ft_memcpy(vars->view.img_ptr, vars->background.img_ptr, sizeof(int) * W_SIZE * H_SIZE);
 	render_minimap(vars);
+	FOV(vars);
 	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->view.img, 0, 0);
 	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->minimap.img.img, MINIMAP_XOFFSET, MINIMAP_YOFFSET);
 	return (0);
