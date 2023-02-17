@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:59:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/16 21:14:46 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:01:49 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	init_params(t_vars *vars)
 		for (int j=0; j<W_SIZE; j++)
 			ft_pixel_put(&vars->backgroud, j, i, vars->texture.floor_rgb);
 	}
+	vars->player.x += 0.0001;
+	vars->player.y += 0.0001;
 }
 
 void	read_images(t_vars *vars)

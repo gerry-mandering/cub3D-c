@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:14:20 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/16 21:26:16 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/17 16:07:53 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void	init_wall_image(t_vars *vars)
 t_direction	get_collision_direction(t_ivec wall_location, \
 											t_dvec collision_point)
 {
-	if (fabs((double)wall_location.x - collision_point.x) < 0.000001)
+	if (fabs((double)wall_location.x - collision_point.x) < 0.0000001)
 		return (WEST);
-	else if (fabs((double)wall_location.x + 1 - collision_point.x) < 0.000001)
+	else if (fabs((double)wall_location.x + 1 - collision_point.x) < 0.0000001)
 		return (EAST);
-	else if (fabs((double)wall_location.y - collision_point.y) < 0.000001)
+	else if (fabs((double)wall_location.y - collision_point.y) < 0.0000001)
 		return (NORTH);
-	else if (fabs((double)wall_location.y + 1 - collision_point.y) < 0.000001)
+	else if (fabs((double)wall_location.y + 1 - collision_point.y) < 0.0000001)
 		return (SOUTH);
 	else
 	{
