@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:57:48 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/16 20:38:28 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:01:48 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ static t_map	**allocate_copied_map(t_vars *vars)
 	t_map	**map;
 	int		i;
 
-	map = (t_map **)ft_calloc((int)vars->map_height, sizeof(int *));
+	map = (t_map **)ft_calloc((int)vars->map_height + 2, sizeof(int *));
 	if (map == NULL)
 		error_handler(SYSTEMCALL_ERROR);
 	i = 0;
-	while (i < vars->map_height)
+	while (i < vars->map_height + 2)
 	{
-		map[i] = (t_map *)ft_calloc((int)vars->map_width, sizeof(int));
+		map[i] = (t_map *)ft_calloc((int)vars->map_width + 2, sizeof(int));
 		if (map[i] == NULL)
 			error_handler(SYSTEMCALL_ERROR);
-		ft_memset(map[i], -1, sizeof(int) * vars->map_width);
+		ft_memset(map[i], NONE, sizeof(int) * (vars->map_width + 2));
 		i++;
 	}
 	return (map);
@@ -45,7 +45,7 @@ t_map	**copy_map(t_vars *vars)
 		width = 0;
 		while (width < vars->map_width)
 		{
-			copied_map[height][width] = vars->map_elem[height][width];
+			copied_map[height + 1][width + 1] = vars->map_elem[height][width];
 			width++;
 		}
 		height++;
