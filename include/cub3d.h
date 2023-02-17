@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/17 19:56:34 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:19:59 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,5 @@ void		init_params(t_vars *vars);
 t_direction	get_collision_direction(t_ivec wall_location, \
 													t_dvec collision_point);
 
+int	render(t_vars *vars);
 #endif

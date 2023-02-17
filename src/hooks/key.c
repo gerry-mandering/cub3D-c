@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:58:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 16:27:44 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:13:23 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ int	key_press(int keycode, t_vars *vars)
 		exit(0);
 	else if (keycode == KEY_W || keycode == KEY_A || keycode == KEY_S || keycode == KEY_D)
 		update_player_position(keycode, vars);
+	else if (keycode == KEY_ARROW_LEFT || keycode == KEY_ARROW_RIGHT)
+		{}
 	return (0);
 }

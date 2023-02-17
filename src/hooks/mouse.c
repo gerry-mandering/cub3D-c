@@ -6,11 +6,21 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:57:44 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 15:55:00 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:20:45 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+int	render(t_vars *vars)
+{
+	ft_memcpy(vars->view.img_ptr, vars->background.img_ptr, sizeof(int) * W_SIZE * H_SIZE);
+	render_minimap(vars);
+	FOV(vars);
+	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->view.img, 0, 0);
+	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->minimap.img.img, MINIMAP_XOFFSET, MINIMAP_YOFFSET);
+	return (0);
+}
 
 int	mouse(t_vars *vars)
 {
@@ -28,10 +38,6 @@ int	mouse(t_vars *vars)
 		vars->viewing_angle -= 2 * M_PI;
 	vars->mouse.x = cur_x;
 	vars->mouse.y = cur_y;
-	ft_memcpy(vars->view.img_ptr, vars->background.img_ptr, sizeof(int) * W_SIZE * H_SIZE);
-	render_minimap(vars);
-	FOV(vars);
-	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->view.img, 0, 0);
-	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->minimap.img.img, MINIMAP_XOFFSET, MINIMAP_YOFFSET);
+	render(vars);
 	return (0);
 }

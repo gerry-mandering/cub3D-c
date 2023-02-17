@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 16:35:15 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:14:18 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define TILE_SIZE				24
 # define PLAYER_SIZE			10
 # define MOVING_SPEED			0.1
-# define MOUSE_SPEED			0.06
+# define MOUSE_SPEED			0.03
 # define FOV_ANGLE				M_PI_4
 # define NUMBER_OF_RAYS			1920
 
