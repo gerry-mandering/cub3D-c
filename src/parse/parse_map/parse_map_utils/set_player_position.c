@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:18:32 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/16 20:42:22 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:25:55 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	set_player_position(t_vars *vars)
 		}
 		height++;
 	}
-	vars->player.x += 0.0001;
-	vars->player.y += 0.0001;
+	//vars->player.x += 0.0001;
+	//vars->player.y += 0.0001;
 }

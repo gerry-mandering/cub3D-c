@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 16:35:15 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:14:35 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # define H_SIZE					1080
 # define TILE_SIZE				24
 # define PLAYER_SIZE			10
-# define MOVING_SPEED			0.1
-# define MOUSE_SPEED			0.06
+# define MOVING_SPEED			0.15
+# define ROTATE_SPEED			0.03
 # define FOV_ANGLE				M_PI_4
-# define NUMBER_OF_RAYS			1920
+# define NUMBER_OF_RAYS			1000
 
 # define SYSTEMCALL_ERROR		NULL
 # define WRONG_ARGUMENTS_COUNT	"Wrong Arguments Count -"
@@ -33,13 +33,14 @@
 # define DUPLICATED_TEXTURE		"Duplicated Texture - "
 # define HAVE_NO_MAP_INPUT		"Have No Map Input -"
 # define INVALID_MAP_FORMAT		"Invalid Map Format - "
+# define INVALID_MAP_SIZE		"Invalid Map Size - "
 # define HAVE_NO_PLAYER			"Have No Player - "
 # define DUPLICATED_PLAYER		"Duplicated Player - "
 # define UNCLOSED_MAP			"Unclosed Map - "
 # define INVALID_IMAGE_PATH		"Invalid Image Path - "
 
-# define NORTH_WALL				"images/north_wall.xpm"
-# define SOUTH_WALL				"images/south_wall.xpm"
+# define NORTH_WALL				"images/green.xpm"
+# define SOUTH_WALL				"images/blue.xpm"
 # define EAST_WALL				"images/east_wall.xpm"
 # define WEST_WALL				"images/west_wall.xpm"
 # define MINIMAP_BG				"images/minimap_background.xpm"
