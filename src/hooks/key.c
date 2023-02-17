@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:58:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 20:13:23 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:32:00 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,22 @@ void	update_player_position(int keycode, t_vars *vars)
 		vars->player.y += delta.y;	
 }
 
+void	update_viewing_angle(int keycode, t_vars *vars)
+{
+	if (keycode == KEY_ARROW_LEFT)
+		vars->viewing_angle -= ROTATE_SPEED * 1.5;
+	else if (keycode == KEY_ARROW_RIGHT)
+		vars->viewing_angle += ROTATE_SPEED * 1.5;
+}
+
 int	key_press(int keycode, t_vars *vars)
 {
 	if (keycode == KEY_ESC)
 		exit(0);
-	else if (keycode == KEY_W || keycode == KEY_A || keycode == KEY_S || keycode == KEY_D)
+	else if (keycode == KEY_W || keycode == KEY_A \
+		|| keycode == KEY_S || keycode == KEY_D)
 		update_player_position(keycode, vars);
 	else if (keycode == KEY_ARROW_LEFT || keycode == KEY_ARROW_RIGHT)
-		{}
+		update_viewing_angle(keycode, vars);
 	return (0);
 }

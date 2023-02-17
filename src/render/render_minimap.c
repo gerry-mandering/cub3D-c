@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:43:34 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 15:54:57 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:44:37 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	place_wall(t_vars *vars)
 			offset.y = y * TILE_SIZE;
 			if (vars->map_elem[y][x] == WALL)
 				draw_rect(&vars->minimap.background_img, offset, TILE_SIZE, WALL_COLOR);
+			else
+				draw_rect(&vars->minimap.background_img, offset, TILE_SIZE, 0x5f0f0f0f);
 			x++;
 		}
 		y++;
@@ -68,8 +70,8 @@ void	place_player(t_vars *vars)
 {
 	t_ivec	offset;
 
-	offset.x = (int)(vars->player.x * TILE_SIZE);
-	offset.y = (int)(vars->player.y * TILE_SIZE);
+	offset.x = (int)(vars->player.x * TILE_SIZE) - 5;
+	offset.y = (int)(vars->player.y * TILE_SIZE) - 5;
 	draw_rect(&vars->minimap.img, offset, PLAYER_SIZE, PLAYER_COLOR);
 }
 
