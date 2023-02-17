@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/17 19:56:34 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:09:29 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,17 @@ void		validate_map(t_vars *vars);
 t_map		**copy_map(t_vars *vars);
 void		free_copied_map(t_map **copied_map, t_ivec map_size);
 
-//error_handler
-void		error_handler(const char *error_type);
+//init_params
+void		init_params(t_vars *vars);
 
-//utils
-int			count_strings(char **strings);
-void		free_strings(char **strings);
-int			ft_strcmp(const char *s1, const char *s2);
-int			ft_isspace(char character);
+//init_params_utils
+t_image		create_image(t_vars *vars, int img_w, int img_h);
+void		init_mlx_params(t_vars *vars);
+void		init_viewing_angle(t_vars *vars);
+void		init_view(t_vars *vars);
+void		init_wall(t_image *wall, char **wall_path, void *mlx_ptr);
+void		init_background(t_vars *vars, int ceiling_rgb, int floor_rgb);
+void		init_minimap(t_vars *vars);
 
 //hooks
 int			key_press(int keycode, t_vars *vars);
@@ -88,8 +91,14 @@ void		draw_rect(t_image *image, \
 								t_ivec offset, int size, unsigned int color);
 void		render_minimap(t_vars *vars);
 
-//init_params
-void		init_params(t_vars *vars);
+//utils
+int			count_strings(char **strings);
+void		free_strings(char **strings);
+int			ft_strcmp(const char *s1, const char *s2);
+int			ft_isspace(char character);
+
+//error_handler
+void		error_handler(const char *error_type);
 
 t_direction	get_collision_direction(t_ivec wall_location, \
 													t_dvec collision_point);
