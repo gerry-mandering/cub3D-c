@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 21:14:35 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/17 22:04:17 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@
 # define NUMBER_OF_RAYS			1000
 
 # define SYSTEMCALL_ERROR		NULL
-# define WRONG_ARGUMENTS_COUNT	"Wrong Arguments Count -"
-# define INVALID_EXTENSION		"Invalid Expension - "
+# define WRONG_ARGUMENTS_COUNT	"Wrong Arguments Count\n"
+# define INVALID_EXTENSION		"Invalid Expension\n"
 # define LACKING_TEXTURE_INFO	"Laking Texture Info -"
-# define INVALID_IDENTIFIER		"Invalid Identifier - "
-# define INVALID_TEXTURE_FORMAT	"Invalid Texture Format - "
-# define INVALID_RGB_FORMAT		"Invalid RGB Format - "
-# define DUPLICATED_TEXTURE		"Duplicated Texture - "
+# define INVALID_IDENTIFIER		"Invalid Identifier\n"
+# define INVALID_TEXTURE_FORMAT	"Invalid Texture Format\n"
+# define INVALID_RGB_FORMAT		"Invalid RGB Format\n"
+# define DUPLICATED_TEXTURE		"Duplicated Texture\n"
 # define HAVE_NO_MAP_INPUT		"Have No Map Input -"
-# define INVALID_MAP_FORMAT		"Invalid Map Format - "
-# define INVALID_MAP_SIZE		"Invalid Map Size - "
-# define HAVE_NO_PLAYER			"Have No Player - "
-# define DUPLICATED_PLAYER		"Duplicated Player - "
-# define UNCLOSED_MAP			"Unclosed Map - "
-# define INVALID_IMAGE_PATH		"Invalid Image Path - "
+# define INVALID_MAP_FORMAT		"Invalid Map Format\n"
+# define INVALID_MAP_SIZE		"Invalid Map Size\n"
+# define HAVE_NO_PLAYER			"Have No Player\n"
+# define DUPLICATED_PLAYER		"Duplicated Player\n"
+# define UNCLOSED_MAP			"Unclosed Map\n"
+# define INVALID_IMAGE_PATH		"Invalid Image Path\n"
 
 # define NORTH_WALL				"images/green.xpm"
 # define SOUTH_WALL				"images/blue.xpm"
@@ -56,6 +56,7 @@
 
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3
+# define X_EVENT_KEY_EXIT		17
 
 # define KEY_W					13
 # define KEY_A					0
