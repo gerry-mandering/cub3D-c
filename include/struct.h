@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 21:40:26 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/18 19:11:50 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef enum e_map
 	WALL,
 	PLAYER,
 	DOOR,
+	OBJECT,
 	VISITED
 }	t_map;
 
@@ -102,8 +103,10 @@ typedef struct s_texture
 {
 	char	*wall_path[4];
 	char	*door_path;
+	char	*object_path[2];
 	t_image	wall[4];
 	t_image	door;
+	t_image	object[2];
 	int		floor_rgb;
 	int		ceiling_rgb;
 }	t_texture;

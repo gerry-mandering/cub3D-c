@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:41:00 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/17 20:39:36 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:19:31 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static int	get_fp_index(char *identifier)
 {
-	const char	identifier_arr[7][3] = {"NO", "SO", "WE", "EA", "F", "C", "D"};
+	const char	identifier_arr[8][3] = {"NO", "SO", "WE", "EA", "F", "C", "D", "O"};
 	int			i;
 
 	i = 0;
-	while (i < 7)
+	while (i < 8)
 	{
 		if (ft_strcmp(identifier, identifier_arr[i]) == 0)
 			return (i);
@@ -30,9 +30,9 @@ static int	get_fp_index(char *identifier)
 
 static void	store_texture_info(t_vars *vars, int *bitflag, char *line)
 {
-	const t_parse_texture_fp	parse_texture_fp[7] = {
+	const t_parse_texture_fp	parse_texture_fp[8] = {
 		parse_north, parse_south, parse_west, parse_east, \
-		parse_floor, parse_ceiling, parse_door
+		parse_floor, parse_ceiling, parse_door, parse_object
 	};
 	int							fp_index;
 	char						**splited_line;

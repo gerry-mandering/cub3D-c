@@ -21,6 +21,7 @@ SRC = main.c \
 	render/render_minimap.c \
 	render/raycast.c \
 	render/get_collision_direction.c \
+	render/render_object.c \
 	hooks/mouse.c \
 	hooks/key.c \
 	error_handler/error_handler.c \
@@ -33,6 +34,7 @@ SRC = main.c \
 	parse/parse_texture/parse_texture_functions/parse_floor.c \
 	parse/parse_texture/parse_texture_functions/parse_ceiling.c \
 	parse/parse_texture/parse_texture_functions/parse_door.c \
+	parse/parse_texture/parse_texture_functions/parse_object.c \
 	parse/parse_texture/parse_texture_utils/get_rgb.c \
 	parse/parse_map/parse_map.c \
 	parse/parse_map/parse_map_utils/allocate_map.c \
@@ -51,6 +53,7 @@ SRC = main.c \
 	init_params/init_params_utils/init_view.c \
 	init_params/init_params_utils/init_viewing_angle.c \
 	init_params/init_params_utils/init_wall.c \
+	init_params/init_params_utils/init_object.c \
 	utils/count_strings.c \
 	utils/free_strings.c \
 	utils/ft_strcmp.c \

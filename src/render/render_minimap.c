@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:43:34 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 20:44:37 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/18 18:36:45 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	place_wall(t_vars *vars)
 				draw_rect(&vars->minimap.background_img, offset, TILE_SIZE, WALL_COLOR);
 			else
 				draw_rect(&vars->minimap.background_img, offset, TILE_SIZE, 0x5f0f0f0f);
+			if (vars->map_elem[y][x] == OBJECT)
+				draw_rect(&vars->minimap.background_img, offset, TILE_SIZE, 0xffd400);
 			x++;
 		}
 		y++;

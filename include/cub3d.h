@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/17 21:59:46 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/18 19:18:35 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void		parse_east(t_vars *vars, int *bitflag, char *value);
 void		parse_floor(t_vars *vars, int *bitflag, char *value);
 void		parse_ceiling(t_vars *vars, int *bitflag, char *value);
 void		parse_door(t_vars *vars, int *bitflag, char *value);
+void		parse_object(t_vars *vars, int *bitflag, char *value);
 
 //parse_texture_utils
 int			get_rgb(char *value);
@@ -68,6 +69,7 @@ void		init_mlx_params(t_vars *vars);
 void		init_viewing_angle(t_vars *vars);
 void		init_view(t_vars *vars);
 void		init_wall(t_image *wall, char **wall_path, void *mlx_ptr);
+void		init_object(t_image *object, char **object_path, void *mlx_ptr);
 void		init_background(t_vars *vars, int ceiling_rgb, int floor_rgb);
 void		init_minimap(t_vars *vars);
 
@@ -78,7 +80,7 @@ int			wall_collision(t_vars *vars, t_dvec delta);
 int			mouse(t_vars *vars);
 
 //render
-void		raycast(t_vars *vars, double ray_dir);
+void		raycast(t_vars *vars, double ray_dir, int count);
 void		FOV(t_vars *vars);
 
 void		plot_low(t_image *img, t_dvec from, t_dvec to);
@@ -104,6 +106,12 @@ void		error_handler(const char *error_type);
 t_direction	get_collision_direction(t_ivec wall_location, \
 													t_dvec collision_point);
 
-int	render(t_vars *vars);
-int	cub3d_exit(t_vars *vars);
+int			render(t_vars *vars);
+int			cub3d_exit(t_vars *vars);
+
+//sprite_image
+t_ray		init_ray(t_vars *vars, double ray_dir);
+void		raycast_object(t_vars *vars, double ray_dir);
+void		render_object(t_vars *vars, t_ray ray, int count);
+
 #endif

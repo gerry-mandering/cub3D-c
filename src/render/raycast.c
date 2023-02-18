@@ -6,12 +6,11 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 21:06:19 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/18 19:26:52 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-#include <stdio.h>
 
 void	draw_vertical_line(t_image *img, t_ivec offset, \
 							int length, unsigned int color)
@@ -187,14 +186,29 @@ void	add_ray_to_minimap(t_vars *vars, t_ray ray)
 	draw_rect(&vars->minimap.img, offset, 2, 0xff);
 }
 
-void	raycast(t_vars *vars, double ray_dir)
+static int	check_object_hit(t_vars *vars, t_ray ray)
+{
+	if (ray.map_check.x >= 0 && ray.map_check.x < vars->map_width \
+		&& ray.map_check.y >= 0 && ray.map_check.y < vars->map_height)
+	{
+		if (vars->map_elem[ray.map_check.y][ray.map_check.x] == OBJECT)
+			return (1);
+	}
+	return (0);
+}
+
+void	raycast(t_vars *vars, double ray_dir, int count)
 {
 	t_ray	ray;
+	t_ray	object_ray;
 	int		hit;
+	int		object_hit;
 
 	ray = init_ray(vars, ray_dir);
+	object_ray = init_ray(vars, ray_dir);
 	hit = 0;
-	while (!hit)
+	object_hit = 0;
+	while (!hit && !object_hit)
 	{
 		if (ray.length.x < ray.length.y)
 		{
@@ -208,12 +222,32 @@ void	raycast(t_vars *vars, double ray_dir)
 			ray.dist = ray.length.y;
 			ray.length.y += ray.unit_step.y;
 		}
+		if (object_hit != 1)
+		{
+			if (object_ray.length.x < object_ray.length.y)
+			{
+				object_ray.map_check.x += object_ray.step.x;
+				object_ray.dist = object_ray.length.x;
+				object_ray.length.x += object_ray.unit_step.x;
+			}
+			else
+			{
+				object_ray.map_check.y += object_ray.step.y;
+				object_ray.dist = object_ray.length.y;
+				object_ray.length.y += object_ray.unit_step.y;
+			}
+		}
 		hit = check_wall_hit(vars, ray);
+		if (object_hit != 1)
+			object_hit = check_object_hit(vars, object_ray);
 	}
 	ray.intersection.x = ray.start.x + ray.delta.x * ray.dist;
 	ray.intersection.y = ray.start.y + ray.delta.y * ray.dist;
 	add_ray_to_minimap(vars, ray);
-	render_view(vars, ray);
+	if (hit == 1)
+		render_view(vars, ray);
+	if (object_hit == 1)
+		render_object(vars, object_ray, count);
 	//render_view_without_texture(vars, ray);
 }
 
@@ -222,13 +256,17 @@ void	FOV(t_vars *vars)
 	double	interval;
 	double	start;
 	double	end;
+	static int	count;
 
 	interval = FOV_ANGLE / NUMBER_OF_RAYS;
 	start = vars->viewing_angle - FOV_ANGLE / 2;
 	end = start + FOV_ANGLE;
 	while (start < end)
 	{
-		raycast(vars, start);
+		raycast(vars, start, count);
 		start += interval;
 	}
+	count++;
+	if (count == 50)
+		count = 0;
 }
