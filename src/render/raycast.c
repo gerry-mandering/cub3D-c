@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/20 14:15:15 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:54:36 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,21 @@ t_ray	init_ray(t_vars *vars, double ray_dir)
 	return (ray);
 }
 
-int	check_wall_hit(t_vars *vars, t_ray ray)
+int	check_wall_hit(t_vars *vars, t_ray *ray)
 {
-	if (ray.map_check.x >= 0 && ray.map_check.x < vars->map_width \
-		&& ray.map_check.y >= 0 && ray.map_check.y < vars->map_height)
+	if (ray->map_check.x >= 0 && ray->map_check.x < vars->map_width \
+		&& ray->map_check.y >= 0 && ray->map_check.y < vars->map_height)
 	{
-		if (vars->map_elem[ray.map_check.y][ray.map_check.x] == WALL)
+		if (vars->map_elem[ray->map_check.y][ray->map_check.x] == WALL)
 			return (1);
-		else if (vars->map_elem[ray.map_check.y][ray.map_check.x] == OBJECT)
+		else if (vars->map_elem[ray->map_check.y][ray->map_check.x] == OBJECT)
 		{
-			if (get_collision_direction(ray.map_check, ray.intersection) == EAST)
+			if (get_collision_direction(ray->map_check, ray->intersection) == EAST)
+				return (1);
+		}
+		else if (ray->map_check.x > 0 && vars->map_elem[ray->map_check.y][ray->map_check.x - 1] == OBJECT)
+		{
+			if (get_collision_direction(ray->map_check, ray->intersection) == WEST)
 			{
 				return (1);
 			}
@@ -216,7 +221,7 @@ void	raycast(t_vars *vars, double ray_dir)
 		}
 		ray.intersection.x = ray.start.x + ray.delta.x * ray.dist;
 		ray.intersection.y = ray.start.y + ray.delta.y * ray.dist;
-		hit = check_wall_hit(vars, ray);
+		hit = check_wall_hit(vars, &ray);
 	}
 	add_ray_to_minimap(vars, ray);
 	render_view(vars, ray);
