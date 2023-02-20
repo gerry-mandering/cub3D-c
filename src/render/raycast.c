@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/20 16:36:01 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:17:59 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	render_view_without_texture(t_vars *vars, t_ray *ray)
 	draw_vertical_line(&vars->view, offset, 200/ray->perp_wall_dist, color);
 }
 
-int	get_texture_xpos(t_ray *ray)
+int	get_texture_xpos(t_ray *ray, t_image img)
 {
 	double	wall_x;
 	int		texture_x;
@@ -117,16 +117,16 @@ int	get_texture_xpos(t_ray *ray)
 	if (ray->collision_direction == NORTH || ray->collision_direction == SOUTH)
 	{
 		wall_x = ray->intersection.x - floor(ray->intersection.x);
-		texture_x = (int)(wall_x * 2000);
+		texture_x = (int)(wall_x * img.width);
 		if (ray->collision_direction == NORTH)
-			texture_x = 2000 - texture_x - 1;
+			texture_x = img.width - texture_x - 1;
 	}
 	else if (ray->collision_direction == EAST || ray->collision_direction == WEST)
 	{
 		wall_x = ray->intersection.y - floor(ray->intersection.y);
-		texture_x = (int)(wall_x * 2000);
+		texture_x = (int)(wall_x * img.width);
 		if (ray->collision_direction == EAST)
-			texture_x = 2000 - texture_x - 1;
+			texture_x = img.width - texture_x - 1;
 	}
 	return (texture_x);
 }
@@ -188,7 +188,7 @@ void	render_view(t_vars *vars, t_ray *ray)
 	ray->collision_direction = \
 		get_collision_direction(ray->map_check, ray->intersection);
 	ray->perp_wall_dist = get_perp_wall_dist(vars, ray);
-	texture.x = get_texture_xpos(ray);
+	texture.x = get_texture_xpos(ray, vars->texture.wall[ray->collision_direction]);
 	texture.y = 0;
 	screen.x = W_SIZE * (ray->dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
 	screen.y = -(int)(H_SIZE / ray->perp_wall_dist) / 2  + H_SIZE / 2;
@@ -209,7 +209,7 @@ void	add_ray_to_minimap(t_vars *vars, t_ray *ray)
 void	draw_object_in_view(t_vars *vars, t_ray *ray, t_ivec screen, t_ivec texture)
 {
 	const int		line_height = (int)(H_SIZE / ray->perp_wall_dist);
-	const double	step = 1.0 * 2000 / line_height;
+	const double	step = 1.0 * 240 / line_height;
 	double			textPos;
 	unsigned int	color;
 	int 			draw_end;
@@ -238,7 +238,7 @@ void	render_object(t_vars *vars, t_ray *object_ray)
 	t_ivec	screen;
 
 	object_ray->perp_wall_dist = get_perp_wall_dist(vars, object_ray);
-	texture.x = get_texture_xpos(object_ray);
+	texture.x = get_texture_xpos(object_ray, vars->texture.object[0]);
 	texture.y = 0;
 	screen.x = W_SIZE * (object_ray->dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
 	screen.y = -(int)(H_SIZE / object_ray->perp_wall_dist) / 2  + H_SIZE / 2;

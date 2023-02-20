@@ -3,8 +3,9 @@ SO ./images/south.xpm
 WE ./images/west.xpm
 EA ./images/east.xpm
 D  ./images/door.xpm
-O  ./images/spongebob1.xpm
-O  ./images/spongebob2.xpm
+O  ./images/sprite1.xpm
+O  ./images/sprite2.xpm
+O  ./images/sprite3.xpm
 
 F 220,100,0
 C 225,30,0
