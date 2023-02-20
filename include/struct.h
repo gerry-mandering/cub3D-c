@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/18 19:11:50 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:49:41 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define STRUCT_H
 
 # include "../lib/libft/libft.h"
+
+# define SPRITE_COUNT	2
 
 typedef enum e_direction
 {
@@ -103,10 +105,10 @@ typedef struct s_texture
 {
 	char	*wall_path[4];
 	char	*door_path;
-	char	*object_path[2];
+	char	*object_path[SPRITE_COUNT];
 	t_image	wall[4];
 	t_image	door;
-	t_image	object[2];
+	t_image	object[SPRITE_COUNT];
 	int		floor_rgb;
 	int		ceiling_rgb;
 }	t_texture;
