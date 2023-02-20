@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/20 15:39:42 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:31:18 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ typedef struct s_vars
 	t_minimap	minimap;
 	t_texture	texture;
 	t_ivec		mouse;
+	size_t		sprite_count;
 }	t_vars;
 
 typedef void	(*t_parse_texture_fp)(t_vars *vars, int *bitflag, char *value);

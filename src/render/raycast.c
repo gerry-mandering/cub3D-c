@@ -6,11 +6,12 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/20 16:04:52 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:36:01 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+#include <stdio.h>
 
 void	draw_vertical_line(t_image *img, t_ivec offset, \
 							int length, unsigned int color)
@@ -65,6 +66,7 @@ int	check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray)
 			{
 				ft_memcpy(object_ray, ray, sizeof(t_ray));
 				object_ray->hit = 1;
+				object_ray->collision_direction = WEST;
 			}
 		}
 		else if (ray->map_check.x > 0 && vars->map_elem[ray->map_check.y][ray->map_check.x - 1] == OBJECT)
@@ -73,6 +75,7 @@ int	check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray)
 			{
 				ft_memcpy(object_ray, ray, sizeof(t_ray));
 				object_ray->hit = 1;
+				object_ray->collision_direction = WEST;
 			}
 		}
 	}
@@ -219,7 +222,10 @@ void	draw_object_in_view(t_vars *vars, t_ray *ray, t_ivec screen, t_ivec texture
 	{
 		texture.y = (int)textPos;
 		textPos += step;
-		color = get_color_value(&vars->texture.object[0], texture);
+		if (vars->sprite_count < 50)
+			color = get_color_value(&vars->texture.object[0], texture);
+		else
+			color = get_color_value(&vars->texture.object[1], texture);
 		ft_pixel_put(&vars->view, screen.x, screen.y, color);
 		ft_pixel_put(&vars->view, screen.x + 1, screen.y, color);
 		screen.y++;
@@ -286,4 +292,7 @@ void	FOV(t_vars *vars)
 		raycast(vars, start);
 		start += interval;
 	}
+	vars->sprite_count++;
+	if (vars->sprite_count % 100 == 0)
+		vars->sprite_count = 0;
 }
