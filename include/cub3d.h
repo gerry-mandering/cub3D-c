@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/20 14:15:09 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:42:56 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,5 @@ int			cub3d_exit(t_vars *vars);
 
 //sprite_image
 t_ray		init_ray(t_vars *vars, double ray_dir);
-void		raycast_object(t_vars *vars, double ray_dir);
-void		render_object(t_vars *vars, t_ray ray, int count);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/18 19:11:50 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:39:42 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ typedef struct s_ray
 	double	dist;
 	double	perp_wall_dist;
 	int		collision_direction;
+	int		hit;
 }	t_ray;
 
 typedef struct s_vars
