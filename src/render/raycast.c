@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/20 17:17:59 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:51:03 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ unsigned int	get_color_value(t_image *img, t_ivec offset)
 void	draw_texture_in_view(t_vars *vars, t_ray *ray, t_ivec screen, t_ivec texture)
 {
 	const int		line_height = (int)(H_SIZE / ray->perp_wall_dist);
-	const double	step = 1.0 * 2000 / line_height;
+	const double	step = 1.0 * 512 / line_height;
 	double			textPos;
 	unsigned int	color;
 	int 			draw_end;
@@ -206,6 +206,21 @@ void	add_ray_to_minimap(t_vars *vars, t_ray *ray)
 	draw_rect(&vars->minimap.img, offset, 2, 0xff);
 }
 
+unsigned int	get_sprite_color_value(t_vars *vars, t_ivec texture)
+{
+	unsigned int	color;
+
+	if (vars->sprite_count < 70)
+		color = get_color_value(&vars->texture.object[0], texture);
+	else if (vars->sprite_count < 80)
+		color = get_color_value(&vars->texture.object[1], texture);
+	else if (vars->sprite_count < 90)
+		color = get_color_value(&vars->texture.object[2], texture);
+	else
+		color = get_color_value(&vars->texture.object[1], texture);
+	return (color);
+}
+
 void	draw_object_in_view(t_vars *vars, t_ray *ray, t_ivec screen, t_ivec texture)
 {
 	const int		line_height = (int)(H_SIZE / ray->perp_wall_dist);
@@ -222,10 +237,7 @@ void	draw_object_in_view(t_vars *vars, t_ray *ray, t_ivec screen, t_ivec texture
 	{
 		texture.y = (int)textPos;
 		textPos += step;
-		if (vars->sprite_count < 50)
-			color = get_color_value(&vars->texture.object[0], texture);
-		else
-			color = get_color_value(&vars->texture.object[1], texture);
+		color = get_sprite_color_value(vars, texture);
 		ft_pixel_put(&vars->view, screen.x, screen.y, color);
 		ft_pixel_put(&vars->view, screen.x + 1, screen.y, color);
 		screen.y++;
@@ -293,6 +305,6 @@ void	FOV(t_vars *vars)
 		start += interval;
 	}
 	vars->sprite_count++;
-	if (vars->sprite_count % 100 == 0)
+	if (vars->sprite_count == 100)
 		vars->sprite_count = 0;
 }

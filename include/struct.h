@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/20 16:31:18 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:23:45 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../lib/libft/libft.h"
 
-# define SPRITE_COUNT	2
+# define SPRITE_COUNT	3
 
 # define NO_OPTION		0
 # define REPLACE_PLAYER	1
