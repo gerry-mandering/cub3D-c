@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/20 17:51:03 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 22:14:43 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray)
 	{
 		if (vars->map_elem[ray->map_check.y][ray->map_check.x] == WALL)
 			return (1);
-		else if (vars->map_elem[ray->map_check.y][ray->map_check.x] == OBJECT)
+		else if (vars->map_elem[ray->map_check.y][ray->map_check.x] == OBJECT && !object_ray->hit)
 		{
 			if (fabs((double)ray->map_check.x + 1 - ray->intersection.x) < 0.005)
 			{
@@ -69,7 +69,7 @@ int	check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray)
 				object_ray->collision_direction = WEST;
 			}
 		}
-		else if (ray->map_check.x > 0 && vars->map_elem[ray->map_check.y][ray->map_check.x - 1] == OBJECT)
+		else if (ray->map_check.x > 0 && vars->map_elem[ray->map_check.y][ray->map_check.x - 1] == OBJECT && !object_ray->hit)
 		{
 			if (fabs((double)ray->map_check.x - ray->intersection.x) < 0.005)
 			{
@@ -138,10 +138,11 @@ double	get_perp_wall_dist(t_vars *vars, t_ray *ray)
 	perp_wall_dist = ray->dist;
 	if (ray->collision_direction == NORTH || ray->collision_direction == SOUTH)
 		perp_wall_dist = ((double)ray->map_check.y - vars->player.y \
-						+ (1 - ray->step.y) / 2) / ray->delta.y;
+							+ (1 - ray->step.y) / 2) / ray->delta.y;
 	else if (ray->collision_direction == WEST || ray->collision_direction == EAST)
 		perp_wall_dist = ((double)ray->map_check.x - vars->player.x \
 						+ (1 - ray->step.x) / 2) / ray->delta.x;
+	printf("dist: %f, perp: %f\n", ray->dist, perp_wall_dist);
 	return (perp_wall_dist);
 }
 
@@ -167,6 +168,7 @@ void	draw_texture_in_view(t_vars *vars, t_ray *ray, t_ivec screen, t_ivec textur
 	if (draw_end >= H_SIZE)
 		draw_end = H_SIZE - 1;
 	textPos = 0;
+	//printf("start: %d, end: %d\n", screen.y, draw_end);
 	while (screen.y < draw_end)
 	{
 		texture.y = (int)textPos;
@@ -187,7 +189,7 @@ void	render_view(t_vars *vars, t_ray *ray)
 
 	ray->collision_direction = \
 		get_collision_direction(ray->map_check, ray->intersection);
-	ray->perp_wall_dist = get_perp_wall_dist(vars, ray);
+	ray->perp_wall_dist = ray->dist;//get_perp_wall_dist(vars, ray);
 	texture.x = get_texture_xpos(ray, vars->texture.wall[ray->collision_direction]);
 	texture.y = 0;
 	screen.x = W_SIZE * (ray->dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
@@ -201,6 +203,7 @@ void	add_ray_to_minimap(t_vars *vars, t_ray *ray)
 {
 	//add ray to minimap
 	t_ivec	offset;
+
 	offset.x = ray->intersection.x * TILE_SIZE;
 	offset.y = ray->intersection.y * TILE_SIZE;
 	draw_rect(&vars->minimap.img, offset, 2, 0xff);
@@ -249,7 +252,7 @@ void	render_object(t_vars *vars, t_ray *object_ray)
 	t_ivec	texture;
 	t_ivec	screen;
 
-	object_ray->perp_wall_dist = get_perp_wall_dist(vars, object_ray);
+	object_ray->perp_wall_dist = object_ray->dist;//get_perp_wall_dist(vars, object_ray);
 	texture.x = get_texture_xpos(object_ray, vars->texture.object[0]);
 	texture.y = 0;
 	screen.x = W_SIZE * (object_ray->dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
@@ -265,6 +268,7 @@ void	raycast(t_vars *vars, double ray_dir)
 	t_ray	object_ray;
 
 	ray = init_ray(vars, ray_dir);
+	object_ray = init_ray(vars, ray_dir);
 	while (!ray.hit)
 	{
 		if (ray.length.x < ray.length.y)
