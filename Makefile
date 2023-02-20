@@ -42,6 +42,10 @@ SRC = main.c \
 	parse/parse_map/parse_map_utils/measure_map_size.c \
 	parse/parse_map/parse_map_utils/set_player_position.c \
 	parse/validate_map/validate_map.c \
+	parse/validate_map/validate_map_utils/check_door_position.c \
+	parse/validate_map/validate_map_utils/check_map_is_closed.c \
+	parse/validate_map/validate_map_utils/check_player_is_duplicated.c \
+	parse/validate_map/validate_map_utils/check_player_is_exist.c \
 	parse/validate_map/validate_map_utils/copy_map.c \
 	parse/validate_map/validate_map_utils/free_copied_map.c \
 	init_params/init_params.c \

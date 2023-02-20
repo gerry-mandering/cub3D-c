@@ -15,6 +15,11 @@
 
 # include "../lib/libft/libft.h"
 
+# define SPRITE_COUNT	2
+
+# define NO_OPTION		0
+# define REPLACE_PLAYER	1
+
 typedef enum e_direction
 {
 	NORTH,
@@ -103,10 +108,10 @@ typedef struct s_texture
 {
 	char	*wall_path[4];
 	char	*door_path;
-	char	*object_path[2];
+	char	*object_path[SPRITE_COUNT];
 	t_image	wall[4];
 	t_image	door;
-	t_image	object[2];
+	t_image	object[SPRITE_COUNT];
 	int		floor_rgb;
 	int		ceiling_rgb;
 }	t_texture;

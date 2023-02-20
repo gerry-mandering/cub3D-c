@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:57:48 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/17 21:01:48 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:43:46 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_map	**allocate_copied_map(t_vars *vars)
 	return (map);
 }
 
-t_map	**copy_map(t_vars *vars)
+t_map	**copy_map(t_vars *vars, int option)
 {
 	int	**copied_map;
 	int	width;
@@ -46,6 +46,9 @@ t_map	**copy_map(t_vars *vars)
 		while (width < vars->map_width)
 		{
 			copied_map[height + 1][width + 1] = vars->map_elem[height][width];
+			if (copied_map[height + 1][width + 1] == PLAYER && \
+					option == REPLACE_PLAYER)
+				copied_map[height + 1][width + 1] = EMPTY_SPACE;
 			width++;
 		}
 		height++;

@@ -6,12 +6,11 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:51:07 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/18 20:26:30 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:52:35 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
-#include <stdio.h>
 
 void	init_object(t_image *object, char **object_path, void *mlx_ptr)
 {

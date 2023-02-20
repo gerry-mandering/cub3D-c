@@ -37,6 +37,7 @@
 # define HAVE_NO_PLAYER			"Have No Player\n"
 # define DUPLICATED_PLAYER		"Duplicated Player\n"
 # define UNCLOSED_MAP			"Unclosed Map\n"
+# define WRONG_DOOR_POSITION	"Wrong Door Position\n"
 # define INVALID_IMAGE_PATH		"Invalid Image Path\n"
 
 # define NORTH_WALL				"images/green.xpm"
