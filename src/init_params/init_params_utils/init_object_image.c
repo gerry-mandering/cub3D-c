@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_object.c                                      :+:      :+:    :+:   */
+/*   init_object_image.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:51:07 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/20 17:19:47 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 20:44:29 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-void	init_object(t_image *object, char **object_path, void *mlx_ptr)
+void	init_object_image(t_image *object, char **object_path, void *mlx_ptr)
 {
 	int	i;
 

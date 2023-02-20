@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/20 17:23:45 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 19:55:48 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,17 @@ typedef enum e_door_state
 	CLOSE
 }	t_door_state;
 
+typedef enum e_door_direction
+{
+	HORIZONTAL,
+	VERTICAL
+}	t_door_direction;
+
 typedef struct s_door
 {
-	t_door_state	state;
+	t_door_state		state;
+	t_door_direction	direction;
+	t_ivec				location;
 }	t_door;
 
 typedef struct s_image
@@ -149,6 +157,7 @@ typedef struct s_vars
 	t_texture	texture;
 	t_ivec		mouse;
 	size_t		sprite_count;
+	t_list		*door_list;
 }	t_vars;
 
 typedef void	(*t_parse_texture_fp)(t_vars *vars, int *bitflag, char *value);

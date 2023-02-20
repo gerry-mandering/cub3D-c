@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/20 16:13:51 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 20:45:26 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,13 @@ t_image		create_image(t_vars *vars, int img_w, int img_h);
 void		init_mlx_params(t_vars *vars);
 void		init_viewing_angle(t_vars *vars);
 void		init_view(t_vars *vars);
-void		init_wall(t_image *wall, char **wall_path, void *mlx_ptr);
-void		init_door(t_image *door, char *door_path, void *mlx_ptr);
-void		init_object(t_image *object, char **object_path, void *mlx_ptr);
+void		init_wall_image(t_image *wall, char **wall_path, void *mlx_ptr);
+void		init_door_image(t_image *door, char *door_path, void *mlx_ptr);
+void		init_object_image(t_image *object, \
+										char **object_path, void *mlx_ptr);
 void		init_background(t_vars *vars, int ceiling_rgb, int floor_rgb);
 void		init_minimap(t_vars *vars);
+void		init_door_list(t_vars *vars);
 
 //hooks
 int			key_press(int keycode, t_vars *vars);
