@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/20 15:48:26 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:58:21 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define PLAYER_SIZE			10
 # define MOVING_SPEED			0.15
 # define ROTATE_SPEED			0.03
-# define FOV_ANGLE				M_PI_4
+# define FOV_ANGLE				M_PI_2
 # define NUMBER_OF_RAYS			1000
 
 # define SYSTEMCALL_ERROR		NULL
