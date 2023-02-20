@@ -56,6 +56,7 @@ SRC = main.c \
 	init_params/init_params_utils/init_view.c \
 	init_params/init_params_utils/init_viewing_angle.c \
 	init_params/init_params_utils/init_wall.c \
+	init_params/init_params_utils/init_door.c \
 	init_params/init_params_utils/init_object.c \
 	utils/count_strings.c \
 	utils/free_strings.c \
