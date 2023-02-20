@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/20 14:15:09 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:49:47 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ void		set_player_position(t_vars *vars);
 void		validate_map(t_vars *vars);
 
 //validate_map_utils
-t_map		**copy_map(t_vars *vars);
+void		check_player_is_exist(t_vars *vars);
+void		check_player_is_duplicated(t_vars *vars);
+void		check_map_is_closed(t_vars *vars);
+void		check_door_position(t_vars *vars);
+t_map		**copy_map(t_vars *vars, int option);
 void		free_copied_map(t_map **copied_map, t_ivec map_size);
 
 //init_params

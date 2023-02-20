@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/20 14:49:41 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:42:49 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "../lib/libft/libft.h"
 
 # define SPRITE_COUNT	2
+
+# define NO_OPTION		0
+# define REPLACE_PLAYER	1
 
 typedef enum e_direction
 {
