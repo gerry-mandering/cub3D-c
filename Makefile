@@ -21,7 +21,6 @@ SRC = main.c \
 	render/render_minimap.c \
 	render/raycast.c \
 	render/get_collision_direction.c \
-	render/render_object.c \
 	hooks/mouse.c \
 	hooks/key.c \
 	error_handler/error_handler.c \

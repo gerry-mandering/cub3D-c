@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/20 14:54:36 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:59:29 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,13 @@ int	check_wall_hit(t_vars *vars, t_ray *ray)
 			return (1);
 		else if (vars->map_elem[ray->map_check.y][ray->map_check.x] == OBJECT)
 		{
-			if (get_collision_direction(ray->map_check, ray->intersection) == EAST)
+			if (fabs((double)ray->map_check.x + 1 - ray->intersection.x) < 0.005)
 				return (1);
 		}
 		else if (ray->map_check.x > 0 && vars->map_elem[ray->map_check.y][ray->map_check.x - 1] == OBJECT)
 		{
-			if (get_collision_direction(ray->map_check, ray->intersection) == WEST)
-			{
+			if (fabs((double)ray->map_check.x - ray->intersection.x) < 0.005)
 				return (1);
-			}
 		}
 	}
 	return (0);
