@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/18 19:26:52 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:15:15 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ int	check_wall_hit(t_vars *vars, t_ray ray)
 	{
 		if (vars->map_elem[ray.map_check.y][ray.map_check.x] == WALL)
 			return (1);
+		else if (vars->map_elem[ray.map_check.y][ray.map_check.x] == OBJECT)
+		{
+			if (get_collision_direction(ray.map_check, ray.intersection) == EAST)
+			{
+				return (1);
+			}
+		}
 	}
 	return (0);
 }
@@ -186,29 +193,14 @@ void	add_ray_to_minimap(t_vars *vars, t_ray ray)
 	draw_rect(&vars->minimap.img, offset, 2, 0xff);
 }
 
-static int	check_object_hit(t_vars *vars, t_ray ray)
-{
-	if (ray.map_check.x >= 0 && ray.map_check.x < vars->map_width \
-		&& ray.map_check.y >= 0 && ray.map_check.y < vars->map_height)
-	{
-		if (vars->map_elem[ray.map_check.y][ray.map_check.x] == OBJECT)
-			return (1);
-	}
-	return (0);
-}
-
-void	raycast(t_vars *vars, double ray_dir, int count)
+void	raycast(t_vars *vars, double ray_dir)
 {
 	t_ray	ray;
-	t_ray	object_ray;
 	int		hit;
-	int		object_hit;
 
 	ray = init_ray(vars, ray_dir);
-	object_ray = init_ray(vars, ray_dir);
 	hit = 0;
-	object_hit = 0;
-	while (!hit && !object_hit)
+	while (!hit)
 	{
 		if (ray.length.x < ray.length.y)
 		{
@@ -222,32 +214,12 @@ void	raycast(t_vars *vars, double ray_dir, int count)
 			ray.dist = ray.length.y;
 			ray.length.y += ray.unit_step.y;
 		}
-		if (object_hit != 1)
-		{
-			if (object_ray.length.x < object_ray.length.y)
-			{
-				object_ray.map_check.x += object_ray.step.x;
-				object_ray.dist = object_ray.length.x;
-				object_ray.length.x += object_ray.unit_step.x;
-			}
-			else
-			{
-				object_ray.map_check.y += object_ray.step.y;
-				object_ray.dist = object_ray.length.y;
-				object_ray.length.y += object_ray.unit_step.y;
-			}
-		}
+		ray.intersection.x = ray.start.x + ray.delta.x * ray.dist;
+		ray.intersection.y = ray.start.y + ray.delta.y * ray.dist;
 		hit = check_wall_hit(vars, ray);
-		if (object_hit != 1)
-			object_hit = check_object_hit(vars, object_ray);
 	}
-	ray.intersection.x = ray.start.x + ray.delta.x * ray.dist;
-	ray.intersection.y = ray.start.y + ray.delta.y * ray.dist;
 	add_ray_to_minimap(vars, ray);
-	if (hit == 1)
-		render_view(vars, ray);
-	if (object_hit == 1)
-		render_object(vars, object_ray, count);
+	render_view(vars, ray);
 	//render_view_without_texture(vars, ray);
 }
 
@@ -256,17 +228,13 @@ void	FOV(t_vars *vars)
 	double	interval;
 	double	start;
 	double	end;
-	static int	count;
 
 	interval = FOV_ANGLE / NUMBER_OF_RAYS;
 	start = vars->viewing_angle - FOV_ANGLE / 2;
 	end = start + FOV_ANGLE;
 	while (start < end)
 	{
-		raycast(vars, start, count);
+		raycast(vars, start);
 		start += interval;
 	}
-	count++;
-	if (count == 50)
-		count = 0;
 }
