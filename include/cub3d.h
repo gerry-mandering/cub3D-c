@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/20 20:45:26 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/22 02:03:56 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int			get_rgb(char *value);
 //parse_map
 void		parse_map(t_vars *vars, int fd);
 void		make_list_map(t_list **list_map, int fd);
-void		measure_map_size(int *map_width, int *map_height, t_list *list_map);
+void		measure_map_size(int *map_width, int *map_height, \
+							t_list *list_map);
 void		allocate_map(t_vars *vars);
 void		labeling_map(t_vars *vars, t_list *list_map);
 void		set_player_position(t_vars *vars);
@@ -87,19 +88,25 @@ int			wall_collision(t_vars *vars, t_dvec delta);
 int			mouse(t_vars *vars);
 
 //render
-void		raycast(t_vars *vars, double ray_dir);
-void		FOV(t_vars *vars);
-
-void		plot_low(t_image *img, t_dvec from, t_dvec to);
-void		plot_high(t_image *img, t_dvec from, t_dvec to);
-void		draw_line(t_image *img, t_dvec from, t_dvec to);
-
 void		ft_pixel_put(t_image *img, int x, int y, unsigned int color);
+void		draw_rect(t_image *image, t_ivec offset, \
+						int size, unsigned int color);
+u_int32_t	get_color_value(t_image *img, t_ivec offset);
+
+void		add_ray_to_minimap(t_vars *vars, t_ray *ray);
 void		place_player(t_vars *vars);
 void		place_wall(t_vars *vars);
 void		draw_rect(t_image *image, \
 								t_ivec offset, int size, unsigned int color);
 void		render_minimap(t_vars *vars);
+
+int			get_texture_xpos(t_ray *ray, t_image *img);
+void		render_view(t_vars *vars, t_ray *ray);
+
+void		render_object(t_vars *vars, t_ray *object_ray);
+
+void		raycast(t_vars *vars, double ray_dir);
+void		FOV(t_vars *vars);
 
 //utils
 int			count_strings(char **strings);

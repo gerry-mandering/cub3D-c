@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:58:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 21:59:58 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 02:09:12 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	update_player_position(int keycode, t_vars *vars)
 	if (!wall_collision(vars, delta))
 		vars->player.x += delta.x;
 	if (!wall_collision(vars, delta))
-		vars->player.y += delta.y;	
+		vars->player.y += delta.y;
 }
 
 void	update_viewing_angle(int keycode, t_vars *vars)

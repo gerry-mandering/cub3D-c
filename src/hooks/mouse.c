@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:57:44 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/21 16:47:57 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 02:09:00 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 int	render(t_vars *vars)
 {
-	ft_memcpy(vars->view.img_ptr, vars->background.img_ptr, sizeof(int) * W_SIZE * H_SIZE);
+	ft_memcpy(vars->view.img_ptr, \
+			vars->background.img_ptr, sizeof(int) * W_SIZE * H_SIZE);
 	render_minimap(vars);
 	FOV(vars);
 	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->view.img, 0, 0);
-	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->minimap.img.img, MINIMAP_XOFFSET, MINIMAP_YOFFSET);
+	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, \
+		vars->minimap.img.img, MINIMAP_XOFFSET, MINIMAP_YOFFSET);
 	return (0);
 }
 
