@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   count_strings.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 16:40:15 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/21 16:44:38 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/21 18:20:15 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/21 18:22:04 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
-void	error_handler(const char *errormsg)
+int	count_strings(char **strings)
 {
-	printf("Error\n");
-	if (errormsg == SYSTEMCALL_ERROR)
-		perror(NULL);
-	else
-		printf("%s\n", errormsg);
-	exit(EXIT_FAILURE);
+	int	count;
+
+	count = 0;
+	while (strings[count] != NULL)
+		count++;
+	return (count);
 }

@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 16:40:15 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/21 16:44:38 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/21 18:00:08 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/21 18:00:27 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "libft.h"
 
-void	error_handler(const char *errormsg)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	printf("Error\n");
-	if (errormsg == SYSTEMCALL_ERROR)
-		perror(NULL);
+	const size_t	s1_len = ft_strlen(s1);
+	const size_t	s2_len = ft_strlen(s2);
+	size_t			length;
+
+	length = 0;
+	while (s1[length] != '\0' && s1[length] == s2[length])
+		length++;
+	if (length == s1_len && length == s2_len)
+		return (0);
 	else
-		printf("%s\n", errormsg);
-	exit(EXIT_FAILURE);
+		return (s1[length] - s2[length]);
 }

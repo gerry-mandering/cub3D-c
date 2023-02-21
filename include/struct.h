@@ -3,130 +3,125 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 19:13:08 by jinholee         ###   ########.fr       */
+/*   Created: 2023/02/21 15:46:04 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/21 21:37:06 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "../lib/libft/libft.h"
+//define sprite image count
+# define SPRITE_COUNT	3
 
-typedef enum e_direction
+//define wall direction
+enum e_wall_direction
 {
 	NORTH,
 	SOUTH,
 	EAST,
 	WEST
-}	t_direction;
+};
 
-typedef struct s_ivec
+//define identifier
+enum e_identifier
+{
+	ID_NORTH,
+	ID_SOUTH,
+	ID_EAST,
+	ID_WEST,
+	ID_FLOOR,
+	ID_CEILING,
+	ID_DOOR,
+	ID_MOB
+};
+
+//define texture bitmask
+enum e_texture_bitmask
+{
+	NORTH_BITMASK = 1,
+	SOUTH_BITMASK = 2,
+	EAST_BITMASK = 4,
+	WEST_BITMASK = 8,
+	FLOOR_BITMASK = 16,
+	CEILING_BITMASK = 32,
+	FINISHED_TEXTURE_INITIALIZE = 63
+};
+
+//define color bits
+enum e_rgb
+{
+	RED = 16,
+	GREEN = 8,
+	BLUE = 0
+};
+
+//define map elements
+enum e_map_element
+{
+	NONE = -1,
+	ROAD,
+	WALL,
+	PLAYER,
+	DOOR,
+	MOB,
+	VISITED
+};
+
+//define integer type vector
+typedef struct e_ivec
 {
 	int	x;
 	int	y;
 }	t_ivec;
 
-typedef struct s_dvec
+//define double type vector
+typedef struct e_dvec
 {
 	double	x;
 	double	y;
 }	t_dvec;
 
-enum e_rgb
-{
-	BLUE = 0,
-	GREEN = 8,
-	RED = 16
-};
-
-enum e_texture_bitmask
-{
-	NORTH_BITMASK = 1,
-	SOUTH_BITMASK = 2,
-	WEST_BITMASK = 4,
-	EAST_BITMASK = 8,
-	FLOOR_BITMASK = 16,
-	CEILING_BITMASK = 32,
-	PARSED_EVERY_TEXTURE = 63
-};
-
-typedef enum e_map
-{
-	NONE = -1,
-	EMPTY_SPACE,
-	WALL,
-	PLAYER,
-	VISITED
-}	t_map;
-
+//define image structure
 typedef struct s_image
 {
 	void	*img;
 	char	*img_ptr;
 	int		size_line;
 	int		bits_per_pixel;
-	int		endidan;
+	int		endian;
 	int		width;
 	int		height;
 }	t_image;
 
-typedef struct s_minimap
-{
-	t_image	background_img;
-	t_image	img;
-	void	*empty_space;
-	void	*wall;
-	void	*player;
-	int		x_scale;
-	int		y_scale;
-	int		w_size;
-	int		h_size;
-}	t_minimap;
-
+//define texture asset structure
 typedef struct s_texture
 {
-	char	*wall_path[4];
-	t_image	wall[4];
 	int		floor_rgb;
 	int		ceiling_rgb;
+	t_image	wall[4];
+	t_image	door;
+	t_image	mob_sprite[SPRITE_COUNT];
 }	t_texture;
 
-typedef struct s_ray
-{
-	t_dvec	start;
-	t_dvec	length;
-	t_dvec	delta;
-	t_dvec	unit_step;
-	t_dvec	intersection;
-	t_ivec	step;
-	t_ivec	map_check;
-	t_ivec	offset;
-	double	dir;
-	double	dist;
-	double	perp_wall_dist;
-	int		collision_direction;
-}	t_ray;
-
+//define game variables
 typedef struct s_vars
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	int			**map_elem;
-	int			map_width;
-	int			map_height;
-	double		viewing_angle;
+	t_texture	texture;
+	int			**map;
+	t_ivec		map_size;
+	t_dvec		player_pos;
+	double		direction;
+	t_ivec		previous_mouse_pos;
 	t_image		view;
 	t_image		background;
-	t_dvec		player;
-	t_direction	spawning_direction;
-	t_minimap	minimap;
-	t_texture	texture;
-	t_ivec		mouse;
+	void		*mlx_ptr;
+	void		*win_ptr;
 }	t_vars;
 
-typedef void	(*t_parse_texture_fp)(t_vars *vars, int *bitflag, char *value);
+typedef void	(*t_init_texture_fp)(t_vars *vars, \
+									int *texture_bitflag, char *texture_value);
 
 #endif

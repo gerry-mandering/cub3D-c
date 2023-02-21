@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   init_ceiling.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 16:40:15 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/21 16:44:38 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/21 21:05:09 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/21 21:06:28 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
-void	error_handler(const char *errormsg)
+void	init_ceiling(t_vars *vars, int *texture_bitflag, char *texture_value)
 {
-	printf("Error\n");
-	if (errormsg == SYSTEMCALL_ERROR)
-		perror(NULL);
-	else
-		printf("%s\n", errormsg);
-	exit(EXIT_FAILURE);
+	if (*texture_bitflag & CEILING_BITMASK)
+		error_handler(DUPLICATED_TEXTURE);
+	vars->texture.ceiling_rgb = get_rgb(texture_value);
+	*texture_bitflag |= CEILING_BITMASK;
 }

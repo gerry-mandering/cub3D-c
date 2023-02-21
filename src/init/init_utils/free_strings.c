@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   free_strings.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 16:40:15 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/21 16:44:38 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/21 20:06:11 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/21 20:07:14 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
-void	error_handler(const char *errormsg)
+void	free_strings(char **strings)
 {
-	printf("Error\n");
-	if (errormsg == SYSTEMCALL_ERROR)
-		perror(NULL);
-	else
-		printf("%s\n", errormsg);
-	exit(EXIT_FAILURE);
+	int	i;
+
+	i = 0;
+	while (strings[i] != NULL)
+		free(strings[i++]);
+	free(strings);
 }
