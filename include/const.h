@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/20 15:58:21 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:40:27 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 # define CONST_H
 
 # define WHITE_SPACE			" \t\n\v\f\r"
-# define W_SIZE					1920
-# define H_SIZE					1080
+# define W_SIZE					1024
+# define H_SIZE					768
 # define TILE_SIZE				24
 # define PLAYER_SIZE			10
 # define MOVING_SPEED			0.15
 # define ROTATE_SPEED			0.03
-# define FOV_ANGLE				M_PI_2
+# define FOV_ANGLE				1.0472
 # define NUMBER_OF_RAYS			1000
 
 # define SYSTEMCALL_ERROR		NULL
