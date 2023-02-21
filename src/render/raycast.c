@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/21 23:32:01 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 00:28:57 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ t_ray	init_ray(t_vars *vars, double ray_dir)
 	ray.delta.y = sin(ray_dir);
 	ray.step.x = (ray.delta.x >= 0) - (ray.delta.x < 0);
 	ray.step.y = (ray.delta.y >= 0) - (ray.delta.y < 0);
-	ray.unit_step.x = sqrt(1 + \
-				(ray.delta.y / ray.delta.x) * (ray.delta.y / ray.delta.x));
-	ray.unit_step.y = sqrt(1 + \
-				(ray.delta.x / ray.delta.y) * (ray.delta.x / ray.delta.y));
+	ray.unit_step.x = sqrt(1 + pow(ray.delta.y / ray.delta.x, 2));
+	ray.unit_step.y = sqrt(1 + pow(ray.delta.x / ray.delta.y, 2));
 	ray.length.x = (ray.map_check.x + 1 - ray.start.x) * ray.unit_step.x;
 	ray.length.y = (ray.map_check.y + 1 - ray.start.y) * ray.unit_step.y;
 	if (ray.delta.x < 0)
@@ -69,7 +67,7 @@ int	check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray)
 	return (0);
 }
 
-int	get_texture_xpos(t_ray *ray, t_image img)
+int	get_texture_xpos(t_ray *ray, t_image *img)
 {
 	double	wall_x;
 	int		texture_x;
@@ -78,16 +76,16 @@ int	get_texture_xpos(t_ray *ray, t_image img)
 	if (ray->collision_direction == NORTH || ray->collision_direction == SOUTH)
 	{
 		wall_x = ray->intersection.x - floor(ray->intersection.x);
-		texture_x = (int)(wall_x * img.width);
+		texture_x = (int)(wall_x * img->width);
 		if (ray->collision_direction == NORTH)
-			texture_x = img.width - texture_x - 1;
+			texture_x = img->width - texture_x - 1;
 	}
 	else if (ray->collision_direction == EAST || ray->collision_direction == WEST)
 	{
 		wall_x = ray->intersection.y - floor(ray->intersection.y);
-		texture_x = (int)(wall_x * img.width);
+		texture_x = (int)(wall_x * img->width);
 		if (ray->collision_direction == EAST)
-			texture_x = img.width - texture_x - 1;
+			texture_x = img->width - texture_x - 1;
 	}
 	return (texture_x);
 }
@@ -102,97 +100,74 @@ unsigned int	get_color_value(t_image *img, t_ivec offset)
 	return (color);
 }
 
-// void	draw_texture_in_view(t_vars *vars, t_ray *ray, t_ivec screen, t_ivec texture)
-// {
-// 	const int		line_height = (int)(H_SIZE / ray->perp_wall_dist);
-// 	const double	step = 1.0 * 512 / line_height;
-// 	double			textPos;
-// 	unsigned int	color;
-// 	int 			draw_end;
+void	render_upper_texture(t_vars *vars, t_ray *ray, t_image *img)
+{
+	t_ivec	texture;
+	t_ivec	screen;
+	double	step;
+	double	next_pos;
+	int		draw_end;
 
-// 	draw_end = line_height / 2 + H_SIZE / 2;
-// 	if (draw_end >= H_SIZE)
-// 		draw_end = H_SIZE - 1;
-// 	textPos = 0;
-// 	while (screen.y < draw_end)
-// 	{
-// 		texture.y = (int)textPos;
-// 		textPos += step;
-// 		color = get_color_value(&vars->texture.wall[ray->collision_direction], texture);
-// 		if (ray->collision_direction == NORTH || ray->collision_direction == SOUTH)
-// 			color = (color >> 1) & 0x7f7f7f;
-// 		ft_pixel_put(&vars->view, screen.x, screen.y, color);
-// 		ft_pixel_put(&vars->view, screen.x + 1, screen.y, color);
-// 		screen.y++;
-// 	}
-// }
+	texture.x = get_texture_xpos(ray, img);
+	texture.y = img->height / 2;
+	screen.x = W_SIZE * \
+		(ray->dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
+	screen.y = H_SIZE / 2 + 1;
+	step = 1.0 * img->height / (int)(H_SIZE / ray->perp_wall_dist);
+	draw_end = H_SIZE / 2 - (int)(H_SIZE / ray->perp_wall_dist) / 2;
+	if (draw_end < 0)
+		draw_end = 0;
+	next_pos = texture.y;
+	while (texture.y >= 0 && screen.y-- >= draw_end)
+	{
+		ft_pixel_put(&vars->view, screen.x, screen.y, \
+						get_color_value(img, texture));
+		ft_pixel_put(&vars->view, screen.x + 1, screen.y, \
+						get_color_value(img, texture));
+		next_pos -= step;
+		texture.y = (int)(next_pos);
+	}
+}
 
-// void	render_view(t_vars *vars, t_ray *ray)
-// {
-// 	t_ivec		texture;
-// 	t_ivec		screen;
+void	render_lower_texture(t_vars *vars, t_ray *ray, t_image *img)
+{
+	t_ivec			texture;
+	t_ivec			screen;
+	double			step;
+	double			next_pos;
+	int				draw_end;
 
-// 	ray->collision_direction = \
-// 		get_collision_direction(ray->map_check, ray->intersection);
-// 	ray->perp_wall_dist = ray->dist * cos(fabs(vars->viewing_angle - ray->dir));
-// 	texture.x = get_texture_xpos(ray, vars->texture.wall[ray->collision_direction]);
-// 	texture.y = 0;
-// 	screen.x = W_SIZE * (ray->dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
-// 	screen.y = -(int)(H_SIZE / ray->perp_wall_dist) / 2  + H_SIZE / 2;
-// 	if (screen.y < 0)
-// 		screen.y = 0;
-// 	draw_texture_in_view(vars, ray, screen, texture);
-// }
+	texture.x = get_texture_xpos(ray, img);
+	texture.y = img->height / 2;
+	screen.x = W_SIZE * \
+		(ray->dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
+	screen.y = H_SIZE / 2 - 1;
+	step = 1.0 * img->height / (int)(H_SIZE / ray->perp_wall_dist);
+	draw_end = H_SIZE / 2 + (int)(H_SIZE / ray->perp_wall_dist) / 2;
+	if (draw_end >= H_SIZE)
+		draw_end = H_SIZE - 1;
+	next_pos = texture.y;
+	while (texture.y < img->height && screen.y++ <= draw_end)
+	{
+		ft_pixel_put(&vars->view, screen.x, screen.y, \
+						get_color_value(img, texture));
+		ft_pixel_put(&vars->view, screen.x + 1, screen.y, \
+						get_color_value(img, texture));
+		next_pos += step;
+		texture.y = (int)(next_pos);
+	}
+}
 
 void	render_view(t_vars *vars, t_ray *ray)
 {
 	t_image	img;
-	t_ivec	texture;
-	t_ivec	screen;
-	int		line_height;
-	int		draw_end;
-	double	textPos;
-	double	step;
-	unsigned int	color;
 
 	ray->collision_direction = \
 		get_collision_direction(ray->map_check, ray->intersection);
 	ray->perp_wall_dist = ray->dist * cos(fabs(vars->viewing_angle - ray->dir));
 	img = vars->texture.wall[ray->collision_direction];
-	line_height = (int)(H_SIZE / ray->perp_wall_dist);
-	texture.x = get_texture_xpos(ray, img);
-	texture.y = img.height / 2;
-	screen.x = W_SIZE * (ray->dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
-	screen.y = H_SIZE / 2;
-	step = 1.0 * img.height / line_height;
-	textPos = texture.y;
-	draw_end = -line_height / 2 + H_SIZE / 2;
-	if (draw_end < 0)
-		draw_end = 0;
-	while (texture.y > 0 && screen.y >= draw_end)
-	{
-		color = get_color_value(&img, texture);
-		ft_pixel_put(&vars->view, screen.x, screen.y, color);
-		ft_pixel_put(&vars->view, screen.x + 1, screen.y, color);
-		textPos -= step;
-		texture.y = (int)textPos;
-		screen.y--;
-	}
-	texture.y = img.height / 2;
-	textPos = texture.y;
-	screen.y = H_SIZE / 2;
-	draw_end = line_height / 2 + H_SIZE / 2;
-	if (draw_end >= H_SIZE)
-		draw_end = H_SIZE - 1;
-	while (texture.y < img.height && screen.y < draw_end)
-	{
-		color = get_color_value(&img, texture);
-		ft_pixel_put(&vars->view, screen.x, screen.y, color);
-		ft_pixel_put(&vars->view, screen.x + 1, screen.y, color);
-		textPos += step;
-		texture.y = (int)textPos;
-		screen.y++;
-	}
+	render_upper_texture(vars, ray, &img);
+	render_lower_texture(vars, ray, &img);
 }
 
 void	add_ray_to_minimap(t_vars *vars, t_ray *ray)
@@ -249,7 +224,7 @@ void	render_object(t_vars *vars, t_ray *object_ray)
 	t_ivec	screen;
 
 	object_ray->perp_wall_dist = object_ray->dist * cos(fabs(vars->viewing_angle - object_ray->dir));
-	texture.x = get_texture_xpos(object_ray, vars->texture.object[0]);
+	texture.x = get_texture_xpos(object_ray, &vars->texture.object[0]);
 	texture.y = 0;
 	screen.x = W_SIZE * (object_ray->dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
 	screen.y = -(int)(H_SIZE / object_ray->perp_wall_dist) / 2  + H_SIZE / 2;
@@ -287,7 +262,6 @@ void	raycast(t_vars *vars, double ray_dir)
 	render_view(vars, &ray);
 	if (object_ray.hit)
 		render_object(vars, &object_ray);
-	//render_view_without_texture(vars, ray);
 }
 
 void	FOV(t_vars *vars)
