@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:43:34 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/22 01:54:05 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 02:38:09 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,13 @@ void	place_player(t_vars *vars)
 
 void	render_minimap(t_vars *vars)
 {
-	ft_memcpy(vars->minimap.img.img_ptr, \
-		vars->minimap.background_img.img_ptr, \
-		sizeof(int) * vars->minimap.w_size * vars->minimap.h_size);
-	place_player(vars);
+	
 }
+
+// void	render_minimap(t_vars *vars)
+// {
+// 	ft_memcpy(vars->minimap.img.img_ptr, \
+// 		vars->minimap.background_img.img_ptr, \
+// 		sizeof(int) * vars->minimap.w_size * vars->minimap.h_size);
+// 	place_player(vars);
+// }
