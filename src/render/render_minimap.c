@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:43:34 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/22 02:38:09 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:19:35 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,50 @@ void	place_player(t_vars *vars)
 	draw_rect(&vars->minimap.img, offset, PLAYER_SIZE, PLAYER_COLOR);
 }
 
-void	render_minimap(t_vars *vars)
+t_ivec	get_crop_offset(t_vars *vars)
 {
-	
+	t_ivec	player;
+	t_ivec	offset;
+
+	player.x = (int)vars->player.x * TILE_SIZE;
+	player.y = (int)vars->player.y * TILE_SIZE;
+	offset.x = player.x - W_SIZE / 8;
+	offset.y = player.y - H_SIZE / 8;
+	if (offset.x < 0)
+		offset.x = 0;
+	else if (player.x + W_SIZE / 8 >= vars->minimap.w_size)
+		offset.x = vars->minimap.w_size - W_SIZE / 4;
+	if (offset.y < 0)
+		offset.y = 0;
+	else if (player.y + H_SIZE / 8 >= vars->minimap.h_size)
+		offset.y = vars->minimap.h_size - H_SIZE / 4;
+	return (offset);
 }
 
-// void	render_minimap(t_vars *vars)
-// {
-// 	ft_memcpy(vars->minimap.img.img_ptr, \
-// 		vars->minimap.background_img.img_ptr, \
-// 		sizeof(int) * vars->minimap.w_size * vars->minimap.h_size);
-// 	place_player(vars);
-// }
+void	crop_minimap(t_vars *vars)
+{
+	t_ivec			offset;
+	t_ivec			temp;
+	unsigned int	color;
+
+	offset = get_crop_offset(vars);
+	for (int y=0; y < vars->minimap.crop.height; y++)
+	{
+		for (int x=0; x < vars->minimap.crop.width; x++)
+		{
+			temp.x = offset.x + x;
+			temp.y = offset.y + y;
+			color = get_color_value(&vars->minimap.img, temp);
+			ft_pixel_put(&vars->minimap.crop, x, y, color);
+		}
+	}
+}
+
+void	render_minimap(t_vars *vars)
+{
+	ft_memcpy(vars->minimap.img.img_ptr, \
+		vars->minimap.background_img.img_ptr, \
+		sizeof(int) * vars->minimap.w_size * vars->minimap.h_size);
+	place_player(vars);
+	crop_minimap(vars);
+}
