@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:58:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/22 19:42:34 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 20:35:57 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,13 @@ void	update_viewing_angle(int keycode, t_vars *vars)
 
 void	update_door_state(t_vars *vars)
 {
-	vars = 0;
+	t_door	*door;
+
+	if (is_near_door(vars))
+	{
+		door = vars->door_list->content;
+		door->state = !door->state;
+	}
 }
 
 int	key_press(int keycode, t_vars *vars)
