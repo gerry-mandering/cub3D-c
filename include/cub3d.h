@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:04:40 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 11:52:39 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:18:53 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ void	put_pixel(t_image *image, t_ivec vector, unsigned int color);
 
 //game_logic
 int		exit_game(t_vars *vars);
+void	update_angle_of_view(int key_code, t_vars *vars);
+void	update_player_position(int key_code, t_vars *vars);
+
+//render
+void	render_view(t_vars *vars);
+void	raycast(t_vars *vars, double angle);
 
 //error_handler
 void	error_handler(const char *errormsg);

@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:46:04 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 10:44:35 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:25:41 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct s_vars
 	void		*win_ptr;
 }	t_vars;
 
+//define init texture function pointer
 typedef void	(*t_init_texture_fp)(t_vars *vars, \
 									int *texture_bitflag, char *texture_value);
 

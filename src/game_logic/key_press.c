@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setting.h                                          :+:      :+:    :+:   */
+/*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 15:12:58 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 15:46:04 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/22 13:21:21 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/22 15:54:35 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SETTING_H
-# define SETTING_H
+#include "../../include/cub3d.h"
 
-//define screen size
-# define W_SIZE						1920
-# define H_SIZE						1080
-
-//define minimap setting
-# define TILE_SIZE					24
-# define PLAYER_SIZE				10
-
-//define gameplay setting
-# define MOVEMENT_SPEED				0.15
-# define ROTATION_SPEED				0.03
-# define FOV_ANGLE					M_PI_2
-
-//define raycasting setting
-# define NUMBER_OF_RAYS				1000
-
-#endif
+int	key_press(int key_code, t_vars *vars)
+{
+	if (key_code == KEY_ESC)
+		exit_game(vars);
+	if (key_code == KEY_W || key_code == KEY_A || \
+		key_code == KEY_S || key_code == KEY_D)
+		update_player_position(key_code, vars);
+	else if (key_code == KEY_LEFT_ARROW || key_code == KEY_RIGHT_ARROW)
+		update_angle_of_view(key_code, vars);
+	render_view(vars);
+	return (0);
+}
