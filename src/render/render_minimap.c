@@ -6,40 +6,19 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:43:34 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 20:44:37 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 01:54:05 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	ft_pixel_put(t_image *img, int x, int y, unsigned int color)
+void	add_ray_to_minimap(t_vars *vars, t_ray *ray)
 {
-	char	*dst;
-	int		offset;
+	t_ivec	offset;
 
-	if (x < 0 || x >= img->width || y < 0 || y >= img->height)
-		return ;
-	offset = (y * img->size_line + x * (img->bits_per_pixel / 8));
-	dst = img->img_ptr + offset;
-	*(unsigned int *)dst = color;
-}
-
-void	draw_rect(t_image *image, t_ivec offset, int size, unsigned int color)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < size)
-	{
-		x = 0;
-		while (x < size)
-		{
-			ft_pixel_put(image, offset.x + x, offset.y + y, color);
-			x++;
-		}
-		y++;
-	}
+	offset.x = ray->intersection.x * TILE_SIZE;
+	offset.y = ray->intersection.y * TILE_SIZE;
+	draw_rect(&vars->minimap.img, offset, 2, 0xff);
 }
 
 void	place_wall(t_vars *vars)
@@ -57,9 +36,14 @@ void	place_wall(t_vars *vars)
 			offset.x = x * TILE_SIZE;
 			offset.y = y * TILE_SIZE;
 			if (vars->map_elem[y][x] == WALL)
-				draw_rect(&vars->minimap.background_img, offset, TILE_SIZE, WALL_COLOR);
+				draw_rect(&vars->minimap.background_img, \
+					offset, TILE_SIZE, WALL_COLOR);
 			else
-				draw_rect(&vars->minimap.background_img, offset, TILE_SIZE, 0x5f0f0f0f);
+				draw_rect(&vars->minimap.background_img, \
+					offset, TILE_SIZE, 0x5f0f0f0f);
+			if (vars->map_elem[y][x] == OBJECT)
+				draw_rect(&vars->minimap.background_img, \
+					offset, TILE_SIZE, 0xffd400);
 			x++;
 		}
 		y++;
@@ -70,13 +54,15 @@ void	place_player(t_vars *vars)
 {
 	t_ivec	offset;
 
-	offset.x = (int)(vars->player.x * TILE_SIZE) - 5;
-	offset.y = (int)(vars->player.y * TILE_SIZE) - 5;
+	offset.x = (int)(vars->player.x * TILE_SIZE) - PLAYER_SIZE / 2;
+	offset.y = (int)(vars->player.y * TILE_SIZE) - PLAYER_SIZE / 2;
 	draw_rect(&vars->minimap.img, offset, PLAYER_SIZE, PLAYER_COLOR);
 }
 
 void	render_minimap(t_vars *vars)
 {
-	ft_memcpy(vars->minimap.img.img_ptr, vars->minimap.background_img.img_ptr, sizeof(int) * vars->minimap.w_size * vars->minimap.h_size);
+	ft_memcpy(vars->minimap.img.img_ptr, \
+		vars->minimap.background_img.img_ptr, \
+		sizeof(int) * vars->minimap.w_size * vars->minimap.h_size);
 	place_player(vars);
 }
