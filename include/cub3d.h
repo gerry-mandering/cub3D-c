@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/20 14:15:09 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/22 20:29:59 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int			get_rgb(char *value);
 //parse_map
 void		parse_map(t_vars *vars, int fd);
 void		make_list_map(t_list **list_map, int fd);
-void		measure_map_size(int *map_width, int *map_height, t_list *list_map);
+void		measure_map_size(int *map_width, int *map_height, \
+							t_list *list_map);
 void		allocate_map(t_vars *vars);
 void		labeling_map(t_vars *vars, t_list *list_map);
 void		set_player_position(t_vars *vars);
@@ -57,7 +58,11 @@ void		set_player_position(t_vars *vars);
 void		validate_map(t_vars *vars);
 
 //validate_map_utils
-t_map		**copy_map(t_vars *vars);
+void		check_player_is_exist(t_vars *vars);
+void		check_player_is_duplicated(t_vars *vars);
+void		check_map_is_closed(t_vars *vars);
+void		check_door_position(t_vars *vars);
+t_map		**copy_map(t_vars *vars, int option);
 void		free_copied_map(t_map **copied_map, t_ivec map_size);
 
 //init_params
@@ -68,10 +73,13 @@ t_image		create_image(t_vars *vars, int img_w, int img_h);
 void		init_mlx_params(t_vars *vars);
 void		init_viewing_angle(t_vars *vars);
 void		init_view(t_vars *vars);
-void		init_wall(t_image *wall, char **wall_path, void *mlx_ptr);
-void		init_object(t_image *object, char **object_path, void *mlx_ptr);
+void		init_wall_image(t_image *wall, char **wall_path, void *mlx_ptr);
+void		init_door_image(t_image *door, char *door_path, void *mlx_ptr);
+void		init_object_image(t_image *object, \
+										char **object_path, void *mlx_ptr);
 void		init_background(t_vars *vars, int ceiling_rgb, int floor_rgb);
 void		init_minimap(t_vars *vars);
+void		init_door_list(t_vars *vars);
 
 //hooks
 int			key_press(int keycode, t_vars *vars);
@@ -80,19 +88,28 @@ int			wall_collision(t_vars *vars, t_dvec delta);
 int			mouse(t_vars *vars);
 
 //render
-void		raycast(t_vars *vars, double ray_dir);
-void		FOV(t_vars *vars);
-
-void		plot_low(t_image *img, t_dvec from, t_dvec to);
-void		plot_high(t_image *img, t_dvec from, t_dvec to);
-void		draw_line(t_image *img, t_dvec from, t_dvec to);
-
 void		ft_pixel_put(t_image *img, int x, int y, unsigned int color);
+void		draw_rect(t_image *image, t_ivec offset, \
+						int size, unsigned int color);
+u_int32_t	get_color_value(t_image *img, t_ivec offset);
+
+void		add_ray_to_minimap(t_vars *vars, t_ray *ray);
 void		place_player(t_vars *vars);
 void		place_wall(t_vars *vars);
 void		draw_rect(t_image *image, \
 								t_ivec offset, int size, unsigned int color);
 void		render_minimap(t_vars *vars);
+
+int			get_texture_xpos(t_ray *ray, t_image *img);
+void		render_view(t_vars *vars, t_ray *ray, t_ray *obj_ray);
+
+void		render_object(t_vars *vars, t_ray *object_ray);
+
+void		raycast(t_vars *vars, double ray_dir);
+void		FOV(t_vars *vars);
+
+t_door		*find_door(t_vars *vars, t_ivec index);
+bool		is_near_door(t_vars *vars);
 
 //utils
 int			count_strings(char **strings);
@@ -111,7 +128,5 @@ int			cub3d_exit(t_vars *vars);
 
 //sprite_image
 t_ray		init_ray(t_vars *vars, double ray_dir);
-void		raycast_object(t_vars *vars, double ray_dir);
-void		render_object(t_vars *vars, t_ray ray, int count);
 
 #endif

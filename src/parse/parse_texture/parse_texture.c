@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:41:00 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/18 17:19:31 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:53:20 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static int	get_fp_index(char *identifier)
 {
-	const char	identifier_arr[8][3] = {"NO", "SO", "WE", "EA", "F", "C", "D", "O"};
+	const char	identifier_arr[8][3] = \
+								{"NO", "SO", "WE", "EA", "F", "C", "D", "O"};
 	int			i;
 
 	i = 0;

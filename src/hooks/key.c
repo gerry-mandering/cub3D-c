@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:58:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 21:59:58 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 20:35:57 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	update_player_position(int keycode, t_vars *vars)
 	if (!wall_collision(vars, delta))
 		vars->player.x += delta.x;
 	if (!wall_collision(vars, delta))
-		vars->player.y += delta.y;	
+		vars->player.y += delta.y;
 }
 
 void	update_viewing_angle(int keycode, t_vars *vars)
@@ -57,6 +57,17 @@ void	update_viewing_angle(int keycode, t_vars *vars)
 		vars->viewing_angle -= ROTATE_SPEED * 1.5;
 	else if (keycode == KEY_ARROW_RIGHT)
 		vars->viewing_angle += ROTATE_SPEED * 1.5;
+}
+
+void	update_door_state(t_vars *vars)
+{
+	t_door	*door;
+
+	if (is_near_door(vars))
+	{
+		door = vars->door_list->content;
+		door->state = !door->state;
+	}
 }
 
 int	key_press(int keycode, t_vars *vars)
@@ -68,5 +79,7 @@ int	key_press(int keycode, t_vars *vars)
 		update_player_position(keycode, vars);
 	else if (keycode == KEY_ARROW_LEFT || keycode == KEY_ARROW_RIGHT)
 		update_viewing_angle(keycode, vars);
+	else if (keycode == KEY_F)
+		update_door_state(vars);
 	return (0);
 }

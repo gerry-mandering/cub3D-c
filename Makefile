@@ -18,10 +18,14 @@ MLX = $(MLX_DIR)$(MLX_NAME)
 
 SRC = main.c \
 	render/bresenham.c \
-	render/render_minimap.c \
+	render/find_door.c \
 	render/raycast.c \
-	render/get_collision_direction.c \
+	render/render_minimap.c \
 	render/render_object.c \
+	render/render_view.c \
+	render/render_utils.c \
+	render/get_collision_direction.c \
+	render/is_near_door.c \
 	hooks/mouse.c \
 	hooks/key.c \
 	error_handler/error_handler.c \
@@ -43,6 +47,10 @@ SRC = main.c \
 	parse/parse_map/parse_map_utils/measure_map_size.c \
 	parse/parse_map/parse_map_utils/set_player_position.c \
 	parse/validate_map/validate_map.c \
+	parse/validate_map/validate_map_utils/check_door_position.c \
+	parse/validate_map/validate_map_utils/check_map_is_closed.c \
+	parse/validate_map/validate_map_utils/check_player_is_duplicated.c \
+	parse/validate_map/validate_map_utils/check_player_is_exist.c \
 	parse/validate_map/validate_map_utils/copy_map.c \
 	parse/validate_map/validate_map_utils/free_copied_map.c \
 	init_params/init_params.c \
@@ -52,8 +60,10 @@ SRC = main.c \
 	init_params/init_params_utils/init_mlx_params.c \
 	init_params/init_params_utils/init_view.c \
 	init_params/init_params_utils/init_viewing_angle.c \
-	init_params/init_params_utils/init_wall.c \
-	init_params/init_params_utils/init_object.c \
+	init_params/init_params_utils/init_wall_image.c \
+	init_params/init_params_utils/init_door_image.c \
+	init_params/init_params_utils/init_object_image.c \
+	init_params/init_params_utils/init_door_list.c \
 	utils/count_strings.c \
 	utils/free_strings.c \
 	utils/ft_strcmp.c \
