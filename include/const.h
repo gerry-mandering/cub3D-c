@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 22:04:17 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:18:06 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 # define CONST_H
 
 # define WHITE_SPACE			" \t\n\v\f\r"
-# define W_SIZE					1920
+# define W_SIZE					1440
 # define H_SIZE					1080
 # define TILE_SIZE				24
 # define PLAYER_SIZE			10
 # define MOVING_SPEED			0.15
 # define ROTATE_SPEED			0.03
-# define FOV_ANGLE				M_PI_4
+# define FOV_ANGLE				1.0472
 # define NUMBER_OF_RAYS			1000
 
 # define SYSTEMCALL_ERROR		NULL
@@ -37,6 +37,7 @@
 # define HAVE_NO_PLAYER			"Have No Player\n"
 # define DUPLICATED_PLAYER		"Duplicated Player\n"
 # define UNCLOSED_MAP			"Unclosed Map\n"
+# define WRONG_DOOR_POSITION	"Wrong Door Position\n"
 # define INVALID_IMAGE_PATH		"Invalid Image Path\n"
 
 # define NORTH_WALL				"images/green.xpm"

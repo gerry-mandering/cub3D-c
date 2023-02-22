@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/17 19:13:08 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 15:39:06 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define STRUCT_H
 
 # include "../lib/libft/libft.h"
+
+# define SPRITE_COUNT	3
+
+# define NO_OPTION		0
+# define REPLACE_PLAYER	1
 
 typedef enum e_direction
 {
@@ -59,8 +64,29 @@ typedef enum e_map
 	EMPTY_SPACE,
 	WALL,
 	PLAYER,
+	DOOR,
+	OBJECT,
 	VISITED
 }	t_map;
+
+typedef enum e_door_state
+{
+	OPEN,
+	CLOSE
+}	t_door_state;
+
+typedef enum e_door_direction
+{
+	HORIZONTAL,
+	VERTICAL
+}	t_door_direction;
+
+typedef struct s_door
+{
+	t_door_state		state;
+	t_door_direction	direction;
+	t_ivec				location;
+}	t_door;
 
 typedef struct s_image
 {
@@ -77,6 +103,7 @@ typedef struct s_minimap
 {
 	t_image	background_img;
 	t_image	img;
+	t_image	crop;
 	void	*empty_space;
 	void	*wall;
 	void	*player;
@@ -89,7 +116,11 @@ typedef struct s_minimap
 typedef struct s_texture
 {
 	char	*wall_path[4];
+	char	*door_path;
+	char	*object_path[SPRITE_COUNT];
 	t_image	wall[4];
+	t_image	door;
+	t_image	object[SPRITE_COUNT];
 	int		floor_rgb;
 	int		ceiling_rgb;
 }	t_texture;
@@ -108,6 +139,7 @@ typedef struct s_ray
 	double	dist;
 	double	perp_wall_dist;
 	int		collision_direction;
+	int		hit;
 }	t_ray;
 
 typedef struct s_vars
@@ -125,6 +157,8 @@ typedef struct s_vars
 	t_minimap	minimap;
 	t_texture	texture;
 	t_ivec		mouse;
+	size_t		sprite_count;
+	t_list		*door_list;
 }	t_vars;
 
 typedef void	(*t_parse_texture_fp)(t_vars *vars, int *bitflag, char *value);
