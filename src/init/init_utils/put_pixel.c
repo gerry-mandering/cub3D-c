@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   put_pixel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 16:37:35 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 11:56:33 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/22 11:12:15 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/22 11:17:08 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
-int	main(int argc, char **argv)
+void	put_pixel(t_image *image, t_ivec vector, unsigned int color)
 {
-	t_vars	vars;
+	int	offset;
 
-	init(&vars, argc, argv);
-	mlx_hook(vars.win_ptr, KEY_PRESS, 0, &key_press, &vars);
-	mlx_loop(vars.mlx_ptr);
-	return (0);
+	if (vector.y < 0 || vector.x < 0 || \
+		vector.x >= image->width || vector.y >= image->height)
+		return ;
+	offset = (image->size_line * vector.y) + \
+			(vector.x * (image->bits_per_pixel / 8));
+	*(unsigned int *)(image->img_ptr + offset) = color;
 }

@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 16:37:35 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 11:56:33 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/22 11:52:56 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/22 11:53:03 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
-int	main(int argc, char **argv)
+int	exit_game(t_vars *vars)
 {
-	t_vars	vars;
-
-	init(&vars, argc, argv);
-	mlx_hook(vars.win_ptr, KEY_PRESS, 0, &key_press, &vars);
-	mlx_loop(vars.mlx_ptr);
-	return (0);
+	mlx_destroy_window(vars->mlx_ptr, vars->win_ptr);
+	exit(EXIT_SUCCESS);
 }

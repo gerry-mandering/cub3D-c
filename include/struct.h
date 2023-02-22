@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:46:04 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/21 21:37:06 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/22 10:44:35 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ enum e_rgb
 };
 
 //define map elements
-enum e_map_element
+enum e_map_label
 {
 	NONE = -1,
 	ROAD,
@@ -113,7 +113,7 @@ typedef struct s_vars
 	int			**map;
 	t_ivec		map_size;
 	t_dvec		player_pos;
-	double		direction;
+	double		angle_of_view;
 	t_ivec		previous_mouse_pos;
 	t_image		view;
 	t_image		background;

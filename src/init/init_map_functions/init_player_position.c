@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_player_position.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 16:37:35 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 11:56:33 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/22 10:34:11 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/22 10:36:29 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
-int	main(int argc, char **argv)
+void	init_player_position(t_vars *vars)
 {
-	t_vars	vars;
+	t_ivec	index;
 
-	init(&vars, argc, argv);
-	mlx_hook(vars.win_ptr, KEY_PRESS, 0, &key_press, &vars);
-	mlx_loop(vars.mlx_ptr);
-	return (0);
+	index.y = 0;
+	while (index.y < vars->map_size.y)
+	{
+		index.x = 0;
+		while (index.x < vars->map_size.x)
+		{
+			if (vars->map[index.y][index.x] == PLAYER)
+			{
+				vars->player_pos.y = index.y;
+				vars->player_pos.x = index.x;
+				return ;
+			}
+			index.x++;
+		}
+		index.y++;
+	}
 }
