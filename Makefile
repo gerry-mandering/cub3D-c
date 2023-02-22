@@ -18,12 +18,14 @@ MLX = $(MLX_DIR)$(MLX_NAME)
 
 SRC = main.c \
 	render/bresenham.c \
+	render/find_door.c \
 	render/raycast.c \
 	render/render_minimap.c \
 	render/render_object.c \
 	render/render_view.c \
 	render/render_utils.c \
 	render/get_collision_direction.c \
+	render/is_near_door.c \
 	hooks/mouse.c \
 	hooks/key.c \
 	error_handler/error_handler.c \

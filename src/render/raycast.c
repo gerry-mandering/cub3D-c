@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/22 02:18:27 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 20:30:02 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray)
 			if (fabs((double)ray->map_check.x + 1 - ray->intersection.x) < 0.005)
 			{
 				ft_memcpy(object_ray, ray, sizeof(t_ray));
-				object_ray->hit = 1;
+				object_ray->hit = OBJECT;
 				object_ray->collision_direction = WEST;
 			}
 		}
@@ -59,8 +59,20 @@ int	check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray)
 			if (fabs((double)ray->map_check.x - ray->intersection.x) < 0.005)
 			{
 				ft_memcpy(object_ray, ray, sizeof(t_ray));
-				object_ray->hit = 1;
+				object_ray->hit = OBJECT;
 				object_ray->collision_direction = WEST;
+			}
+		}
+		else if (vars->map_elem[ray->map_check.y][ray->map_check.x] == DOOR && !object_ray->hit)
+		{
+			t_door *door = find_door(vars, ray->map_check);
+			if (door)
+			{
+				if (door->state == CLOSE)
+				{
+					ft_memcpy(object_ray, ray, sizeof(t_ray));
+					object_ray->hit = DOOR;
+				}
 			}
 		}
 	}
@@ -92,10 +104,7 @@ void	raycast(t_vars *vars, double ray_dir)
 		ray.intersection.y = ray.start.y + ray.delta.y * ray.dist;
 		ray.hit = check_wall_hit(vars, &ray, &object_ray);
 	}
-	add_ray_to_minimap(vars, &ray);
-	render_view(vars, &ray);
-	if (object_ray.hit)
-		render_object(vars, &object_ray);
+	render_view(vars, &ray, &object_ray);
 }
 
 void	FOV(t_vars *vars)

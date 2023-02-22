@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:57:44 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/22 02:09:00 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 20:18:51 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ int	render(t_vars *vars)
 	render_minimap(vars);
 	FOV(vars);
 	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->view.img, 0, 0);
-	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, \
-		vars->minimap.img.img, MINIMAP_XOFFSET, MINIMAP_YOFFSET);
+	//mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, \
+	//	vars->minimap.img.img, MINIMAP_XOFFSET, MINIMAP_YOFFSET);
+	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->minimap.crop.img, 0, 0);
+	if (is_near_door(vars))
+		mlx_string_put(vars->mlx_ptr, vars->win_ptr, W_SIZE / 2, H_SIZE / 3 * 2, 0xFFFFFF, "Press F to OPEN/CLOSE");
 	return (0);
 }
 
