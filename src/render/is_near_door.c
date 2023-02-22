@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 19:19:38 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 20:17:21 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/22 20:23:40 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static t_ivec	get_search_position(int heading_direction, t_dvec player)
 	search_pos.x = (int)player.x;
 	search_pos.y = (int)player.y;
 	if (heading_direction == NORTH)
-		search_pos.y++;
-	else if (heading_direction == SOUTH)
 		search_pos.y--;
+	else if (heading_direction == SOUTH)
+		search_pos.y++;
 	else if (heading_direction == EAST)
 		search_pos.x++;
 	else if (heading_direction == WEST)
