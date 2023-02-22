@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 02:03:56 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:50:04 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void		render_object(t_vars *vars, t_ray *object_ray);
 
 void		raycast(t_vars *vars, double ray_dir);
 void		FOV(t_vars *vars);
+
+t_door		*find_door(t_vars *vars, t_ivec index);
 
 //utils
 int			count_strings(char **strings);
