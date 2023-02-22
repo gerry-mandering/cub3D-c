@@ -18,6 +18,7 @@ MLX = $(MLX_DIR)$(MLX_NAME)
 
 SRC = main.c \
 	render/bresenham.c \
+	render/find_door.c \
 	render/raycast.c \
 	render/render_minimap.c \
 	render/render_object.c \

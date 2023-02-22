@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 01:54:58 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/22 01:59:30 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 20:28:31 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,31 @@ void	render_lower_texture(t_vars *vars, t_ray *ray, t_image *img)
 	}
 }
 
-void	render_view(t_vars *vars, t_ray *ray)
+void	render_view(t_vars *vars, t_ray *ray, t_ray *obj_ray)
 {
-	t_image	img;
+	t_image	*img;
+	t_door	*door;
 
 	ray->collision_direction = \
 		get_collision_direction(ray->map_check, ray->intersection);
 	ray->perp_wall_dist = ray->dist * cos(fabs(vars->viewing_angle - ray->dir));
-	img = vars->texture.wall[ray->collision_direction];
-	render_upper_texture(vars, ray, &img);
-	render_lower_texture(vars, ray, &img);
+	img = &vars->texture.wall[ray->collision_direction];
+	render_upper_texture(vars, ray, img);
+	render_lower_texture(vars, ray, img);
+	if (obj_ray->hit)
+	{
+		obj_ray->perp_wall_dist = obj_ray->dist * cos(fabs(vars->viewing_angle - obj_ray->dir));
+		if (obj_ray->hit == DOOR)
+		{
+			obj_ray->collision_direction = NORTH;
+			door = vars->door_list->content;
+			if (door->state == OPEN)
+				return ;
+			img = &vars->texture.door;
+		}
+		else if (obj_ray->hit == OBJECT)
+			img = &vars->texture.object[0];
+		render_upper_texture(vars, obj_ray, img);
+		render_lower_texture(vars, obj_ray, img);
+	}
 }

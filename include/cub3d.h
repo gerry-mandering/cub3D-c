@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 18:50:04 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/22 19:43:40 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void		draw_rect(t_image *image, \
 void		render_minimap(t_vars *vars);
 
 int			get_texture_xpos(t_ray *ray, t_image *img);
-void		render_view(t_vars *vars, t_ray *ray);
+void		render_view(t_vars *vars, t_ray *ray, t_ray *obj_ray);
 
 void		render_object(t_vars *vars, t_ray *object_ray);
 

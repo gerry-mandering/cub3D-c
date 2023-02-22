@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/22 16:18:06 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 19:37:25 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@
 # define KEY_A					0
 # define KEY_S					1
 # define KEY_D					2
+# define KEY_F					3
 # define KEY_Q					12
 # define KEY_E					14
 # define KEY_R					15
