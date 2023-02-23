@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 16:07:56 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:16:53 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ int	check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray)
 		&& ray->map_check.y >= 0 && ray->map_check.y < vars->map_height)
 	{
 		hit = vars->map_elem[ray->map_check.y][ray->map_check.x];
-		if (hit == WALL)
-			return (WALL);
 		if (!object_ray->hit)
 			check_object_hit(vars, ray, object_ray);
+		if (hit == WALL)
+			return (WALL);
 	}
 	return (0);
 }
