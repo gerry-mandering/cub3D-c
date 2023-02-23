@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/22 21:19:30 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/23 21:03:26 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,7 @@
 # define WRONG_DOOR_POSITION	"Wrong Door Position\n"
 # define INVALID_IMAGE_PATH		"Invalid Image Path\n"
 
-# define NORTH_WALL				"images/green.xpm"
-# define SOUTH_WALL				"images/blue.xpm"
-# define EAST_WALL				"images/east_wall.xpm"
-# define WEST_WALL				"images/west_wall.xpm"
-# define MINIMAP_BG				"images/minimap_background.xpm"
-# define MINIMAP_WALL			"images/minimap_wall.xpm"
-# define MINIMAP_PLAYER			"images/minimap_player.xpm"
+# define PRESS_MSG				"Press F to OPEN/CLOSE"
 
 # define WALL_COLOR 			0xffffff
 # define PLAYER_COLOR 			0xff0000

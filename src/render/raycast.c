@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 16:16:53 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/23 21:03:54 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,6 @@ int	render(t_vars *vars)
 							vars->win_ptr, vars->minimap.crop.img, 0, 0);
 	if (is_near_door(vars))
 		mlx_string_put(vars->mlx_ptr, \
-			vars->win_ptr, W_SIZE / 2, H_SIZE / 3 * 2, 0xFFFFFF, "Press F to OPEN/CLOSE");
+			vars->win_ptr, W_SIZE / 2, H_SIZE / 3 * 2, 0xFFFFFF, PRESS_MSG);
 	return (0);
 }
