@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 19:19:38 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 14:45:53 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:54:28 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,20 @@ static int	get_heading_direction(double viewing_angle)
 		return (-1);
 }
 
-t_ivec	get_heading_position(double viewing_angle, t_dvec player)
+t_ivec	get_heading_position(t_vars *vars)
 {
 	int		heading_direction;
 	t_ivec	heading_pos;
 
-	heading_direction = get_heading_direction(viewing_angle);
+	heading_direction = get_heading_direction(vars->viewing_angle);
 	if (heading_direction == -1)
 	{
 		heading_pos.x = -1;
 		heading_pos.y = -1;
 		return (heading_pos);
 	}
-	heading_pos.x = (int)player.x;
-	heading_pos.y = (int)player.y;
+	heading_pos.x = (int)vars->player.x;
+	heading_pos.y = (int)vars->player.y;
 	if (heading_direction == NORTH)
 		heading_pos.y--;
 	else if (heading_direction == SOUTH)
@@ -59,7 +59,9 @@ bool	is_near_door(t_vars *vars)
 {
 	t_ivec	heading_pos;
 
-	heading_pos = get_heading_position(vars->viewing_angle, vars->player);
+	heading_pos = get_heading_position(vars);
+	if (heading_pos.x == -1 && heading_pos.y == -1)
+		return (false);
 	if (vars->map_elem[heading_pos.y][heading_pos.x] == DOOR_CLOSED || \
 		vars->map_elem[heading_pos.y][heading_pos.x] == DOOR_OPENED)
 		return (true);
