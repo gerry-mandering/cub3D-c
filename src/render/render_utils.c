@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 01:49:10 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 16:06:55 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:24:15 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,6 @@ void	draw_rect(t_image *image, t_ivec offset, int size, unsigned int color)
 	}
 }
 
-unsigned int	get_color_value(t_image *img, t_ivec offset)
-{
-	unsigned int	color;
-	char			*dst;
-
-	dst = img->img_ptr + (offset.y * img->size_line) \
-		+ offset.x * (img->bits_per_pixel / 8);
-	color = *(unsigned int *)dst;
-	return (color);
-}
-
 t_ray	init_ray(t_vars *vars, double ray_dir)
 {
 	t_ray	ray;
@@ -76,4 +65,30 @@ t_ray	init_ray(t_vars *vars, double ray_dir)
 	if (ray.delta.y < 0)
 		ray.length.y = (ray.start.y - ray.map_check.y) * ray.unit_step.y;
 	return (ray);
+}
+
+unsigned int	get_color_value(t_image *img, t_ivec offset)
+{
+	unsigned int	color;
+	char			*dst;
+
+	dst = img->img_ptr + (offset.y * img->size_line) \
+		+ offset.x * (img->bits_per_pixel / 8);
+	color = *(unsigned int *)dst;
+	return (color);
+}
+
+t_direction	get_collision_direction(t_ivec wall_location, \
+											t_dvec collision_point)
+{
+	if (fabs((double)wall_location.x - collision_point.x) < 0.0000001)
+		return (WEST);
+	else if (fabs((double)wall_location.x + 1 - collision_point.x) < 0.0000001)
+		return (EAST);
+	else if (fabs((double)wall_location.y - collision_point.y) < 0.0000001)
+		return (NORTH);
+	else if (fabs((double)wall_location.y + 1 - collision_point.y) < 0.0000001)
+		return (SOUTH);
+	else
+		return (-1);
 }

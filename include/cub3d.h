@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 15:59:42 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:29:29 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,26 +87,37 @@ int			wall_collision(t_vars *vars, t_dvec delta);
 int			mouse(t_vars *vars);
 
 //render
+//utils
 void		ft_pixel_put(t_image *img, int x, int y, unsigned int color);
 void		draw_rect(t_image *image, t_ivec offset, \
 						int size, unsigned int color);
+t_ray		init_ray(t_vars *vars, double ray_dir);
 u_int32_t	get_color_value(t_image *img, t_ivec offset);
+t_direction	get_collision_direction(t_ivec wall_location, \
+													t_dvec collision_point);
 
-void		add_ray_to_minimap(t_vars *vars, t_ray *ray);
-void		place_player(t_vars *vars);
+//minimap
 void		place_wall(t_vars *vars);
-void		draw_rect(t_image *image, \
-								t_ivec offset, int size, unsigned int color);
+void		place_player(t_vars *vars);
+t_ivec		get_crop_offset(t_vars *vars);
+void		crop_minimap(t_vars *vars);
 void		render_minimap(t_vars *vars);
 
+//view
 int			get_texture_xpos(t_ray *ray, t_image *img);
+t_image		*get_object_img(t_vars *vars);
+void		render_upper_texture(t_vars *vars, t_ray *ray, t_image *img);
+void		render_lower_texture(t_vars *vars, t_ray *ray, t_image *img);
 void		render_view(t_vars *vars, t_ray *ray, t_ray *obj_ray);
 
-void		render_object(t_vars *vars, t_ray *object_ray);
-
+//raycast
+void		check_object_hit(t_vars *vars, t_ray *ray, t_ray *obj_ray);
+int			check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray);
 void		raycast(t_vars *vars, double ray_dir);
 void		field_of_view(t_vars *vars);
+int			render(t_vars *vars);
 
+//door
 t_ivec		get_heading_position(t_vars *vars);
 bool		is_near_door(t_vars *vars);
 
@@ -118,9 +129,6 @@ int			ft_isspace(char character);
 
 //error_handler
 void		error_handler(const char *error_type);
-
-t_direction	get_collision_direction(t_ivec wall_location, \
-													t_dvec collision_point);
 
 int			render(t_vars *vars);
 int			cub3d_exit(t_vars *vars);

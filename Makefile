@@ -21,7 +21,6 @@ SRC = main.c \
 	render/render_minimap.c \
 	render/render_view.c \
 	render/render_utils.c \
-	render/get_collision_direction.c \
 	render/is_near_door.c \
 	hooks/mouse.c \
 	hooks/key.c \
