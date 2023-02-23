@@ -20,7 +20,6 @@ SRC = main.c \
 	render/bresenham.c \
 	render/raycast.c \
 	render/render_minimap.c \
-	render/render_object.c \
 	render/render_view.c \
 	render/render_utils.c \
 	render/get_collision_direction.c \
@@ -62,7 +61,6 @@ SRC = main.c \
 	init_params/init_params_utils/init_wall_image.c \
 	init_params/init_params_utils/init_door_image.c \
 	init_params/init_params_utils/init_object_image.c \
-	init_params/init_params_utils/init_door_list.c \
 	utils/count_strings.c \
 	utils/free_strings.c \
 	utils/ft_strcmp.c \
