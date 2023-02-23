@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:58:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/22 20:35:57 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:43:01 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,17 @@ int	wall_collision(t_vars *vars, t_dvec delta)
 
 	next_pos.x = vars->player.x + delta.x;
 	next_pos.y = vars->player.y + delta.y;
-	if (vars->map_elem[(int)(next_pos.y - 0.01)][(int)(next_pos.x)] == WALL)
+	if (vars->map_elem[(int)(next_pos.y - 0.01)][(int)(next_pos.x)] == WALL || \
+	vars->map_elem[(int)(next_pos.y - 0.01)][(int)(next_pos.x)] == DOOR_CLOSED)
 		return (1);
-	if (vars->map_elem[(int)(next_pos.y + 0.01)][(int)(next_pos.x)] == WALL)
+	if (vars->map_elem[(int)(next_pos.y + 0.01)][(int)(next_pos.x)] == WALL || \
+	vars->map_elem[(int)(next_pos.y + 0.01)][(int)(next_pos.x)] == DOOR_CLOSED)
 		return (1);
-	if (vars->map_elem[(int)(next_pos.y)][(int)(next_pos.x - 0.01)] == WALL)
+	if (vars->map_elem[(int)(next_pos.y)][(int)(next_pos.x - 0.01)] == WALL || \
+	vars->map_elem[(int)(next_pos.y)][(int)(next_pos.x - 0.01)] == DOOR_CLOSED)
 		return (1);
-	if (vars->map_elem[(int)(next_pos.y)][(int)(next_pos.x + 0.01)] == WALL)
+	if (vars->map_elem[(int)(next_pos.y)][(int)(next_pos.x + 0.01)] == WALL || \
+	vars->map_elem[(int)(next_pos.y)][(int)(next_pos.x + 0.01)] == DOOR_CLOSED)
 		return (1);
 	return (0);
 }
@@ -61,12 +65,9 @@ void	update_viewing_angle(int keycode, t_vars *vars)
 
 void	update_door_state(t_vars *vars)
 {
-	t_door	*door;
-
 	if (is_near_door(vars))
 	{
-		door = vars->door_list->content;
-		door->state = !door->state;
+		printf("door open or close\n");
 	}
 }
 
