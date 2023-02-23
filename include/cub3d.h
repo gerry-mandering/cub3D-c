@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 14:46:31 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:50:23 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void		render_object(t_vars *vars, t_ray *object_ray);
 void		raycast(t_vars *vars, double ray_dir);
 void		FOV(t_vars *vars);
 
-t_ivec		get_heading_position(double viewing_angle, t_dvec player);
+t_ivec		get_heading_position(t_vars *vars);
 bool		is_near_door(t_vars *vars);
 
 //utils
