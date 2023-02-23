@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:58:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 14:43:01 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:55:11 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,20 @@ void	update_viewing_angle(int keycode, t_vars *vars)
 
 void	update_door_state(t_vars *vars)
 {
+	t_ivec	door_pos;
+	int		door_state;
+
 	if (is_near_door(vars))
 	{
-		printf("door open or close\n");
+		door_pos = get_heading_position(vars);
+		if (door_pos.x >= 0 && door_pos.y >= 0)
+		{
+			door_state = vars->map_elem[door_pos.y][door_pos.x];
+			if (door_state == DOOR_CLOSED)
+				vars->map_elem[door_pos.y][door_pos.x] = DOOR_OPENED;
+			else if (door_state == DOOR_OPENED)
+				vars->map_elem[door_pos.y][door_pos.x] = DOOR_CLOSED;
+		}
 	}
 }
 
