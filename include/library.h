@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_strings.c                                     :+:      :+:    :+:   */
+/*   library.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/10 17:03:58 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/10 17:05:21 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/23 15:20:21 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/23 15:21:11 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#ifndef LIBRARY_H
+# define LIBRARY_H
 
-void	free_strings(char **strings)
-{
-	int	i;
+# include <unistd.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <math.h>
+# include "../lib/get_next_line/get_next_line.h"
+# include "../lib/libft/libft.h"
+# include "../lib/minilibx_opengl/mlx.h"
 
-	i = 0;
-	while (strings != NULL && strings[i] != NULL)
-	{
-		free(strings[i]);
-		i++;
-	}
-	free(strings);
-}
+#endif

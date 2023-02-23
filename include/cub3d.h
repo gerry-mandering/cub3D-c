@@ -6,25 +6,18 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 14:50:23 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:27:28 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "const.h"
 # include "struct.h"
-# include <unistd.h>
-# include <stdio.h>
-# include <stdbool.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <math.h>
-# include "../lib/get_next_line/get_next_line.h"
-# include "../lib/libft/libft.h"
-# include "../lib/minilibx_opengl/mlx.h"
+# include "library.h"
+# include "setting.h"
+# include "keymapping.h"
+# include "errormsg.h"
 
 //parse
 void		parse(t_vars *vars, char **argv);
@@ -33,6 +26,18 @@ void		parse(t_vars *vars, char **argv);
 void		parse_texture(t_vars *vars, int fd);
 
 //parse_texture_functions
+//
+//
+void		init_north(t_vars *vars, char *value);
+void		init_south(t_vars *vars, char *value);
+void		init_east(t_vars *vars, char *value);
+void		init_west(t_vars *vars, char *value);
+void		init_floor(t_vars *vars, char *value);
+void		init_ceiling(t_vars *vars, char *value);
+void		init_door(t_vars *vars, char *value);
+void		init_object(t_vars *vars, char *value);
+
+
 void		parse_north(t_vars *vars, int *bitflag, char *value);
 void		parse_south(t_vars *vars, int *bitflag, char *value);
 void		parse_west(t_vars *vars, int *bitflag, char *value);

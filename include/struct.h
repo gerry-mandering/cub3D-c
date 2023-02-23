@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 14:32:54 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 17:38:38 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,22 @@ enum e_texture_bitmask
 	EAST_BITMASK = 8,
 	FLOOR_BITMASK = 16,
 	CEILING_BITMASK = 32,
-	PARSED_EVERY_TEXTURE = 63
+	DONE_TEXTURE_INIT = 63,
+	DOOR_BITMASK = 64,
+	OBJECT_BITMASK = 128
 };
+
+typedef enum e_identifier
+{
+	ID_NORTH,
+	ID_SOUTH,
+	ID_EAST,
+	ID_WEST,
+	ID_FLOOR,
+	ID_CEILING,
+	ID_DOOR,
+	ID_OBJECT
+}	t_identifier;
 
 typedef enum e_map
 {
@@ -64,10 +78,10 @@ typedef enum e_map
 	EMPTY_SPACE,
 	WALL,
 	PLAYER,
-	OBJECT,
-	VISITED,
 	DOOR_CLOSED,
-	DOOR_OPENED
+	DOOR_OPENED,
+	OBJECT,
+	VISITED
 }	t_map;
 
 typedef struct s_image
@@ -76,7 +90,7 @@ typedef struct s_image
 	char	*img_ptr;
 	int		size_line;
 	int		bits_per_pixel;
-	int		endidan;
+	int		endian;
 	int		width;
 	int		height;
 }	t_image;
@@ -97,14 +111,12 @@ typedef struct s_minimap
 
 typedef struct s_texture
 {
-	char	*wall_path[4];
-	char	*door_path;
-	char	*object_path[SPRITE_COUNT];
+	int		bitflag;
+	int		floor_rgb;
+	int		ceiling_rgb;
 	t_image	wall[4];
 	t_image	door;
 	t_image	object[SPRITE_COUNT];
-	int		floor_rgb;
-	int		ceiling_rgb;
 }	t_texture;
 
 typedef struct s_ray
@@ -135,13 +147,12 @@ typedef struct s_vars
 	t_image		view;
 	t_image		background;
 	t_dvec		player;
-	t_direction	spawning_direction;
 	t_minimap	minimap;
 	t_texture	texture;
 	t_ivec		mouse;
 	size_t		sprite_count;
 }	t_vars;
 
-typedef void	(*t_parse_texture_fp)(t_vars *vars, int *bitflag, char *value);
+typedef void	(*t_init_texture_fp)(t_vars *vars, char *value);
 
 #endif
