@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 16:27:28 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 18:44:04 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,11 @@
 # include "keymapping.h"
 # include "errormsg.h"
 
-//parse
-void		parse(t_vars *vars, char **argv);
+//init
+void		init(t_vars *vars, int argc, char **argv);
 
-//parse_texture
-void		parse_texture(t_vars *vars, int fd);
-
-//parse_texture_functions
-//
-//
+//init_texture
+void		init_texture(t_vars *vars, int fd);
 void		init_north(t_vars *vars, char *value);
 void		init_south(t_vars *vars, char *value);
 void		init_east(t_vars *vars, char *value);
@@ -37,18 +33,21 @@ void		init_ceiling(t_vars *vars, char *value);
 void		init_door(t_vars *vars, char *value);
 void		init_object(t_vars *vars, char *value);
 
+//init_map
+void		make_list_map(t_list **list_map, int fd);
+void		init_map_size(t_vars *vars, t_list *list_map);
+void		allocate_map(t_vars *vars);
+void		labeling_map(t_vars *vars, t_list *list_map);
+void		init_player_position(t_vars *vars);
+void		init_angle_of_view(t_vars *vars, t_list *list_map);
+void		init_view(t_vars *vars);
+void		init_background(t_vars *vars);
+void		init_mlx(t_vars *vars);
 
-void		parse_north(t_vars *vars, int *bitflag, char *value);
-void		parse_south(t_vars *vars, int *bitflag, char *value);
-void		parse_west(t_vars *vars, int *bitflag, char *value);
-void		parse_east(t_vars *vars, int *bitflag, char *value);
-void		parse_floor(t_vars *vars, int *bitflag, char *value);
-void		parse_ceiling(t_vars *vars, int *bitflag, char *value);
-void		parse_door(t_vars *vars, int *bitflag, char *value);
-void		parse_object(t_vars *vars, int *bitflag, char *value);
-
-//parse_texture_utils
+//init_utils
 int			get_rgb(char *value);
+int			count_strings(char **strings);
+void		free_strings(char **strings);
 
 //parse_map
 void		parse_map(t_vars *vars, int fd);
@@ -116,9 +115,6 @@ t_ivec		get_heading_position(t_vars *vars);
 bool		is_near_door(t_vars *vars);
 
 //utils
-int			count_strings(char **strings);
-void		free_strings(char **strings);
-int			ft_strcmp(const char *s1, const char *s2);
 int			ft_isspace(char character);
 
 //error_handler
