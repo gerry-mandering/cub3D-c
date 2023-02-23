@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 20:05:09 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/20 20:46:21 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:24:28 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ void	init_params(t_vars *vars)
 									vars->texture.object_path, vars->mlx_ptr);
 	init_background(vars, vars->texture.ceiling_rgb, vars->texture.floor_rgb);
 	init_minimap(vars);
-	init_door_list(vars);
 }

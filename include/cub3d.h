@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 02:03:56 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:59:42 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void		init_object_image(t_image *object, \
 										char **object_path, void *mlx_ptr);
 void		init_background(t_vars *vars, int ceiling_rgb, int floor_rgb);
 void		init_minimap(t_vars *vars);
-void		init_door_list(t_vars *vars);
 
 //hooks
 int			key_press(int keycode, t_vars *vars);
@@ -101,12 +100,15 @@ void		draw_rect(t_image *image, \
 void		render_minimap(t_vars *vars);
 
 int			get_texture_xpos(t_ray *ray, t_image *img);
-void		render_view(t_vars *vars, t_ray *ray);
+void		render_view(t_vars *vars, t_ray *ray, t_ray *obj_ray);
 
 void		render_object(t_vars *vars, t_ray *object_ray);
 
 void		raycast(t_vars *vars, double ray_dir);
-void		FOV(t_vars *vars);
+void		field_of_view(t_vars *vars);
+
+t_ivec		get_heading_position(t_vars *vars);
+bool		is_near_door(t_vars *vars);
 
 //utils
 int			count_strings(char **strings);

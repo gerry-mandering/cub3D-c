@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:25 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/21 16:40:27 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/22 21:19:30 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define CONST_H
 
 # define WHITE_SPACE			" \t\n\v\f\r"
-# define W_SIZE					1024
-# define H_SIZE					768
+# define W_SIZE					1440
+# define H_SIZE					1080
 # define TILE_SIZE				24
 # define PLAYER_SIZE			10
 # define MOVING_SPEED			0.15
@@ -63,6 +63,7 @@
 # define KEY_A					0
 # define KEY_S					1
 # define KEY_D					2
+# define KEY_F					3
 # define KEY_Q					12
 # define KEY_E					14
 # define KEY_R					15

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_door_position.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 15:29:13 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/20 15:48:07 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:39:35 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	check_door_position(t_vars *vars)
 		index.x = 0;
 		while (index.x < map_size.x)
 		{
-			if (copied_map[index.y][index.x] == DOOR)
+			if (copied_map[index.y][index.x] == DOOR_CLOSED)
 				check_four_direction(copied_map, index);
 			index.x++;
 		}
