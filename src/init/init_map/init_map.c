@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:40:35 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 18:43:14 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:00:10 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	init_map(t_vars *vars, int fd)
 	allocate_map(vars);
 	labeling_map(vars, list_map);
 	init_player_position(vars);
-	init_angle_of_view(vars, list_map);
+	init_viewing_angle(vars, list_map);
 	ft_lstclear(&list_map, free);
 }

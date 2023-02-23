@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_image.c                                     :+:      :+:    :+:   */
+/*   init_background.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/17 20:09:41 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/17 20:09:58 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/23 19:02:14 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/23 19:02:21 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-t_image	create_image(t_vars *vars, int img_w, int img_h)
+void	init_background(t_vars *vars)
 {
-	t_image	img;
+	t_ivec	vector;
 
-	img.img = mlx_new_image(vars->mlx_ptr, img_w, img_h);
-	img.img_ptr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
-									&img.size_line, &img.endidan);
-	img.width = img_w;
-	img.height = img_h;
-	if (!img.img_ptr)
-		error_handler(SYSTEMCALL_ERROR);
-	return (img);
+	vars->background = create_image(vars, W_SIZE, H_SIZE);
+	vector.y = 0;
+	while (vector.y < H_SIZE)
+	{
+		vector.x = 0;
+		while (vector.x < W_SIZE)
+		{
+			if (vector.y < H_SIZE / 2)
+				put_pixel(&vars->background, vector, vars->texture.ceiling_rgb);
+			else
+				put_pixel(&vars->background, vector, vars->texture.floor_rgb);
+			vector.x++;
+		}
+		vector.y++;
+	}
 }

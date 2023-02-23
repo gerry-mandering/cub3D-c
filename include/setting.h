@@ -6,14 +6,14 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:25:22 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 15:26:05 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:48:15 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SETTING_H
 # define SETTING_H
 
-# define W_SIZE					1920
+# define W_SIZE					1440
 # define H_SIZE					1080
 # define TILE_SIZE				24
 # define PLAYER_SIZE			10

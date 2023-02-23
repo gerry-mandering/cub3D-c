@@ -6,12 +6,11 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 14:35:40 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:37:58 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-#include <stdio.h>
 
 t_ray	init_ray(t_vars *vars, double ray_dir)
 {
@@ -19,8 +18,8 @@ t_ray	init_ray(t_vars *vars, double ray_dir)
 
 	ray.hit = 0;
 	ray.dir = ray_dir;
-	ray.start.x = vars->player.x;
-	ray.start.y = vars->player.y;
+	ray.start.x = vars->player_pos.x;
+	ray.start.y = vars->player_pos.y;
 	ray.map_check.x = (int)ray.start.x;
 	ray.map_check.y = (int)ray.start.y;
 	ray.delta.x = cos(ray_dir);
@@ -40,12 +39,12 @@ t_ray	init_ray(t_vars *vars, double ray_dir)
 
 int	check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray)
 {
-	if (ray->map_check.x >= 0 && ray->map_check.x < vars->map_width \
-		&& ray->map_check.y >= 0 && ray->map_check.y < vars->map_height)
+	if (ray->map_check.x >= 0 && ray->map_check.x < vars->map_size.x \
+		&& ray->map_check.y >= 0 && ray->map_check.y < vars->map_size.y)
 	{
-		if (vars->map_elem[ray->map_check.y][ray->map_check.x] == WALL)
+		if (vars->map[ray->map_check.y][ray->map_check.x] == WALL)
 			return (1);
-		else if (vars->map_elem[ray->map_check.y][ray->map_check.x] == OBJECT && !object_ray->hit)
+		else if (vars->map[ray->map_check.y][ray->map_check.x] == OBJECT && !object_ray->hit)
 		{
 			if (fabs((double)ray->map_check.x + 1 - ray->intersection.x) < 0.005)
 			{
@@ -54,7 +53,7 @@ int	check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray)
 				object_ray->collision_direction = WEST;
 			}
 		}
-		else if (ray->map_check.x > 0 && vars->map_elem[ray->map_check.y][ray->map_check.x - 1] == OBJECT && !object_ray->hit)
+		else if (ray->map_check.x > 0 && vars->map[ray->map_check.y][ray->map_check.x - 1] == OBJECT && !object_ray->hit)
 		{
 			if (fabs((double)ray->map_check.x - ray->intersection.x) < 0.005)
 			{
@@ -63,7 +62,7 @@ int	check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray)
 				object_ray->collision_direction = WEST;
 			}
 		}
-		else if (vars->map_elem[ray->map_check.y][ray->map_check.x] == DOOR_CLOSED && !object_ray->hit)
+		else if (vars->map[ray->map_check.y][ray->map_check.x] == DOOR_CLOSED && !object_ray->hit)
 		{
 			{
 				ft_memcpy(object_ray, ray, sizeof(t_ray));

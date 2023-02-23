@@ -6,13 +6,13 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 09:52:07 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 10:42:16 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:25:56 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-static enum e_map_label	get_label(char character)
+static t_map_label	get_label(char character)
 {
 	if (character == ' ')
 		return (NONE);
@@ -20,12 +20,12 @@ static enum e_map_label	get_label(char character)
 		return (ROAD);
 	else if (character == '1')
 		return (WALL);
-	else if (is_direction(character))
+	else if (is_direction_character(character))
 		return (PLAYER);
 	else if (character == 'D')
-		return (DOOR);
-	else if (character == 'M')
-		return (MOB);
+		return (DOOR_CLOSED);
+	else if (character == 'O')
+		return (OBJECT);
 	else
 		error_handler(INVALID_MAP_FORMAT);
 	return (-1);

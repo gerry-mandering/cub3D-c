@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 01:54:58 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 14:45:37 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:49:37 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,28 @@ int	get_texture_xpos(t_ray *ray, t_image *img)
 void	render_upper_texture(t_vars *vars, t_ray *ray, t_image *img)
 {
 	t_ivec	texture;
-	t_ivec	screen;
+	t_ivec	screen1;
+	t_ivec	screen2;
 	double	step;
 	double	next_pos;
 	int		draw_end;
 
 	texture.x = get_texture_xpos(ray, img);
 	texture.y = img->height / 2;
-	screen.x = W_SIZE * \
+	screen1.x = W_SIZE * \
 		(ray->dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
-	screen.y = H_SIZE / 2 + 1;
+	screen1.y = H_SIZE / 2 + 1;
+	screen2.x = screen1.x + 1;
 	step = 1.0 * img->height / (int)(H_SIZE / ray->perp_wall_dist);
 	draw_end = H_SIZE / 2 - (int)(H_SIZE / ray->perp_wall_dist) / 2;
 	if (draw_end < 0)
 		draw_end = 0;
 	next_pos = texture.y;
-	while (texture.y >= 0 && screen.y-- >= draw_end)
+	while (texture.y >= 0 && screen1.y-- >= draw_end)
 	{
-		ft_pixel_put(&vars->view, screen.x, screen.y, \
-						get_color_value(img, texture));
-		ft_pixel_put(&vars->view, screen.x + 1, screen.y, \
-						get_color_value(img, texture));
+		screen2.y = screen1.y;
+		put_pixel(&vars->view, screen1, get_color_value(img, texture));
+		put_pixel(&vars->view, screen2, get_color_value(img, texture));
 		next_pos -= step;
 		texture.y = (int)(next_pos);
 	}
@@ -68,27 +69,28 @@ void	render_upper_texture(t_vars *vars, t_ray *ray, t_image *img)
 void	render_lower_texture(t_vars *vars, t_ray *ray, t_image *img)
 {
 	t_ivec			texture;
-	t_ivec			screen;
+	t_ivec			screen1;
+	t_ivec			screen2;
 	double			step;
 	double			next_pos;
 	int				draw_end;
 
 	texture.x = get_texture_xpos(ray, img);
 	texture.y = img->height / 2;
-	screen.x = W_SIZE * \
+	screen1.x = W_SIZE * \
 		(ray->dir + FOV_ANGLE / 2 - vars->viewing_angle) / FOV_ANGLE;
-	screen.y = H_SIZE / 2 - 1;
+	screen1.y = H_SIZE / 2 - 1;
+	screen2.x = screen1.x + 1;
 	step = 1.0 * img->height / (int)(H_SIZE / ray->perp_wall_dist);
 	draw_end = H_SIZE / 2 + (int)(H_SIZE / ray->perp_wall_dist) / 2;
 	if (draw_end >= H_SIZE)
 		draw_end = H_SIZE - 1;
 	next_pos = texture.y;
-	while (texture.y < img->height && screen.y++ <= draw_end)
+	while (texture.y < img->height && screen1.y++ <= draw_end)
 	{
-		ft_pixel_put(&vars->view, screen.x, screen.y, \
-						get_color_value(img, texture));
-		ft_pixel_put(&vars->view, screen.x + 1, screen.y, \
-						get_color_value(img, texture));
+		screen2.y = screen1.y;
+		put_pixel(&vars->view, screen1, get_color_value(img, texture));
+		put_pixel(&vars->view, screen2, get_color_value(img, texture));
 		next_pos += step;
 		texture.y = (int)(next_pos);
 	}
@@ -106,7 +108,8 @@ void	render_view(t_vars *vars, t_ray *ray, t_ray *obj_ray)
 	render_lower_texture(vars, ray, img);
 	if (obj_ray->hit)
 	{
-		obj_ray->perp_wall_dist = obj_ray->dist * cos(fabs(vars->viewing_angle - obj_ray->dir));
+		obj_ray->perp_wall_dist = obj_ray->dist * \
+								cos(fabs(vars->viewing_angle - obj_ray->dir));
 		if (obj_ray->hit == DOOR_CLOSED)
 		{
 			obj_ray->collision_direction = NORTH;

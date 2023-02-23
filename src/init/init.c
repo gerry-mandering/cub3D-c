@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:29:53 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 18:38:41 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:17:26 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ void	init(t_vars *vars, int argc, char **argv)
 
 	fd = open_description_file(argc, argv);
 	ft_memset(vars, 0, sizeof(t_vars));
+	init_mlx(vars);
 	init_texture(vars, fd);
 	init_map(vars, fd);
+	validate_map(vars);
+	init_view(vars);
+	init_background(vars);
+	init_minimap(vars);
 }

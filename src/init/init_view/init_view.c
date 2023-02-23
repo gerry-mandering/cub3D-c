@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   init_view.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 10:28:57 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 10:29:07 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/17 20:11:41 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/23 18:59:58 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
-int	ft_isspace(char character)
+void	init_view(t_vars *vars)
 {
-	if (ft_strchr(WHITE_SPACE, character) != NULL)
-		return (1);
-	else
-		return (0);
+	vars->view = create_image(vars, W_SIZE, H_SIZE);
 }

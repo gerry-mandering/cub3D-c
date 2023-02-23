@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx_params.c                                  :+:      :+:    :+:   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/17 20:10:13 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/17 21:50:22 by jinholee         ###   ########.fr       */
+/*   Created: 2023/02/13 17:08:34 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/23 19:26:05 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-void	init_mlx_params(t_vars *vars)
+void	validate_map(t_vars *vars)
 {
-	vars->mlx_ptr = mlx_init();
-	vars->win_ptr = mlx_new_window(vars->mlx_ptr, W_SIZE, H_SIZE, "cub3D");
-	mlx_mouse_show();
-	mlx_mouse_move(vars->win_ptr, W_SIZE / 2, H_SIZE / 2);
-	mlx_mouse_get_pos(vars->win_ptr, &vars->mouse.x, &vars->mouse.y);
+	check_map_has_all_texture(vars);
+	check_player_is_exist(vars);
+	check_player_is_duplicated(vars);
+	check_map_is_closed(vars);
+	check_door_position(vars);
 }

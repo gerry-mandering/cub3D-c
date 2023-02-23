@@ -6,11 +6,11 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:10:51 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/14 22:00:13 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:48:33 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
 static int	get_component_value(char *rgb_component)
 {

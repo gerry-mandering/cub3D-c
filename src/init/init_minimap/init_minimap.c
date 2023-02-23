@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 20:12:15 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 15:45:07 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:48:10 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	init_minimap(t_vars *vars)
 	int	crop_h;
 	int	crop_w;
 
-	minimap_h = vars->map_height * TILE_SIZE;
-	minimap_w = vars->map_width * TILE_SIZE;
+	minimap_h = vars->map_size.y * TILE_SIZE;
+	minimap_w = vars->map_size.x * TILE_SIZE;
 	vars->minimap.h_size = minimap_h;
 	vars->minimap.w_size = minimap_w;
 	crop_h = H_SIZE / 4;

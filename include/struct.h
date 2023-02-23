@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 17:38:38 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:08:33 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,17 @@ typedef enum e_identifier
 	ID_OBJECT
 }	t_identifier;
 
-typedef enum e_map
+typedef enum e_map_label
 {
 	NONE = -1,
-	EMPTY_SPACE,
+	ROAD,
 	WALL,
 	PLAYER,
 	DOOR_CLOSED,
 	DOOR_OPENED,
 	OBJECT,
 	VISITED
-}	t_map;
+}	t_map_label;
 
 typedef struct s_image
 {
@@ -138,18 +138,17 @@ typedef struct s_ray
 
 typedef struct s_vars
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	int			**map_elem;
-	int			map_width;
-	int			map_height;
+	t_texture	texture;
+	int			**map;
+	t_ivec		map_size;
+	t_dvec		player_pos;
 	double		viewing_angle;
 	t_image		view;
 	t_image		background;
-	t_dvec		player;
 	t_minimap	minimap;
-	t_texture	texture;
-	t_ivec		mouse;
+	t_ivec		mouse_pos;
+	void		*mlx_ptr;
+	void		*win_ptr;
 	size_t		sprite_count;
 }	t_vars;
 

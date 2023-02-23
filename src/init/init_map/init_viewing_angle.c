@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_direction.c                                   :+:      :+:    :+:   */
+/*   init_viewing_angle.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 10:37:27 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 10:48:23 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 18:55:31 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static double	get_angle(char direction)
 		return (M_PI);
 }
 
-void	init_angle_of_view(t_vars *vars, t_list *list_map)
+void	init_viewing_angle(t_vars *vars, t_list *list_map)
 {
 	t_list	*current_node;
 	char	*map_description;
@@ -38,8 +38,8 @@ void	init_angle_of_view(t_vars *vars, t_list *list_map)
 		index.x = 0;
 		while (map_description[index.x] != '\0')
 		{
-			if (is_direction(map_description[index.x]))
-				vars->angle_of_view = get_angle(map_description[index.x]);
+			if (is_direction_character(map_description[index.x]))
+				vars->viewing_angle = get_angle(map_description[index.x]);
 			index.x++;
 		}
 		current_node = current_node->next;

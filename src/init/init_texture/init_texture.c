@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:38:18 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 17:38:55 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:15:48 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	separate_description_line(char *description_line, \
 {
 	char	**strings;
 
-	strings = ft_split(description_line, " ");
+	strings = ft_split(description_line, " \t\n\v\f\r");
 	if (strings == NULL)
 		error_handler(SYSTEMCALL_ERROR);
 	if (count_strings(strings) != 2)
@@ -71,10 +71,11 @@ void	init_texture(t_vars *vars, int fd)
 	t_identifier			identifier;
 	char					*value;
 
-	while ((vars->texture.bitflag & DONE_TEXTURE_INIT) == DONE_TEXTURE_INIT)
+	while ((vars->texture.bitflag & DONE_TEXTURE_INIT) != DONE_TEXTURE_INIT)
 	{
 		description_line = get_description_line(fd);
 		separate_description_line(description_line, &identifier, &value);
 		init_texture_fp[identifier](vars, value);
+		free(value);
 	}
 }

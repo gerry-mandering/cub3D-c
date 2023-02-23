@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 19:19:38 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 14:54:28 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:38:17 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ t_ivec	get_heading_position(t_vars *vars)
 		heading_pos.y = -1;
 		return (heading_pos);
 	}
-	heading_pos.x = (int)vars->player.x;
-	heading_pos.y = (int)vars->player.y;
+	heading_pos.x = (int)vars->player_pos.x;
+	heading_pos.y = (int)vars->player_pos.y;
 	if (heading_direction == NORTH)
 		heading_pos.y--;
 	else if (heading_direction == SOUTH)
@@ -62,8 +62,8 @@ bool	is_near_door(t_vars *vars)
 	heading_pos = get_heading_position(vars);
 	if (heading_pos.x == -1 && heading_pos.y == -1)
 		return (false);
-	if (vars->map_elem[heading_pos.y][heading_pos.x] == DOOR_CLOSED || \
-		vars->map_elem[heading_pos.y][heading_pos.x] == DOOR_OPENED)
+	if (vars->map[heading_pos.y][heading_pos.x] == DOOR_CLOSED || \
+		vars->map[heading_pos.y][heading_pos.x] == DOOR_OPENED)
 		return (true);
 	else
 		return (false);

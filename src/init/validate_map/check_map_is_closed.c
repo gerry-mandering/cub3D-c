@@ -6,13 +6,13 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 15:27:51 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/20 15:42:06 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:23:19 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
-static void	flood_fill(t_map **map, int y, int x, t_ivec map_size)
+static void	flood_fill(int **map, int y, int x, t_ivec map_size)
 {
 	if (y < 0 || x < 0)
 		return ;
@@ -31,12 +31,13 @@ static void	flood_fill(t_map **map, int y, int x, t_ivec map_size)
 
 void	check_map_is_closed(t_vars *vars)
 {
-	t_map	**copied_map;
-	t_ivec	map_size;
+	int		**copied_map;
+	t_ivec	size;
 
 	copied_map = copy_map(vars, NO_OPTION);
-	map_size.y = vars->map_height + 2;
-	map_size.x = vars->map_width + 2;
-	flood_fill(copied_map, vars->player.y + 1, vars->player.x + 1, map_size);
-	free_copied_map(copied_map, map_size);
+	size.y = vars->map_size.y + 2;
+	size.x = vars->map_size.x + 2;
+	flood_fill(copied_map, \
+			vars->player_pos.y + 1, vars->player_pos.x + 1, size);
+	free_copied_map(copied_map, size);
 }

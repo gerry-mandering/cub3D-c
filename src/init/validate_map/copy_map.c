@@ -6,52 +6,51 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:57:48 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/20 15:43:46 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:20:55 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
-static t_map	**allocate_copied_map(t_vars *vars)
+static int	**allocate_copied_map(t_vars *vars)
 {
-	t_map	**map;
-	int		i;
+	int	**map;
+	int	i;
 
-	map = (t_map **)ft_calloc((int)vars->map_height + 2, sizeof(int *));
+	map = (int **)ft_calloc((int)vars->map_size.y + 2, sizeof(int *));
 	if (map == NULL)
 		error_handler(SYSTEMCALL_ERROR);
 	i = 0;
-	while (i < vars->map_height + 2)
+	while (i < vars->map_size.y + 2)
 	{
-		map[i] = (t_map *)ft_calloc((int)vars->map_width + 2, sizeof(int));
+		map[i] = (int *)ft_calloc((int)vars->map_size.x + 2, sizeof(int));
 		if (map[i] == NULL)
 			error_handler(SYSTEMCALL_ERROR);
-		ft_memset(map[i], NONE, sizeof(int) * (vars->map_width + 2));
+		ft_memset(map[i], NONE, sizeof(int) * (vars->map_size.x + 2));
 		i++;
 	}
 	return (map);
 }
 
-t_map	**copy_map(t_vars *vars, int option)
+int	**copy_map(t_vars *vars, int option)
 {
-	int	**copied_map;
-	int	width;
-	int	height;
+	int		**copied_map;
+	t_ivec	index;
 
 	copied_map = allocate_copied_map(vars);
-	height = 0;
-	while (height < vars->map_height)
+	index.y = 0;
+	while (index.y < vars->map_size.y)
 	{
-		width = 0;
-		while (width < vars->map_width)
+		index.x = 0;
+		while (index.x < vars->map_size.x)
 		{
-			copied_map[height + 1][width + 1] = vars->map_elem[height][width];
-			if (copied_map[height + 1][width + 1] == PLAYER && \
+			copied_map[index.y + 1][index.x + 1] = vars->map[index.y][index.x];
+			if (copied_map[index.y + 1][index.x + 1] == PLAYER && \
 					option == REPLACE_PLAYER)
-				copied_map[height + 1][width + 1] = EMPTY_SPACE;
-			width++;
+				copied_map[index.y + 1][index.x + 1] = ROAD;
+			index.x++;
 		}
-		height++;
+		index.y++;
 	}
 	return (copied_map);
 }

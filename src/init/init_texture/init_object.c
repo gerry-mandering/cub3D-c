@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:39:25 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 18:35:37 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:16:14 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	init_object(t_vars *vars, char *value)
 											&object.size_line, \
 											&object.endian);
 	vars->texture.object[sprite_index] = object;
+	vars->texture.bitflag |= OBJECT_BITMASK;
 	sprite_index++;
 }

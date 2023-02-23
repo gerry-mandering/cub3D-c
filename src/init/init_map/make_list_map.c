@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 09:33:39 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 09:42:19 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:31:48 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	cut_last_spaces(char *map_description)
 	int	last_index;
 
 	last_index = ft_strlen(map_description) - 1;
-	while (map_description[last_index] == ' ')
+	while (ft_strchr(" \t\n\v\f\r", map_description[last_index]) != NULL)
 		map_description[last_index--] = '\0';
 }
 
@@ -43,15 +43,17 @@ void	make_list_map(t_list **list_map, int fd)
 
 	*list_map = NULL;
 	map_description = get_map_description(fd);
-	while (map_description != NULL)
+	while (true)
 	{
-		cut_last_spaces(map_description);
-		ft_lstadd_back(list_map, ft_lstnew(map_description));
 		map_description = get_next_line(fd);
+		if (map_description == NULL)
+			break ;
 		if (ft_strcmp(map_description, "\n") == 0)
 		{
 			free(map_description);
 			break ;
 		}
+		cut_last_spaces(map_description);
+		ft_lstadd_back(list_map, ft_lstnew(map_description));
 	}
 }

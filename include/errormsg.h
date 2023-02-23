@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:22:10 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 15:22:44 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:30:33 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define HAVE_NO_MAP_INPUT		"Have No Map Input\n"
 # define INVALID_MAP_FORMAT		"Invalid Map Format\n"
 # define INVALID_MAP_SIZE		"Invalid Map Size\n"
+# define HAVE_NO_TEXTURE		"Have No Texture\n"
 # define HAVE_NO_PLAYER			"Have No Player\n"
 # define DUPLICATED_PLAYER		"Duplicated Player\n"
 # define UNCLOSED_MAP			"Unclosed Map\n"
