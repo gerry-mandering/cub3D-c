@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 01:49:10 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 16:24:15 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:59:03 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ t_ray	init_ray(t_vars *vars, double ray_dir)
 
 	ray.hit = 0;
 	ray.dir = ray_dir;
-	ray.start.x = vars->player.x;
-	ray.start.y = vars->player.y;
+	ray.start.x = vars->player_pos.x;
+	ray.start.y = vars->player_pos.y;
 	ray.map_check.x = (int)ray.start.x;
 	ray.map_check.y = (int)ray.start.y;
 	ray.delta.x = cos(ray_dir);
