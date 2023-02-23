@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx_params.c                                  :+:      :+:    :+:   */
+/*   init_mlx_params_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 20:10:13 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 22:19:10 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 21:25:29 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
+#include "../../../include_bonus/cub3d_bonus.h"
 
 void	init_mlx_params(t_vars *vars)
 {

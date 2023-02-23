@@ -33,8 +33,6 @@ SRC = main.c \
 	parse/parse_texture/parse_texture_functions/parse_west.c \
 	parse/parse_texture/parse_texture_functions/parse_floor.c \
 	parse/parse_texture/parse_texture_functions/parse_ceiling.c \
-	parse/parse_texture/parse_texture_functions/parse_door.c \
-	parse/parse_texture/parse_texture_functions/parse_object.c \
 	parse/parse_texture/parse_texture_utils/get_rgb.c \
 	parse/parse_map/parse_map.c \
 	parse/parse_map/parse_map_utils/allocate_map.c \
@@ -43,7 +41,6 @@ SRC = main.c \
 	parse/parse_map/parse_map_utils/measure_map_size.c \
 	parse/parse_map/parse_map_utils/set_player_position.c \
 	parse/validate_map/validate_map.c \
-	parse/validate_map/validate_map_utils/check_door_position.c \
 	parse/validate_map/validate_map_utils/check_map_is_closed.c \
 	parse/validate_map/validate_map_utils/check_player_is_duplicated.c \
 	parse/validate_map/validate_map_utils/check_player_is_exist.c \
@@ -63,11 +60,58 @@ SRC = main.c \
 	utils/free_strings.c \
 	utils/ft_strcmp.c \
 	utils/ft_isspace.c
-SRC_BONUS = 
+SRC_BONUS = main_bonus.c \
+			render/raycast_bonus.c \
+			render/render_minimap_bonus.c \
+			render/render_view_bonus.c \
+			render/render_utils_bonus.c \
+			render/is_near_door_bonus.c \
+			hooks/mouse_bonus.c \
+			hooks/key_bonus.c \
+			error_handler/error_handler_bonus.c \
+			parse/parse_bonus.c \
+			parse/parse_texture/parse_texture_bonus.c \
+			parse/parse_texture/parse_texture_functions/parse_north_bonus.c \
+			parse/parse_texture/parse_texture_functions/parse_south_bonus.c \
+			parse/parse_texture/parse_texture_functions/parse_east_bonus.c \
+			parse/parse_texture/parse_texture_functions/parse_west_bonus.c \
+			parse/parse_texture/parse_texture_functions/parse_floor_bonus.c \
+			parse/parse_texture/parse_texture_functions/parse_ceiling_bonus.c \
+			parse/parse_texture/parse_texture_functions/parse_door_bonus.c \
+			parse/parse_texture/parse_texture_functions/parse_object_bonus.c \
+			parse/parse_texture/parse_texture_utils/get_rgb_bonus.c \
+			parse/parse_map/parse_map_bonus.c \
+			parse/parse_map/parse_map_utils/allocate_map_bonus.c \
+			parse/parse_map/parse_map_utils/labeling_map_bonus.c \
+			parse/parse_map/parse_map_utils/make_list_map_bonus.c \
+			parse/parse_map/parse_map_utils/measure_map_size_bonus.c \
+			parse/parse_map/parse_map_utils/set_player_position_bonus.c \
+			parse/validate_map/validate_map_bonus.c \
+			parse/validate_map/validate_map_utils/check_door_position_bonus.c \
+			parse/validate_map/validate_map_utils/check_map_is_closed_bonus.c \
+			parse/validate_map/validate_map_utils/check_player_is_duplicated_bonus.c \
+			parse/validate_map/validate_map_utils/check_player_is_exist_bonus.c \
+			parse/validate_map/validate_map_utils/copy_map_bonus.c \
+			parse/validate_map/validate_map_utils/free_copied_map_bonus.c \
+			init_params/init_params_bonus.c \
+			init_params/init_params_utils/create_image_bonus.c \
+			init_params/init_params_utils/init_background_bonus.c \
+			init_params/init_params_utils/init_minimap_bonus.c \
+			init_params/init_params_utils/init_mlx_params_bonus.c \
+			init_params/init_params_utils/init_view_bonus.c \
+			init_params/init_params_utils/init_viewing_angle_bonus.c \
+			init_params/init_params_utils/init_wall_image_bonus.c \
+			init_params/init_params_utils/init_door_image_bonus.c \
+			init_params/init_params_utils/init_object_image_bonus.c \
+			utils/count_strings_bonus.c \
+			utils/free_strings_bonus.c \
+			utils/ft_strcmp_bonus.c \
+			utils/ft_isspace_bonus.c
 GNL_SRC = get_next_line.c \
 		get_next_line_utils.c
 SRCS = $(addprefix $(SRC_DIR), $(SRC)) $(addprefix $(GNL_DIR), $(GNL_SRC))
 OBJS = $(SRCS:.c=.o)
+OBJS_BONUS = $(addprefix $(SRC_DIR), $(SRC_BONUS:.c=.o)) $(addprefix $(GNL_DIR), $(GNL_SRC))
 
 ifdef SANITIZE
 	CFLAGS += -fsanitize=address -g3
@@ -76,6 +120,7 @@ endif
 
 ifdef BONUS
 	SRCS = $(addprefix $(SRC_BONUS_DIR), $(SRC_BONUS)) $(addprefix $(GNL_DIR), $(GNL_SRC))
+	OBJS = $(SRCS:.c=.o)
 endif
 
 all : $(NAME)

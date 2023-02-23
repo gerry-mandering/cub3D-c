@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_object.c                                     :+:      :+:    :+:   */
+/*   parse_floor_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/18 17:15:05 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/20 14:50:41 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/10 13:57:14 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/23 21:35:09 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/cub3d.h"
+#include "../../../../include_bonus/cub3d_bonus.h"
 
-void	parse_object(t_vars *vars, int *bitflag, char *value)
+void	parse_floor(t_vars *vars, int *bitflag, char *value)
 {
-	static int	sprite_count;
-
-	vars->texture.object_path[sprite_count] = ft_strdup(value);
-	sprite_count++;
-	(void)bitflag;
+	if (*bitflag & FLOOR_BITMASK)
+		error_handler(DUPLICATED_TEXTURE);
+	vars->texture.floor_rgb = get_rgb(value);
+	*bitflag |= FLOOR_BITMASK;
 }

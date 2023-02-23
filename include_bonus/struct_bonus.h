@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   struct_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 22:22:16 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 21:23:01 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#ifndef STRUCT_BONUS_H
+# define STRUCT_BONUS_H
 
 # include "../lib/libft/libft.h"
+
+# define SPRITE_COUNT	3
+
+# define NO_OPTION		0
+# define REPLACE_PLAYER	1
 
 typedef enum e_direction
 {
@@ -59,7 +64,10 @@ typedef enum e_map
 	EMPTY_SPACE,
 	WALL,
 	PLAYER,
-	VISITED
+	OBJECT,
+	VISITED,
+	DOOR_CLOSED,
+	DOOR_OPENED
 }	t_map;
 
 typedef struct s_image
@@ -90,7 +98,11 @@ typedef struct s_minimap
 typedef struct s_texture
 {
 	char	*wall_path[4];
+	char	*door_path;
+	char	*object_path[SPRITE_COUNT];
 	t_image	wall[4];
+	t_image	door;
+	t_image	object[SPRITE_COUNT];
 	int		floor_rgb;
 	int		ceiling_rgb;
 }	t_texture;
@@ -127,6 +139,7 @@ typedef struct s_vars
 	t_minimap	minimap;
 	t_texture	texture;
 	t_ivec		mouse;
+	size_t		sprite_count;
 }	t_vars;
 
 typedef void	(*t_parse_texture_fp)(t_vars *vars, int *bitflag, char *value);

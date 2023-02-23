@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_door.c                                       :+:      :+:    :+:   */
+/*   validate_map_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/17 20:40:20 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/18 17:17:12 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/13 17:08:34 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/23 21:29:57 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/cub3d.h"
+#include "../../../include_bonus/cub3d_bonus.h"
 
-void	parse_door(t_vars *vars, int *bitflag, char *value)
+void	validate_map(t_vars *vars)
 {
-	vars->texture.door_path = ft_strdup(value);
-	(void)bitflag;
+	check_player_is_exist(vars);
+	check_player_is_duplicated(vars);
+	check_map_is_closed(vars);
+	if (vars->texture.door_path != NULL)
+		check_door_position(vars);
 }

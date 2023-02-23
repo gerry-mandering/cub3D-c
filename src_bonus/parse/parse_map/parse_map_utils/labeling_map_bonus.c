@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   labeling_map.c                                     :+:      :+:    :+:   */
+/*   labeling_map_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:43:26 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 22:14:59 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 21:32:51 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/cub3d.h"
+#include "../../../../include_bonus/cub3d_bonus.h"
 
 static void	set_spawning_direction(char character, t_vars *vars)
 {
@@ -44,6 +44,10 @@ static int	get_label(char character)
 	else if (character == 'N' || character == 'S' || \
 				character == 'E' || character == 'W')
 		return (PLAYER);
+	else if (character == 'D')
+		return (DOOR_CLOSED);
+	else if (character == 'O')
+		return (OBJECT);
 	else
 	{
 		error_handler(INVALID_MAP_FORMAT);

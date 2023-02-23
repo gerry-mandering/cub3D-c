@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 22:19:52 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 21:23:21 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
-# include "const.h"
-# include "struct.h"
+# include "const_bonus.h"
+# include "struct_bonus.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdbool.h>
@@ -39,6 +39,8 @@ void		parse_west(t_vars *vars, int *bitflag, char *value);
 void		parse_east(t_vars *vars, int *bitflag, char *value);
 void		parse_floor(t_vars *vars, int *bitflag, char *value);
 void		parse_ceiling(t_vars *vars, int *bitflag, char *value);
+void		parse_door(t_vars *vars, int *bitflag, char *value);
+void		parse_object(t_vars *vars, int *bitflag, char *value);
 
 //parse_texture_utils
 int			get_rgb(char *value);
@@ -59,7 +61,8 @@ void		validate_map(t_vars *vars);
 void		check_player_is_exist(t_vars *vars);
 void		check_player_is_duplicated(t_vars *vars);
 void		check_map_is_closed(t_vars *vars);
-t_map		**copy_map(t_vars *vars);
+void		check_door_position(t_vars *vars);
+t_map		**copy_map(t_vars *vars, int option);
 void		free_copied_map(t_map **copied_map, t_ivec map_size);
 
 //init_params
@@ -71,6 +74,9 @@ void		init_mlx_params(t_vars *vars);
 void		init_viewing_angle(t_vars *vars);
 void		init_view(t_vars *vars);
 void		init_wall_image(t_image *wall, char **wall_path, void *mlx_ptr);
+void		init_door_image(t_image *door, char *door_path, void *mlx_ptr);
+void		init_object_image(t_image *object, \
+										char **object_path, void *mlx_ptr);
 void		init_background(t_vars *vars, int ceiling_rgb, int floor_rgb);
 void		init_minimap(t_vars *vars);
 

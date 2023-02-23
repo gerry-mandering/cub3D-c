@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_object_image.c                                :+:      :+:    :+:   */
+/*   init_object_image_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:51:07 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/20 20:44:29 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 21:25:44 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
+#include "../../../include_bonus/cub3d_bonus.h"
 
 void	init_object_image(t_image *object, char **object_path, void *mlx_ptr)
 {

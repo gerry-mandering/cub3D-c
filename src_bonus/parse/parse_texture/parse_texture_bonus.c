@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_texture.c                                    :+:      :+:    :+:   */
+/*   parse_texture_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:41:00 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 22:12:44 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 21:34:00 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
+#include "../../../include_bonus/cub3d_bonus.h"
 
 static int	get_fp_index(char *identifier)
 {
-	const char	identifier_arr[6][3] = \
-								{"NO", "SO", "WE", "EA", "F", "C"};
+	const char	identifier_arr[8][3] = \
+								{"NO", "SO", "WE", "EA", "F", "C", "D", "O"};
 	int			i;
 
 	i = 0;
@@ -31,9 +31,9 @@ static int	get_fp_index(char *identifier)
 
 static void	store_texture_info(t_vars *vars, int *bitflag, char *line)
 {
-	const t_parse_texture_fp	parse_texture_fp[6] = {
+	const t_parse_texture_fp	parse_texture_fp[8] = {
 		parse_north, parse_south, parse_west, parse_east, \
-		parse_floor, parse_ceiling
+		parse_floor, parse_ceiling, parse_door, parse_object
 	};
 	int							fp_index;
 	char						**splited_line;

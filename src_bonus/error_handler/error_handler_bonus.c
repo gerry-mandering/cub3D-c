@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_params.c                                      :+:      :+:    :+:   */
+/*   error_handler_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/17 20:05:09 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 22:17:22 by minseok2         ###   ########.fr       */
+/*   Created: 2023/02/09 15:24:48 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/23 21:23:44 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include_bonus/cub3d_bonus.h"
 
-void	init_params(t_vars *vars)
+void	error_handler(const char *error_type)
 {
-	init_mlx_params(vars);
-	init_viewing_angle(vars);
-	init_view(vars);
-	init_wall_image(vars->texture.wall, vars->texture.wall_path, vars->mlx_ptr);
-	init_background(vars, vars->texture.ceiling_rgb, vars->texture.floor_rgb);
-	init_minimap(vars);
+	write(STDOUT_FILENO, "Error\n", 6);
+	if (error_type == SYSTEMCALL_ERROR)
+		perror(error_type);
+	else
+		write(STDOUT_FILENO, error_type, ft_strlen(error_type));
+	exit(EXIT_FAILURE);
 }

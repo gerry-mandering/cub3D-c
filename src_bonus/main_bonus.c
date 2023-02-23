@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:14:20 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 21:57:57 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 21:23:38 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include_bonus/cub3d_bonus.h"
 
 int	cub3d_exit(t_vars *vars)
 {
 	mlx_destroy_image(vars->mlx_ptr, vars->background.img);
 	mlx_destroy_image(vars->mlx_ptr, vars->view.img);
+	mlx_destroy_image(vars->mlx_ptr, vars->minimap.background_img.img);
+	mlx_destroy_image(vars->mlx_ptr, vars->minimap.img.img);
 	mlx_destroy_window(vars->mlx_ptr, vars->win_ptr);
 	exit(0);
 	return (0);
