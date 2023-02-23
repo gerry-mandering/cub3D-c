@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 19:19:38 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 20:23:40 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:54:28 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,40 @@ static int	get_heading_direction(double viewing_angle)
 		return (-1);
 }
 
-static t_ivec	get_search_position(int heading_direction, t_dvec player)
+t_ivec	get_heading_position(t_vars *vars)
 {
-	t_ivec	search_pos;
+	int		heading_direction;
+	t_ivec	heading_pos;
 
-	search_pos.x = (int)player.x;
-	search_pos.y = (int)player.y;
+	heading_direction = get_heading_direction(vars->viewing_angle);
+	if (heading_direction == -1)
+	{
+		heading_pos.x = -1;
+		heading_pos.y = -1;
+		return (heading_pos);
+	}
+	heading_pos.x = (int)vars->player.x;
+	heading_pos.y = (int)vars->player.y;
 	if (heading_direction == NORTH)
-		search_pos.y--;
+		heading_pos.y--;
 	else if (heading_direction == SOUTH)
-		search_pos.y++;
+		heading_pos.y++;
 	else if (heading_direction == EAST)
-		search_pos.x++;
+		heading_pos.x++;
 	else if (heading_direction == WEST)
-		search_pos.x--;
-	return (search_pos);
+		heading_pos.x--;
+	return (heading_pos);
 }
 
 bool	is_near_door(t_vars *vars)
 {
-	int		heading_direction;
-	t_ivec	search_pos;
+	t_ivec	heading_pos;
 
-	heading_direction = get_heading_direction(vars->viewing_angle);
-	if (heading_direction == -1)
+	heading_pos = get_heading_position(vars);
+	if (heading_pos.x == -1 && heading_pos.y == -1)
 		return (false);
-	search_pos = get_search_position(heading_direction, vars->player);
-	if (vars->map_elem[search_pos.y][search_pos.x] == DOOR)
+	if (vars->map_elem[heading_pos.y][heading_pos.x] == DOOR_CLOSED || \
+		vars->map_elem[heading_pos.y][heading_pos.x] == DOOR_OPENED)
 		return (true);
 	else
 		return (false);
