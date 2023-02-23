@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 19:19:38 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 20:23:40 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:32:25 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ bool	is_near_door(t_vars *vars)
 	if (heading_direction == -1)
 		return (false);
 	search_pos = get_search_position(heading_direction, vars->player);
-	if (vars->map_elem[search_pos.y][search_pos.x] == DOOR)
+	if (vars->map_elem[search_pos.y][search_pos.x] == DOOR_CLOSED || \
+		vars->map_elem[search_pos.y][search_pos.x] == DOOR_OPENED)
 		return (true);
 	else
 		return (false);
