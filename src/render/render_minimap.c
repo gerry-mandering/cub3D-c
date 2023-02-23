@@ -6,20 +6,11 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:43:34 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/22 17:19:35 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:05:07 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-void	add_ray_to_minimap(t_vars *vars, t_ray *ray)
-{
-	t_ivec	offset;
-
-	offset.x = ray->intersection.x * TILE_SIZE;
-	offset.y = ray->intersection.y * TILE_SIZE;
-	draw_rect(&vars->minimap.img, offset, 2, 0xff);
-}
 
 void	place_wall(t_vars *vars)
 {
@@ -82,19 +73,25 @@ t_ivec	get_crop_offset(t_vars *vars)
 void	crop_minimap(t_vars *vars)
 {
 	t_ivec			offset;
-	t_ivec			temp;
+	t_ivec			pos;
 	unsigned int	color;
+	int				x;
+	int				y;
 
 	offset = get_crop_offset(vars);
-	for (int y=0; y < vars->minimap.crop.height; y++)
+	y = 0;
+	while (y < vars->minimap.crop.height)
 	{
-		for (int x=0; x < vars->minimap.crop.width; x++)
+		x = 0;
+		while (x < vars->minimap.crop.width)
 		{
-			temp.x = offset.x + x;
-			temp.y = offset.y + y;
-			color = get_color_value(&vars->minimap.img, temp);
+			pos.x = offset.x + x;
+			pos.y = offset.y + y;
+			color = get_color_value(&vars->minimap.img, pos);
 			ft_pixel_put(&vars->minimap.crop, x, y, color);
+			x++;
 		}
+		y++;
 	}
 }
 

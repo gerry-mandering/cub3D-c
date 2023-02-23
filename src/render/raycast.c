@@ -6,70 +6,49 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 14:35:40 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:07:56 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include <stdio.h>
 
-t_ray	init_ray(t_vars *vars, double ray_dir)
+void	check_object_hit(t_vars *vars, t_ray *ray, t_ray *obj_ray)
 {
-	t_ray	ray;
+	int	hit;
 
-	ray.hit = 0;
-	ray.dir = ray_dir;
-	ray.start.x = vars->player.x;
-	ray.start.y = vars->player.y;
-	ray.map_check.x = (int)ray.start.x;
-	ray.map_check.y = (int)ray.start.y;
-	ray.delta.x = cos(ray_dir);
-	ray.delta.y = sin(ray_dir);
-	ray.step.x = (ray.delta.x >= 0) - (ray.delta.x < 0);
-	ray.step.y = (ray.delta.y >= 0) - (ray.delta.y < 0);
-	ray.unit_step.x = sqrt(1 + pow(ray.delta.y / ray.delta.x, 2));
-	ray.unit_step.y = sqrt(1 + pow(ray.delta.x / ray.delta.y, 2));
-	ray.length.x = (ray.map_check.x + 1 - ray.start.x) * ray.unit_step.x;
-	ray.length.y = (ray.map_check.y + 1 - ray.start.y) * ray.unit_step.y;
-	if (ray.delta.x < 0)
-		ray.length.x = (ray.start.x - ray.map_check.x) * ray.unit_step.x;
-	if (ray.delta.y < 0)
-		ray.length.y = (ray.start.y - ray.map_check.y) * ray.unit_step.y;
-	return (ray);
+	hit = vars->map_elem[ray->map_check.y][ray->map_check.x];
+	if (hit == DOOR_CLOSED || (hit == OBJECT && \
+		fabs((double)ray->map_check.x + 1 - ray->intersection.x) < 0.005))
+	{
+		ft_memcpy(obj_ray, ray, sizeof(t_ray));
+		obj_ray->hit = hit;
+		obj_ray->collision_direction = EAST;
+	}
+	else if (ray->map_check.x > 0 && \
+		vars->map_elem[ray->map_check.y][ray->map_check.x -1] == OBJECT)
+	{
+		if (fabs((double)ray->map_check.x - ray->intersection.x) < 0.005)
+		{
+			ft_memcpy(obj_ray, ray, sizeof(t_ray));
+			obj_ray->hit = OBJECT;
+			obj_ray->collision_direction = WEST;
+		}
+	}
 }
 
 int	check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray)
 {
+	int	hit;
+
 	if (ray->map_check.x >= 0 && ray->map_check.x < vars->map_width \
 		&& ray->map_check.y >= 0 && ray->map_check.y < vars->map_height)
 	{
-		if (vars->map_elem[ray->map_check.y][ray->map_check.x] == WALL)
-			return (1);
-		else if (vars->map_elem[ray->map_check.y][ray->map_check.x] == OBJECT && !object_ray->hit)
-		{
-			if (fabs((double)ray->map_check.x + 1 - ray->intersection.x) < 0.005)
-			{
-				ft_memcpy(object_ray, ray, sizeof(t_ray));
-				object_ray->hit = OBJECT;
-				object_ray->collision_direction = WEST;
-			}
-		}
-		else if (ray->map_check.x > 0 && vars->map_elem[ray->map_check.y][ray->map_check.x - 1] == OBJECT && !object_ray->hit)
-		{
-			if (fabs((double)ray->map_check.x - ray->intersection.x) < 0.005)
-			{
-				ft_memcpy(object_ray, ray, sizeof(t_ray));
-				object_ray->hit = OBJECT;
-				object_ray->collision_direction = WEST;
-			}
-		}
-		else if (vars->map_elem[ray->map_check.y][ray->map_check.x] == DOOR_CLOSED && !object_ray->hit)
-		{
-			{
-				ft_memcpy(object_ray, ray, sizeof(t_ray));
-				object_ray->hit = DOOR_CLOSED;
-			}
-		}
+		hit = vars->map_elem[ray->map_check.y][ray->map_check.x];
+		if (hit == WALL)
+			return (WALL);
+		if (!object_ray->hit)
+			check_object_hit(vars, ray, object_ray);
 	}
 	return (0);
 }
@@ -102,7 +81,7 @@ void	raycast(t_vars *vars, double ray_dir)
 	render_view(vars, &ray, &object_ray);
 }
 
-void	FOV(t_vars *vars)
+void	field_of_view(t_vars *vars)
 {
 	double	interval;
 	double	start;
@@ -119,4 +98,19 @@ void	FOV(t_vars *vars)
 	vars->sprite_count++;
 	if (vars->sprite_count == 100)
 		vars->sprite_count = 0;
+}
+
+int	render(t_vars *vars)
+{
+	ft_memcpy(vars->view.img_ptr, \
+			vars->background.img_ptr, sizeof(int) * W_SIZE * H_SIZE);
+	render_minimap(vars);
+	field_of_view(vars);
+	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->view.img, 0, 0);
+	mlx_put_image_to_window(vars->mlx_ptr, \
+							vars->win_ptr, vars->minimap.crop.img, 0, 0);
+	if (is_near_door(vars))
+		mlx_string_put(vars->mlx_ptr, \
+			vars->win_ptr, W_SIZE / 2, H_SIZE / 3 * 2, 0xFFFFFF, "Press F to OPEN/CLOSE");
+	return (0);
 }

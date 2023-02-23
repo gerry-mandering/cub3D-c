@@ -17,7 +17,6 @@ LIBFT = $(LIBFT_DIR)$(LIBFT_NAME)
 MLX = $(MLX_DIR)$(MLX_NAME)
 
 SRC = main.c \
-	render/bresenham.c \
 	render/raycast.c \
 	render/render_minimap.c \
 	render/render_view.c \

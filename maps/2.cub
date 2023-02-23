@@ -1,0 +1,17 @@
+NO ./images/wall1.xpm
+SO ./images/wall2.xpm
+WE ./images/wall3.xpm
+EA ./images/wall4.xpm
+D  ./images/door.xpm
+O  ./images/sprite1.xpm
+O  ./images/sprite2.xpm
+O  ./images/sprite3.xpm
+
+F 129,193,71
+C 0,191,255
+
+11111
+10101
+11011
+1N101
+11111
