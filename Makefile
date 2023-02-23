@@ -17,6 +17,7 @@ LIBFT = $(LIBFT_DIR)$(LIBFT_NAME)
 MLX = $(MLX_DIR)$(MLX_NAME)
 
 SRC = main.c \
+<<<<<<< HEAD
 	  init/init.c \
 	  init/init_background/init_background.c \
 	  init/init_map/allocate_map.c	\
@@ -61,6 +62,54 @@ SRC = main.c \
 	  hooks/mouse.c \
 	  hooks/key.c \
 	  error_handler/error_handler.c
+=======
+	render/raycast.c \
+	render/render_minimap.c \
+	render/render_view.c \
+	render/render_utils.c \
+	render/is_near_door.c \
+	hooks/mouse.c \
+	hooks/key.c \
+	error_handler/error_handler.c \
+	parse/parse.c \
+	parse/parse_texture/parse_texture.c \
+	parse/parse_texture/parse_texture_functions/parse_north.c \
+	parse/parse_texture/parse_texture_functions/parse_south.c \
+	parse/parse_texture/parse_texture_functions/parse_east.c \
+	parse/parse_texture/parse_texture_functions/parse_west.c \
+	parse/parse_texture/parse_texture_functions/parse_floor.c \
+	parse/parse_texture/parse_texture_functions/parse_ceiling.c \
+	parse/parse_texture/parse_texture_functions/parse_door.c \
+	parse/parse_texture/parse_texture_functions/parse_object.c \
+	parse/parse_texture/parse_texture_utils/get_rgb.c \
+	parse/parse_map/parse_map.c \
+	parse/parse_map/parse_map_utils/allocate_map.c \
+	parse/parse_map/parse_map_utils/labeling_map.c \
+	parse/parse_map/parse_map_utils/make_list_map.c \
+	parse/parse_map/parse_map_utils/measure_map_size.c \
+	parse/parse_map/parse_map_utils/set_player_position.c \
+	parse/validate_map/validate_map.c \
+	parse/validate_map/validate_map_utils/check_door_position.c \
+	parse/validate_map/validate_map_utils/check_map_is_closed.c \
+	parse/validate_map/validate_map_utils/check_player_is_duplicated.c \
+	parse/validate_map/validate_map_utils/check_player_is_exist.c \
+	parse/validate_map/validate_map_utils/copy_map.c \
+	parse/validate_map/validate_map_utils/free_copied_map.c \
+	init_params/init_params.c \
+	init_params/init_params_utils/create_image.c \
+	init_params/init_params_utils/init_background.c \
+	init_params/init_params_utils/init_minimap.c \
+	init_params/init_params_utils/init_mlx_params.c \
+	init_params/init_params_utils/init_view.c \
+	init_params/init_params_utils/init_viewing_angle.c \
+	init_params/init_params_utils/init_wall_image.c \
+	init_params/init_params_utils/init_door_image.c \
+	init_params/init_params_utils/init_object_image.c \
+	utils/count_strings.c \
+	utils/free_strings.c \
+	utils/ft_strcmp.c \
+	utils/ft_isspace.c
+>>>>>>> 1369f512eb20c8887b463ceb729885183cd487d1
 SRC_BONUS = 
 GNL_SRC = get_next_line.c \
 		get_next_line_utils.c

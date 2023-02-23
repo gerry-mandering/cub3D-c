@@ -6,20 +6,11 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:43:34 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 19:53:56 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:05:07 by jinholee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-void	add_ray_to_minimap(t_vars *vars, t_ray *ray)
-{
-	t_ivec	offset;
-
-	offset.x = ray->intersection.x * TILE_SIZE;
-	offset.y = ray->intersection.y * TILE_SIZE;
-	draw_rect(&vars->minimap.img, offset, 2, 0xff);
-}
 
 void	place_wall(t_vars *vars)
 {
