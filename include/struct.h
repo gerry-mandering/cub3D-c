@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/22 15:39:06 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:18:44 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 # define STRUCT_H
 
 # include "../lib/libft/libft.h"
-
-# define SPRITE_COUNT	3
-
-# define NO_OPTION		0
-# define REPLACE_PLAYER	1
 
 typedef enum e_direction
 {
@@ -55,38 +50,27 @@ enum e_texture_bitmask
 	EAST_BITMASK = 8,
 	FLOOR_BITMASK = 16,
 	CEILING_BITMASK = 32,
-	PARSED_EVERY_TEXTURE = 63
+	DONE_TEXTURE_INIT = 63
 };
 
-typedef enum e_map
+typedef enum e_identifier
+{
+	ID_NORTH,
+	ID_SOUTH,
+	ID_EAST,
+	ID_WEST,
+	ID_FLOOR,
+	ID_CEILING
+}	t_identifier;
+
+typedef enum e_map_label
 {
 	NONE = -1,
-	EMPTY_SPACE,
+	ROAD,
 	WALL,
 	PLAYER,
-	DOOR,
-	OBJECT,
 	VISITED
-}	t_map;
-
-typedef enum e_door_state
-{
-	OPEN,
-	CLOSE
-}	t_door_state;
-
-typedef enum e_door_direction
-{
-	HORIZONTAL,
-	VERTICAL
-}	t_door_direction;
-
-typedef struct s_door
-{
-	t_door_state		state;
-	t_door_direction	direction;
-	t_ivec				location;
-}	t_door;
+}	t_map_label;
 
 typedef struct s_image
 {
@@ -94,7 +78,7 @@ typedef struct s_image
 	char	*img_ptr;
 	int		size_line;
 	int		bits_per_pixel;
-	int		endidan;
+	int		endian;
 	int		width;
 	int		height;
 }	t_image;
@@ -115,14 +99,10 @@ typedef struct s_minimap
 
 typedef struct s_texture
 {
-	char	*wall_path[4];
-	char	*door_path;
-	char	*object_path[SPRITE_COUNT];
-	t_image	wall[4];
-	t_image	door;
-	t_image	object[SPRITE_COUNT];
+	int		bitflag;
 	int		floor_rgb;
 	int		ceiling_rgb;
+	t_image	wall[4];
 }	t_texture;
 
 typedef struct s_ray
@@ -144,23 +124,19 @@ typedef struct s_ray
 
 typedef struct s_vars
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	int			**map_elem;
-	int			map_width;
-	int			map_height;
+	t_texture	texture;
+	int			**map;
+	t_ivec		map_size;
+	t_dvec		player_pos;
 	double		viewing_angle;
 	t_image		view;
 	t_image		background;
-	t_dvec		player;
-	t_direction	spawning_direction;
 	t_minimap	minimap;
-	t_texture	texture;
-	t_ivec		mouse;
-	size_t		sprite_count;
-	t_list		*door_list;
+	t_ivec		mouse_pos;
+	void		*mlx_ptr;
+	void		*win_ptr;
 }	t_vars;
 
-typedef void	(*t_parse_texture_fp)(t_vars *vars, int *bitflag, char *value);
+typedef void	(*t_init_texture_fp)(t_vars *vars, char *value);
 
 #endif

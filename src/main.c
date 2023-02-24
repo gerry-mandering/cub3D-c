@@ -6,11 +6,12 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:14:20 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 20:03:48 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:41:34 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+#include <stdlib.h>
 
 int	cub3d_exit(t_vars *vars)
 {
@@ -27,10 +28,7 @@ int	main(int argc, char **argv)
 {
 	t_vars	vars;
 
-	if (!argv || argc != 2)
-		error_handler(WRONG_ARGUMENTS_COUNT);
-	parse(&vars, argv);
-	init_params(&vars);
+	init(&vars, argc, argv);
 	mlx_hook(vars.win_ptr, X_EVENT_KEY_PRESS, 0, &key_press, &vars);
 	mlx_hook(vars.win_ptr, X_EVENT_KEY_EXIT, 0, &cub3d_exit, &vars);
 	mlx_loop_hook(vars.mlx_ptr, &mouse, &vars);

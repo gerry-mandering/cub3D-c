@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 01:54:58 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/22 01:59:30 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:27:14 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ void	render_upper_texture(t_vars *vars, t_ray *ray, t_image *img)
 	next_pos = texture.y;
 	while (texture.y >= 0 && screen.y-- >= draw_end)
 	{
-		ft_pixel_put(&vars->view, screen.x, screen.y, \
-						get_color_value(img, texture));
-		ft_pixel_put(&vars->view, screen.x + 1, screen.y, \
-						get_color_value(img, texture));
+		put_pixel(&vars->view, \
+					screen.x, screen.y, get_color_value(img, texture));
+		put_pixel(&vars->view, \
+					screen.x + 1, screen.y, get_color_value(img, texture));
 		next_pos -= step;
 		texture.y = (int)(next_pos);
 	}
@@ -85,10 +85,10 @@ void	render_lower_texture(t_vars *vars, t_ray *ray, t_image *img)
 	next_pos = texture.y;
 	while (texture.y < img->height && screen.y++ <= draw_end)
 	{
-		ft_pixel_put(&vars->view, screen.x, screen.y, \
-						get_color_value(img, texture));
-		ft_pixel_put(&vars->view, screen.x + 1, screen.y, \
-						get_color_value(img, texture));
+		put_pixel(&vars->view, \
+					screen.x, screen.y, get_color_value(img, texture));
+		put_pixel(&vars->view, \
+					screen.x + 1, screen.y, get_color_value(img, texture));
 		next_pos += step;
 		texture.y = (int)(next_pos);
 	}
@@ -96,12 +96,12 @@ void	render_lower_texture(t_vars *vars, t_ray *ray, t_image *img)
 
 void	render_view(t_vars *vars, t_ray *ray)
 {
-	t_image	img;
+	t_image	*img;
 
 	ray->collision_direction = \
 		get_collision_direction(ray->map_check, ray->intersection);
 	ray->perp_wall_dist = ray->dist * cos(fabs(vars->viewing_angle - ray->dir));
-	img = vars->texture.wall[ray->collision_direction];
-	render_upper_texture(vars, ray, &img);
-	render_lower_texture(vars, ray, &img);
+	img = &vars->texture.wall[ray->collision_direction];
+	render_upper_texture(vars, ray, img);
+	render_lower_texture(vars, ray, img);
 }

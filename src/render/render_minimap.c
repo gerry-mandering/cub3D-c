@@ -6,20 +6,11 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:43:34 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/22 17:19:35 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:27:30 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-void	add_ray_to_minimap(t_vars *vars, t_ray *ray)
-{
-	t_ivec	offset;
-
-	offset.x = ray->intersection.x * TILE_SIZE;
-	offset.y = ray->intersection.y * TILE_SIZE;
-	draw_rect(&vars->minimap.img, offset, 2, 0xff);
-}
 
 void	place_wall(t_vars *vars)
 {
@@ -28,22 +19,19 @@ void	place_wall(t_vars *vars)
 	int		y;
 
 	y = 0;
-	while (y < vars->map_height)
+	while (y < vars->map_size.y)
 	{
 		x = 0;
-		while (x < vars->map_width)
+		while (x < vars->map_size.x)
 		{
 			offset.x = x * TILE_SIZE;
 			offset.y = y * TILE_SIZE;
-			if (vars->map_elem[y][x] == WALL)
+			if (vars->map[y][x] == WALL)
 				draw_rect(&vars->minimap.background_img, \
 					offset, TILE_SIZE, WALL_COLOR);
 			else
 				draw_rect(&vars->minimap.background_img, \
 					offset, TILE_SIZE, 0x5f0f0f0f);
-			if (vars->map_elem[y][x] == OBJECT)
-				draw_rect(&vars->minimap.background_img, \
-					offset, TILE_SIZE, 0xffd400);
 			x++;
 		}
 		y++;
@@ -54,8 +42,8 @@ void	place_player(t_vars *vars)
 {
 	t_ivec	offset;
 
-	offset.x = (int)(vars->player.x * TILE_SIZE) - PLAYER_SIZE / 2;
-	offset.y = (int)(vars->player.y * TILE_SIZE) - PLAYER_SIZE / 2;
+	offset.x = (int)(vars->player_pos.x * TILE_SIZE) - PLAYER_SIZE / 2;
+	offset.y = (int)(vars->player_pos.y * TILE_SIZE) - PLAYER_SIZE / 2;
 	draw_rect(&vars->minimap.img, offset, PLAYER_SIZE, PLAYER_COLOR);
 }
 
@@ -64,8 +52,8 @@ t_ivec	get_crop_offset(t_vars *vars)
 	t_ivec	player;
 	t_ivec	offset;
 
-	player.x = (int)vars->player.x * TILE_SIZE;
-	player.y = (int)vars->player.y * TILE_SIZE;
+	player.x = (int)vars->player_pos.x * TILE_SIZE;
+	player.y = (int)vars->player_pos.y * TILE_SIZE;
 	offset.x = player.x - W_SIZE / 8;
 	offset.y = player.y - H_SIZE / 8;
 	if (offset.x < 0)
@@ -82,19 +70,24 @@ t_ivec	get_crop_offset(t_vars *vars)
 void	crop_minimap(t_vars *vars)
 {
 	t_ivec			offset;
-	t_ivec			temp;
+	t_ivec			pos;
 	unsigned int	color;
+	t_ivec			index;
 
 	offset = get_crop_offset(vars);
-	for (int y=0; y < vars->minimap.crop.height; y++)
+	index.y = 0;
+	while (index.y < vars->minimap.crop.height)
 	{
-		for (int x=0; x < vars->minimap.crop.width; x++)
+		index.x = 0;
+		while (index.x < vars->minimap.crop.width)
 		{
-			temp.x = offset.x + x;
-			temp.y = offset.y + y;
-			color = get_color_value(&vars->minimap.img, temp);
-			ft_pixel_put(&vars->minimap.crop, x, y, color);
+			pos.x = offset.x + index.x;
+			pos.y = offset.y + index.y;
+			color = get_color_value(&vars->minimap.img, pos);
+			put_pixel(&vars->minimap.crop, index.x, index.y, color);
+			index.x++;
 		}
+		index.y++;
 	}
 }
 
