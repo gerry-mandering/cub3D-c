@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:38:18 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 20:15:48 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:20:14 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static char	*get_description_line(int fd)
 
 static t_identifier	get_identifier(char *input)
 {
-	const char		identifier_arr[8][3] = {
-		"NO", "SO", "EA", "WE", "F", "C", "D", "O"};
+	const char		identifier_arr[6][3] = {
+		"NO", "SO", "EA", "WE", "F", "C"};
 	t_identifier	identifier;
 
 	identifier = ID_NORTH;
@@ -63,9 +63,9 @@ static void	separate_description_line(char *description_line, \
 
 void	init_texture(t_vars *vars, int fd)
 {
-	const t_init_texture_fp	init_texture_fp[8] = {
+	const t_init_texture_fp	init_texture_fp[6] = {
 		init_north, init_south, init_east, init_west, \
-		init_floor, init_ceiling, init_door, init_object
+		init_floor, init_ceiling
 	};
 	char					*description_line;
 	t_identifier			identifier;

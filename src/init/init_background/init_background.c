@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 19:02:14 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 19:02:21 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:24:30 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ void	init_background(t_vars *vars)
 		while (vector.x < W_SIZE)
 		{
 			if (vector.y < H_SIZE / 2)
-				put_pixel(&vars->background, vector, vars->texture.ceiling_rgb);
+				put_pixel(&vars->background, \
+							vector.x, vector.y, vars->texture.ceiling_rgb);
 			else
-				put_pixel(&vars->background, vector, vars->texture.floor_rgb);
+				put_pixel(&vars->background, \
+							vector.x, vector.y, vars->texture.floor_rgb);
 			vector.x++;
 		}
 		vector.y++;

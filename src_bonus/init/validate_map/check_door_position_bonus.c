@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_door_position.c                              :+:      :+:    :+:   */
+/*   check_door_position_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 15:29:13 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 19:23:30 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:10:34 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
+#include "../../../include_bonus/cub3d_bonus.h"
 
 static void	check_four_direction(int **copied_map, t_ivec index)
 {

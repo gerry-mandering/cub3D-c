@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:33:52 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 19:08:33 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:18:44 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 # define STRUCT_H
 
 # include "../lib/libft/libft.h"
-
-# define SPRITE_COUNT	3
-
-# define NO_OPTION		0
-# define REPLACE_PLAYER	1
 
 typedef enum e_direction
 {
@@ -55,9 +50,7 @@ enum e_texture_bitmask
 	EAST_BITMASK = 8,
 	FLOOR_BITMASK = 16,
 	CEILING_BITMASK = 32,
-	DONE_TEXTURE_INIT = 63,
-	DOOR_BITMASK = 64,
-	OBJECT_BITMASK = 128
+	DONE_TEXTURE_INIT = 63
 };
 
 typedef enum e_identifier
@@ -67,9 +60,7 @@ typedef enum e_identifier
 	ID_EAST,
 	ID_WEST,
 	ID_FLOOR,
-	ID_CEILING,
-	ID_DOOR,
-	ID_OBJECT
+	ID_CEILING
 }	t_identifier;
 
 typedef enum e_map_label
@@ -78,9 +69,6 @@ typedef enum e_map_label
 	ROAD,
 	WALL,
 	PLAYER,
-	DOOR_CLOSED,
-	DOOR_OPENED,
-	OBJECT,
 	VISITED
 }	t_map_label;
 
@@ -115,8 +103,6 @@ typedef struct s_texture
 	int		floor_rgb;
 	int		ceiling_rgb;
 	t_image	wall[4];
-	t_image	door;
-	t_image	object[SPRITE_COUNT];
 }	t_texture;
 
 typedef struct s_ray
@@ -149,7 +135,6 @@ typedef struct s_vars
 	t_ivec		mouse_pos;
 	void		*mlx_ptr;
 	void		*win_ptr;
-	size_t		sprite_count;
 }	t_vars;
 
 typedef void	(*t_init_texture_fp)(t_vars *vars, char *value);

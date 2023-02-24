@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 09:52:07 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 20:25:56 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:21:13 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ static t_map_label	get_label(char character)
 		return (WALL);
 	else if (is_direction_character(character))
 		return (PLAYER);
-	else if (character == 'D')
-		return (DOOR_CLOSED);
-	else if (character == 'O')
-		return (OBJECT);
 	else
 		error_handler(INVALID_MAP_FORMAT);
 	return (-1);

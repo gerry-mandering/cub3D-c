@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 16:29:29 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:52:42 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void		init_east(t_vars *vars, char *value);
 void		init_west(t_vars *vars, char *value);
 void		init_floor(t_vars *vars, char *value);
 void		init_ceiling(t_vars *vars, char *value);
-void		init_door(t_vars *vars, char *value);
-void		init_object(t_vars *vars, char *value);
 
 //init_map
 void		init_map(t_vars *vars, int fd);
@@ -47,12 +45,10 @@ void		init_viewing_angle(t_vars *vars, t_list *list_map);
 void		validate_map(t_vars *vars);
 
 //validate_map_utils
-void		check_map_has_all_texture(t_vars *vars);
 void		check_player_is_exist(t_vars *vars);
 void		check_player_is_duplicated(t_vars *vars);
 void		check_map_is_closed(t_vars *vars);
-void		check_door_position(t_vars *vars);
-int			**copy_map(t_vars *vars, int option);
+int			**copy_map(t_vars *vars);
 void		free_copied_map(int **copied_map, t_ivec map_size);
 
 //init_view
@@ -69,7 +65,7 @@ int			get_rgb(char *value);
 int			count_strings(char **strings);
 void		free_strings(char **strings);
 bool		is_direction_character(char character);
-void		put_pixel(t_image *img, t_ivec vector, unsigned int color);
+void		put_pixel(t_image *img, int x, int y, unsigned int color);
 t_image		create_image(t_vars *vars, int img_w, int img_h);
 
 //hooks
@@ -95,21 +91,15 @@ void		render_minimap(t_vars *vars);
 
 //view
 int			get_texture_xpos(t_ray *ray, t_image *img);
-t_image		*get_object_img(t_vars *vars);
 void		render_upper_texture(t_vars *vars, t_ray *ray, t_image *img);
 void		render_lower_texture(t_vars *vars, t_ray *ray, t_image *img);
-void		render_view(t_vars *vars, t_ray *ray, t_ray *obj_ray);
+void		render_view(t_vars *vars, t_ray *ray);
 
 //raycast
-void		check_object_hit(t_vars *vars, t_ray *ray, t_ray *obj_ray);
-int			check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray);
+int			check_wall_hit(t_vars *vars, t_ray *ray);
 void		raycast(t_vars *vars, double ray_dir);
 void		field_of_view(t_vars *vars);
 int			render(t_vars *vars);
-
-//door
-t_ivec		get_heading_position(t_vars *vars);
-bool		is_near_door(t_vars *vars);
 
 //error_handler
 void		error_handler(const char *error_type);

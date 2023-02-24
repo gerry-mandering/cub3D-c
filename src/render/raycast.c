@@ -6,37 +6,13 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:17:20 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 16:16:53 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:26:43 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	check_object_hit(t_vars *vars, t_ray *ray, t_ray *obj_ray)
-{
-	int	hit;
-
-	hit = vars->map[ray->map_check.y][ray->map_check.x];
-	if (hit == DOOR_CLOSED || (hit == OBJECT && \
-		fabs((double)ray->map_check.x + 1 - ray->intersection.x) < 0.005))
-	{
-		ft_memcpy(obj_ray, ray, sizeof(t_ray));
-		obj_ray->hit = hit;
-		obj_ray->collision_direction = EAST;
-	}
-	else if (ray->map_check.x > 0 && \
-		vars->map[ray->map_check.y][ray->map_check.x -1] == OBJECT)
-	{
-		if (fabs((double)ray->map_check.x - ray->intersection.x) < 0.005)
-		{
-			ft_memcpy(obj_ray, ray, sizeof(t_ray));
-			obj_ray->hit = OBJECT;
-			obj_ray->collision_direction = WEST;
-		}
-	}
-}
-
-int	check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray)
+int	check_wall_hit(t_vars *vars, t_ray *ray)
 {
 	int	hit;
 
@@ -44,8 +20,6 @@ int	check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray)
 		&& ray->map_check.y >= 0 && ray->map_check.y < vars->map_size.y)
 	{
 		hit = vars->map[ray->map_check.y][ray->map_check.x];
-		if (!object_ray->hit)
-			check_object_hit(vars, ray, object_ray);
 		if (hit == WALL)
 			return (WALL);
 	}
@@ -55,10 +29,8 @@ int	check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray)
 void	raycast(t_vars *vars, double ray_dir)
 {
 	t_ray	ray;
-	t_ray	object_ray;
 
 	ray = init_ray(vars, ray_dir);
-	object_ray = init_ray(vars, ray_dir);
 	while (!ray.hit)
 	{
 		if (ray.length.x < ray.length.y)
@@ -75,9 +47,9 @@ void	raycast(t_vars *vars, double ray_dir)
 		}
 		ray.intersection.x = ray.start.x + ray.delta.x * ray.dist;
 		ray.intersection.y = ray.start.y + ray.delta.y * ray.dist;
-		ray.hit = check_wall_hit(vars, &ray, &object_ray);
+		ray.hit = check_wall_hit(vars, &ray);
 	}
-	render_view(vars, &ray, &object_ray);
+	render_view(vars, &ray);
 }
 
 void	field_of_view(t_vars *vars)
@@ -94,9 +66,6 @@ void	field_of_view(t_vars *vars)
 		raycast(vars, start);
 		start += interval;
 	}
-	vars->sprite_count++;
-	if (vars->sprite_count == 100)
-		vars->sprite_count = 0;
 }
 
 int	render(t_vars *vars)
@@ -108,8 +77,5 @@ int	render(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->view.img, 0, 0);
 	mlx_put_image_to_window(vars->mlx_ptr, \
 							vars->win_ptr, vars->minimap.crop.img, 0, 0);
-	if (is_near_door(vars))
-		mlx_string_put(vars->mlx_ptr, \
-			vars->win_ptr, W_SIZE / 2, H_SIZE / 3 * 2, 0xFFFFFF, "Press F to OPEN/CLOSE");
 	return (0);
 }

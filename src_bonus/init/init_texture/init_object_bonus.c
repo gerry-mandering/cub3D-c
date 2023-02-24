@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_object.c                                      :+:      :+:    :+:   */
+/*   init_object_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:39:25 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 19:16:14 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:12:00 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
+#include "../../../include_bonus/cub3d_bonus.h"
 
 void	init_object(t_vars *vars, char *value)
 {
@@ -28,6 +28,6 @@ void	init_object(t_vars *vars, char *value)
 											&object.size_line, \
 											&object.endian);
 	vars->texture.object[sprite_index] = object;
-	vars->texture.bitflag |= OBJECT_BITMASK;
+	vars->texture.bitflag |= OBJECT_BITMASK << sprite_index;
 	sprite_index++;
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map_has_all_texture.c                        :+:      :+:    :+:   */
+/*   check_map_has_all_texture_bonus.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 19:26:47 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 19:32:14 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:10:27 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
+#include "../../../include_bonus/cub3d_bonus.h"
 
 void	check_map_has_all_texture(t_vars *vars)
 {
@@ -24,10 +24,10 @@ void	check_map_has_all_texture(t_vars *vars)
 		{
 			if (vars->map[index.y][index.x] == DOOR_CLOSED && \
 				(vars->texture.bitflag & DOOR_BITMASK) == 0)
-					error_handler(HAVE_NO_TEXTURE);
+				error_handler(HAVE_NO_TEXTURE);
 			if (vars->map[index.y][index.x] == OBJECT && \
-				(vars->texture.bitflag & OBJECT_BITMASK) == 0)
-					error_handler(HAVE_NO_TEXTURE);
+				(vars->texture.bitflag & DONE_OBJECT_INIT) != DONE_OBJECT_INIT)
+				error_handler(HAVE_NO_TEXTURE);
 			index.x++;
 		}
 		index.y++;

@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 10:34:11 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/22 10:36:29 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 12:52:23 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ void	init_player_position(t_vars *vars)
 			{
 				vars->player_pos.y = index.y;
 				vars->player_pos.x = index.x;
-				return ;
+				break ;
 			}
 			index.x++;
 		}
 		index.y++;
 	}
+	vars->player_pos.y += 0.5;
+	vars->player_pos.x += 0.5;
 }

@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:26:37 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 15:27:06 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:19:11 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # define KEY_A					0
 # define KEY_S					1
 # define KEY_D					2
-# define KEY_F					3
 # define KEY_ESC				53
 # define KEY_ARROW_LEFT			123
 # define KEY_ARROW_RIGHT		124

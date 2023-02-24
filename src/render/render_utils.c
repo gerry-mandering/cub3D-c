@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 01:49:10 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 20:59:03 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 12:02:40 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	draw_rect(t_image *image, t_ivec offset, int size, unsigned int color)
 		{
 			draw_pos.x = offset.x + index.x;
 			draw_pos.y = offset.y + index.y;
-			put_pixel(image, draw_pos, color);
+			put_pixel(image, draw_pos.x, draw_pos.y, color);
 			index.x++;
 		}
 		index.y++;

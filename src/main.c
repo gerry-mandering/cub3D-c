@@ -6,11 +6,12 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:14:20 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 19:33:45 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:41:34 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+#include <stdlib.h>
 
 int	cub3d_exit(t_vars *vars)
 {

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_door.c                                        :+:      :+:    :+:   */
+/*   init_door_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:09:44 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 16:32:07 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:12:47 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
+#include "../../../include_bonus/cub3d_bonus.h"
 
 void	init_door(t_vars *vars, char *value)
 {

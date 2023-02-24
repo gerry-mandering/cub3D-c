@@ -6,15 +6,15 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:18:32 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 16:14:16 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:49:33 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SETTING_H
 # define SETTING_H
 
-# define W_SIZE					1440
-# define H_SIZE					1080
+# define W_SIZE					960
+# define H_SIZE					720
 # define TILE_SIZE				24
 # define PLAYER_SIZE			10
 # define MOVING_SPEED			0.15

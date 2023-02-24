@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 15:27:51 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 19:23:19 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:23:38 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	check_map_is_closed(t_vars *vars)
 	int		**copied_map;
 	t_ivec	size;
 
-	copied_map = copy_map(vars, NO_OPTION);
+	copied_map = copy_map(vars);
 	size.y = vars->map_size.y + 2;
 	size.x = vars->map_size.x + 2;
 	flood_fill(copied_map, \

@@ -1,0 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_player_position_bonus.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/22 10:34:11 by minseok2          #+#    #+#             */
+/*   Updated: 2023/02/24 13:13:45 by minseok2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../../include_bonus/cub3d_bonus.h"
+
+void	init_player_position(t_vars *vars)
+{
+	t_ivec	index;
+
+	index.y = 0;
+	while (index.y < vars->map_size.y)
+	{
+		index.x = 0;
+		while (index.x < vars->map_size.x)
+		{
+			if (vars->map[index.y][index.x] == PLAYER)
+			{
+				vars->player_pos.y = index.y;
+				vars->player_pos.x = index.x;
+				break ;
+			}
+			index.x++;
+		}
+		index.y++;
+	}
+	vars->player_pos.y += 0.5;
+	vars->player_pos.x += 0.5;
+}

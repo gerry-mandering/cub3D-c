@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:57:48 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 19:20:55 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:23:24 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	**allocate_copied_map(t_vars *vars)
 	return (map);
 }
 
-int	**copy_map(t_vars *vars, int option)
+int	**copy_map(t_vars *vars)
 {
 	int		**copied_map;
 	t_ivec	index;
@@ -45,9 +45,6 @@ int	**copy_map(t_vars *vars, int option)
 		while (index.x < vars->map_size.x)
 		{
 			copied_map[index.y + 1][index.x + 1] = vars->map[index.y][index.x];
-			if (copied_map[index.y + 1][index.x + 1] == PLAYER && \
-					option == REPLACE_PLAYER)
-				copied_map[index.y + 1][index.x + 1] = ROAD;
 			index.x++;
 		}
 		index.y++;

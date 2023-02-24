@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 21:58:15 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 19:59:22 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:28:21 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,13 @@ int	wall_collision(t_vars *vars, t_dvec delta)
 
 	next_pos.x = vars->player_pos.x + delta.x;
 	next_pos.y = vars->player_pos.y + delta.y;
-	if (vars->map[(int)(next_pos.y - 0.01)][(int)(next_pos.x)] == WALL || \
-	vars->map[(int)(next_pos.y - 0.01)][(int)(next_pos.x)] == DOOR_CLOSED)
+	if (vars->map[(int)(next_pos.y - 0.01)][(int)(next_pos.x)] == WALL)
 		return (1);
-	if (vars->map[(int)(next_pos.y + 0.01)][(int)(next_pos.x)] == WALL || \
-	vars->map[(int)(next_pos.y + 0.01)][(int)(next_pos.x)] == DOOR_CLOSED)
+	if (vars->map[(int)(next_pos.y + 0.01)][(int)(next_pos.x)] == WALL)
 		return (1);
-	if (vars->map[(int)(next_pos.y)][(int)(next_pos.x - 0.01)] == WALL || \
-	vars->map[(int)(next_pos.y)][(int)(next_pos.x - 0.01)] == DOOR_CLOSED)
+	if (vars->map[(int)(next_pos.y)][(int)(next_pos.x - 0.01)] == WALL)
 		return (1);
-	if (vars->map[(int)(next_pos.y)][(int)(next_pos.x + 0.01)] == WALL || \
-	vars->map[(int)(next_pos.y)][(int)(next_pos.x + 0.01)] == DOOR_CLOSED)
+	if (vars->map[(int)(next_pos.y)][(int)(next_pos.x + 0.01)] == WALL)
 		return (1);
 	return (0);
 }
@@ -63,25 +59,6 @@ void	update_viewing_angle(int keycode, t_vars *vars)
 		vars->viewing_angle += ROTATE_SPEED * 1.5;
 }
 
-void	update_door_state(t_vars *vars)
-{
-	t_ivec	door_pos;
-	int		door_state;
-
-	if (is_near_door(vars))
-	{
-		door_pos = get_heading_position(vars);
-		if (door_pos.x >= 0 && door_pos.y >= 0)
-		{
-			door_state = vars->map[door_pos.y][door_pos.x];
-			if (door_state == DOOR_CLOSED)
-				vars->map[door_pos.y][door_pos.x] = DOOR_OPENED;
-			else if (door_state == DOOR_OPENED)
-				vars->map[door_pos.y][door_pos.x] = DOOR_CLOSED;
-		}
-	}
-}
-
 int	key_press(int keycode, t_vars *vars)
 {
 	if (keycode == KEY_ESC)
@@ -91,7 +68,5 @@ int	key_press(int keycode, t_vars *vars)
 		update_player_position(keycode, vars);
 	else if (keycode == KEY_ARROW_LEFT || keycode == KEY_ARROW_RIGHT)
 		update_viewing_angle(keycode, vars);
-	else if (keycode == KEY_F)
-		update_door_state(vars);
 	return (0);
 }
