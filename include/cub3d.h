@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/02/23 22:19:52 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/02/24 10:56:37 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,21 +99,15 @@ void		render_minimap(t_vars *vars);
 
 //view
 int			get_texture_xpos(t_ray *ray, t_image *img);
-t_image		*get_object_img(t_vars *vars);
 void		render_upper_texture(t_vars *vars, t_ray *ray, t_image *img);
 void		render_lower_texture(t_vars *vars, t_ray *ray, t_image *img);
-void		render_view(t_vars *vars, t_ray *ray, t_ray *obj_ray);
+void		render_view(t_vars *vars, t_ray *ray);
 
 //raycast
-void		check_object_hit(t_vars *vars, t_ray *ray, t_ray *obj_ray);
-int			check_wall_hit(t_vars *vars, t_ray *ray, t_ray *object_ray);
+int			check_wall_hit(t_vars *vars, t_ray *ray);
 void		raycast(t_vars *vars, double ray_dir);
 void		field_of_view(t_vars *vars);
 int			render(t_vars *vars);
-
-//door
-t_ivec		get_heading_position(t_vars *vars);
-bool		is_near_door(t_vars *vars);
 
 //utils
 int			count_strings(char **strings);

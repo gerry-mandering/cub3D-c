@@ -6,7 +6,7 @@
 /*   By: jinholee <jinholee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 01:54:58 by jinholee          #+#    #+#             */
-/*   Updated: 2023/02/23 16:05:23 by jinholee         ###   ########.fr       */
+/*   Updated: 2023/02/24 10:52:32 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,6 @@ int	get_texture_xpos(t_ray *ray, t_image *img)
 			texture_x = img->width - texture_x - 1;
 	}
 	return (texture_x);
-}
-
-t_image	*get_object_img(t_vars *vars)
-{
-	if (vars->sprite_count < 80)
-		return (&vars->texture.object[0]);
-	else if (vars->sprite_count < 85)
-		return (&vars->texture.object[1]);
-	else if (vars->sprite_count < 95)
-		return (&vars->texture.object[2]);
-	else
-		return (&vars->texture.object[1]);
 }
 
 void	render_upper_texture(t_vars *vars, t_ray *ray, t_image *img)
@@ -106,7 +94,7 @@ void	render_lower_texture(t_vars *vars, t_ray *ray, t_image *img)
 	}
 }
 
-void	render_view(t_vars *vars, t_ray *ray, t_ray *obj_ray)
+void	render_view(t_vars *vars, t_ray *ray)
 {
 	t_image	*img;
 
@@ -116,18 +104,4 @@ void	render_view(t_vars *vars, t_ray *ray, t_ray *obj_ray)
 	img = &vars->texture.wall[ray->collision_direction];
 	render_upper_texture(vars, ray, img);
 	render_lower_texture(vars, ray, img);
-	if (obj_ray->hit)
-	{
-		obj_ray->perp_wall_dist = obj_ray->dist \
-			* cos(fabs(vars->viewing_angle - obj_ray->dir));
-		if (obj_ray->hit == DOOR_CLOSED)
-		{
-			obj_ray->collision_direction = NORTH;
-			img = &vars->texture.door;
-		}
-		else if (obj_ray->hit == OBJECT)
-			img = get_object_img(vars);
-		render_upper_texture(vars, obj_ray, img);
-		render_lower_texture(vars, obj_ray, img);
-	}
 }

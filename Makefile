@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = $(LIBFT) -L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
@@ -21,7 +21,6 @@ SRC = main.c \
 	render/render_minimap.c \
 	render/render_view.c \
 	render/render_utils.c \
-	render/is_near_door.c \
 	hooks/mouse.c \
 	hooks/key.c \
 	error_handler/error_handler.c \
@@ -54,8 +53,6 @@ SRC = main.c \
 	init_params/init_params_utils/init_view.c \
 	init_params/init_params_utils/init_viewing_angle.c \
 	init_params/init_params_utils/init_wall_image.c \
-	init_params/init_params_utils/init_door_image.c \
-	init_params/init_params_utils/init_object_image.c \
 	utils/count_strings.c \
 	utils/free_strings.c \
 	utils/ft_strcmp.c \
@@ -111,7 +108,7 @@ GNL_SRC = get_next_line.c \
 		get_next_line_utils.c
 SRCS = $(addprefix $(SRC_DIR), $(SRC)) $(addprefix $(GNL_DIR), $(GNL_SRC))
 OBJS = $(SRCS:.c=.o)
-OBJS_BONUS = $(addprefix $(SRC_DIR), $(SRC_BONUS:.c=.o)) $(addprefix $(GNL_DIR), $(GNL_SRC))
+OBJS_BONUS = $(addprefix $(SRC_BONUS_DIR), $(SRC_BONUS:.c=.o)) $(addprefix $(GNL_DIR), $(GNL_SRC:.c=.o))
 
 ifdef SANITIZE
 	CFLAGS += -fsanitize=address -g3
